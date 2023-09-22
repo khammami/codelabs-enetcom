@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-3295395-7",
+  "updated": "2019-09-29T08:51:40Z",
+  "id": "interface-utilisateur-interactive",
+  "duration": 0,
+  "title": "TP 01.2: Votre première interface utilisateur interactive",
+  "authors": "Khalil Hammami",
+  "summary": "",
+  "source": "1PgEhc-urRz5I1-RN-iiaHfUtCGZXLUSVMtSz5ie-S4g",
+  "theme": "android",
+  "status": [
+    "hidden"
+  ],
+  "category": [
+    "Android"
+  ],
+  "tags": [
+    "enetcomtppem",
+    "enetcomtppm",
+    "kiosk",
+    "web"
+  ],
+  "url": "interface-utilisateur-interactive"
+}

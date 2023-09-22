@@ -1,0 +1,271 @@
+
+<!doctype html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
+  <meta name="theme-color" content="#4F7DC9">
+  <meta charset="UTF-8">
+  <title>P 01: Version Control With Git in Android Studio</title>
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
+  <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
+  <style>
+    .success {
+      color: #1e8e3e;
+    }
+    .error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <google-codelab-analytics gaid="UA-3295395-7"></google-codelab-analytics>
+  <google-codelab codelab-gaid=""
+                  id="vcs-git-android-studio"
+                  title="P 01: Version Control With Git in Android Studio"
+                  environment="web"
+                  feedback-link="">
+    
+      <google-codelab-step label="Introduction" duration="0">
+        <p>As you know, it&#39;s best practice to always use source control management (SCM) for your projects—even personal projects. Do you know that Android Studio has an amazing integration with Git for source control management? If you didn&#39;t know or don&#39;t have experience using it, then continue reading this post. Even if you have already used Android Studio&#39;s Git integration, you might still pick up some useful tricks in this post.</p>
+<p>I&#39;ll show you the many features of Git support in Android Studio and also how easy it is to do the different Git operations (commit, push, pull, branch, etc.) from inside Android Studio. </p>
+<p>In this tutorial, I&#39;ll walk you through the list of SCM features that are available in Android Studio. We&#39;ll look at the following areas:</p>
+<ul>
+<li>integrating a new Android Studio project with Git</li>
+<li>working with GitHub or Bitbucket</li>
+<li>exploring the <strong>Version Control</strong> window</li>
+<li>commits</li>
+<li>branches </li>
+<li>pushing and pulling from a remote repository</li>
+</ul>
+<h2 is-upgraded>Prerequisites</h2>
+<p>To be able to follow this tutorial, you&#39;ll need:</p>
+<ul>
+<li>a basic understanding of the <a href="https://www.udacity.com/course/version-control-with-git--ud123" target="_blank">Git distributed version control system</a></li>
+<li><a href="https://developer.android.com/studio/index.html" target="_blank">Android Studio</a> 3.0 or higher</li>
+</ul>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Create an Android Studio Project" duration="0">
+        <p>Fire up Android Studio and create a new project (you can name it <code>GitApplicationDemo</code>) with an empty activity called <code>MainActivity</code>. </p>
+<p class="image-container"><img alt="Create Android Project dialog" style="width: 624.00px" src="img/c3a68df9fb6234c0.jpeg"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Integrating Git" duration="0">
+        <p>After your Android Studio project has been set up, click the <strong>VCS</strong> menu, hover on the <strong>Import into Version Control</strong> menu, and select <strong>Create Git Repository</strong>...</p>
+<p class="image-container"><img alt="Menu navigation to Create Git Repository" style="width: 624.00px" src="img/647490071acab886.png"></p>
+<p>Then select the top parent folder of your Android Studio Project.</p>
+<p class="image-container"><img alt="Select project folder in Android Studio" style="width: 624.00px" src="img/883a66a21ba3538e.png"></p>
+<p>Click the <strong>OK</strong> button to initialize the project with Git. Under the hood, Android Studio executes the Git command:</p>
+<pre><code>git init</code></pre>
+<p>As a reminder, here&#39;s what this command will do: </p>
+<p>This command creates an empty Git repository—basically a <code>.git</code> directory with subdirectories for <code>objects</code>, <code>refs/heads</code>, <code>refs/tags</code>, and template files. An initial <code>HEAD</code> file that references the HEAD of the master branch is also created.</p>
+<p>An information dialog will pop up: </p>
+<p class="image-container"><img alt="Add File to Git dialog" style="width: 624.00px" src="img/575beb1cd36fe88b.png"></p>
+<p>This is telling us about a file named <strong>vcs.xml</strong> inside the <strong>.idea</strong> folder. This folder just contains project-specific settings. Note that this is the format used by all recent IntelliJ IDEA versions.</p>
+<p>Ideally, the files in the <code>.idea/</code> should not reach Git—so you should add it to <code>.gitignore</code>. </p>
+<p>By default, we&#39;re switched to the master branch. You can always view your project&#39;s current branch in the bottom-right corner of Android Studio. </p>
+<p class="image-container"><img alt="Current Git branch toolbar " style="width: 624.00px" src="img/ace511f569f66951.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Integrating With GitHub or Bitbucket" duration="0">
+        <p>You can easily work on any of your Android source code repository that is in a GitHub or Bitbucket account in Android Studio. Let me show you how to do that. </p>
+<p>Navigate to <strong>File &gt; New &gt; Project from Version Control &gt; GitHub</strong>. </p>
+<p class="image-container"><img alt="Navigation to cloning Github repo" style="width: 624.00px" src="img/82a40f7bf034f8b7.png"></p>
+<p>(If you want to work on a repo from Bitbucket, select <strong>Bitbucket</strong> instead. If you want to just clone a Git repo from the internet into your local machine, select the Git menu option.)</p>
+<p>Next, enter your GitHub account credentials and click <strong>Login</strong>. </p>
+<p class="image-container"><img alt="GitHub login dialog" style="width: 624.00px" src="img/a302d3967fe3b745.png"></p>
+<p>If the login was successful, the <strong>Clone Repository</strong> dialog will pop up. This dialog displays a drop-down containing a list of repositories on GitHub you currently own or have worked on.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/23aaf77eab9697ec.png"></p>
+<p>Click <strong>Clone</strong> to clone the repo to your local machine inside the already selected parent directory.  </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="The Version Control Window" duration="0">
+        <p>After successfully initiating our Android Studio project with Git, Android Studio will show the <strong>Version Control</strong> window. Click on the <strong>Version Control</strong> tab (at the bottom-left of Android Studio) and let&#39;s explore what we have there. Note that you can use <strong>Alt-9</strong> to open up this window quickly. </p>
+<p class="image-container"><img alt="Version Control window " style="width: 624.00px" src="img/527b4811509dd086.png"></p>
+<p>Inside this window, we have three different tabs: <strong>Local Changes</strong>, <strong>Console</strong>, and <strong>Log</strong>. </p>
+<h3 is-upgraded>The Local Changes Tab</h3>
+<p>This shows the list of files that have been modified locally (on your own machine) and not yet committed to the repository. </p>
+<p class="image-container"><img alt="Local changes tab" style="width: 624.00px" src="img/ec3b3cf2d60c5075.png"></p>
+<p>Let&#39;s take a look at the item toolbars available when you&#39;re in the <strong>Local changes</strong> tab.</p>
+<p class="image-container"><img alt="Local changes window with item toolbars " style="width: 624.00px" src="img/fb2402eb788803b9.png"></p>
+<ol type="1" start="1">
+<li>Click this icon to refresh the status of your files in the current workplace. The shortcut is <strong>Control-F5</strong>. </li>
+<li>This icon when clicked will commit your current changes. The shortcut is <strong>Control-Alt-Z</strong>.</li>
+<li>Click this icon to roll back any selected changes. </li>
+<li>Click this icon to create a new changelist. Note that a changelist is a set of changes in files that represents a logical change in source code. The shortcut is <strong>Alt-Insert</strong>. </li>
+<li>Click this button to delete the selected changelist. </li>
+<li>To make a changelist active, simply click this icon. </li>
+<li>To move a selected file to another changelist, click this icon. </li>
+</ol>
+<p class="image-container"><img alt="Local changes window with more item toolbars" style="width: 624.00px" src="img/2ba29579dc0dd143.png"></p>
+<ol type="1" start="1">
+<li>Click this icon to expand to view all files. </li>
+<li>Click this icon to collapse all files. </li>
+<li>Click this icon to show the changed files which are grouped by folders. </li>
+<li>Click this icon to copy the path to the selected file to the System&#39;s clipboard. </li>
+<li>Click this icon to display the ignored files node with the list of existing files ignored by Git.</li>
+<li>Click this icon to set up the list of files that will be ignored by Git. </li>
+<li>Click this icon to open up the <strong>Preview Diff</strong> pane to compare the current file with the latest committed revision. </li>
+</ol>
+<h3 is-upgraded>The Console Tab</h3>
+<p>Inside this tab, we see the result of performing Git-related commands. Note that you can&#39;t write Git commands inside this tab—do that in the terminal window in Android Studio instead. </p>
+<p class="image-container"><img alt="Console tab " style="width: 624.00px" src="img/23dd6e41eae882c8.png"></p>
+<h3 is-upgraded>The Log Tab</h3>
+<p>This tab shows up all changes that were committed to all branches of the local and remote repository. Inside this tab, you can browse commits to any branch. </p>
+<p class="image-container"><img alt="Log tab" style="width: 624.00px" src="img/44cb05ef615f570e.png"></p>
+<p>The search box is used to search for commits that have the entered string or a regular expression. </p>
+<ol type="1" start="1">
+<li>This dropdown that is used to filter commits by branch. To view all local and remote commits, just select <strong>All</strong> (the default). </li>
+<li>To filter commits by the author, use this dropdown list. You&#39;ll have to type the author&#39;s name to view their commits. Select <strong>All</strong> to view commits by all users. </li>
+<li>Use this dropdown to filter commits by a time range or for a specific date. To be specific on the date, simply click <strong>Select</strong> and choose the date. Select <strong>All</strong> to view commits made on all dates. </li>
+<li>Use this dropdown to filter commits by the path of modified files. </li>
+<li>This button (IntelliSort) enables a more convenient way to see merges, by first displaying the incoming commits, directly below the merge commit. </li>
+<li>If this button is enabled, long branches are displayed in full, even if there are no commits in them. </li>
+<li>Use this button to refresh the list of commits in the project. </li>
+<li>To go to a hash, tag, or branch, simply use this button. </li>
+<li>Click this button to apply changes from the selected commit to the current branch. </li>
+<li>Click this button to highlight the commits from the selected branch that have not yet been applied to the current branch. </li>
+</ol>
+<p>You can learn more about the <strong>Version Control</strong> tool window in the <a href="https://www.jetbrains.com/help/idea/version-control-tool-window.html" target="_blank">IntelliJ IDEA documentation</a>. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Making a Commit" duration="0">
+        <p>You&#39;ll notice that when we set up the Git integration with our Android Studio project, our file name&#39;s colour became brown. According to the official IntelliJ IDEA documentation, for files with brown labels:</p>
+<p>File exists locally, but is not in the repository, and is not scheduled for adding. </p>
+<p>Let&#39;s now see how to make a commit in Android Studio. But first, we need to add our changes in the working directory to the staging area. In the console, we would use the git add command. </p>
+<pre><code>git add &lt;file&gt; || &lt;directory&gt;</code></pre>
+<p>But we can do this right from within Android Studio. Select the <strong>Unversioned Files</strong> drop-down in the <strong>Local Changes</strong> tab, <strong>right-click</strong> and go to <strong>Git &gt; Add</strong> or use <strong>Control-Alt-A</strong>. Remember that selecting the root folder will add everything inside it to the staging area. </p>
+<p class="image-container"><img alt="Adding unversioned files to git" style="width: 624.00px" src="img/4d6c4ddf4807c28d.png"></p>
+<p>Now, you will observe that your file label colours have changed from brown to green. Here is what the IntelliJ IDEA documentation says about file names that are coloured green: </p>
+<p>File is scheduled for addition to the repository. </p>
+<p>To learn more about the different colours a file name can have depending on the file status in Android Studio (IntelliJ IDEA), check out the <a href="https://www.jetbrains.com/help/idea/file-status-highlights.html" target="_blank">file status highlights documentation</a>. </p>
+<p>To finally commit our changes, click on the commit changes button in the <strong>Local Changes</strong> tab, and the <strong>Commit Changes</strong> dialog will pop up. </p>
+<p class="image-container"><img alt="Commit Changes dialog" style="width: 624.00px" src="img/97c0d1173b3603d4.png"></p>
+<ol type="1" start="1">
+<li>Here we can select or unselect files that should be included in this commit. By default, all staged files are checked. </li>
+<li>Write your commit message inside here. If you have a previously written commit message, it will show here as a default. </li>
+<li>Select operation(s) to perform before committing to Git. </li>
+<li>Side-by-side comparison of the changed files. </li>
+<li>With this dropdown button, you can either commit and push or just commit. </li>
+</ol>
+<p>So to make a commit, let&#39;s write a commit message:</p>
+<pre><code>Initial commit</code></pre>
+<p>Select <strong>Commit</strong> in the <strong>Commit</strong> drop-down to finally commit your changes. Note that you can use the shortcut <strong>Control-K</strong> to commit changes anytime from Android Studio. </p>
+<p>If you now revisit the <strong>Local Changes</strong> tab in the <strong>Version Control</strong> window, you won&#39;t see any of your files listed there anymore—because we successfully committed them to our local repo. </p>
+<p>Note that you can also navigate to <strong>VCS &gt; Git &gt; Commit File</strong>... to make a commit and <strong>VCS &gt; Git &gt; Add</strong> to add a file for staging. In addition, you can click the commit changes icon in the main top toolbar in Android Studio to make a quickly make a commit (or commit and push). </p>
+<p class="image-container"><img alt="commit changes icon" style="width: 624.00px" src="img/53b7175f33f1311f.png"></p>
+<p>In our <strong>MainActivity.kt</strong> class, I did a simple modification in the class by overriding <code>onResume()</code>. You will notice that the file name colour after the modification is now blue; this means that we have modified the file. </p>
+<p class="image-container"><img alt="Commit changes dialog with file name colour blue" style="width: 624.00px" src="img/93761c0f54e43b11.png"></p>
+<h3 is-upgraded>Viewing the Commit Log</h3>
+<p>Now, revisit the <strong>Version Control</strong> window once again and go to the <strong>Log</strong> tab. What you will now see are the commits that have been made to this project. To get more details on any commit, just click it. </p>
+<p class="image-container"><img alt="Log tab with commit details" style="width: 624.00px" src="img/6c4ab29b6a820a36.png"></p>
+<ol type="1" start="1">
+<li>This main pane shows all commits on the project according to the filter selected. In other words, this shows us the commit history. </li>
+<li>This pane displays the files and folders affected by the commit selected in the commits history pane. </li>
+<li>This pane displays more details about the selected commit. </li>
+</ol>
+<p>By right-clicking on a commit, you can also see a menu that allows you to copy the revision number, create a patch, check out a revision, branch from that commit, create a new tag, and reset the current branch to that commit. </p>
+<p class="image-container"><img alt="Commit menu " style="width: 624.00px" src="img/959efe409a1ca0f.png"></p>
+<p>Let&#39;s now look at how we can view what code was added, edited, or removed. In other words, we want to check out—in more detail—the changes made. </p>
+<p>Simply click on the show diff icon above the window where the files affected by the commit are shown. A shortcut is to use <strong>Control-D</strong> or to double-click on the file or folder. </p>
+<p class="image-container"><img style="width: 624.00px" src="img/25bd0b9f7ffe1dc2.png"></p>
+<p>What you&#39;ll see is a <strong>Show Diff</strong> dialog, showing the differences between the previous commit and the selected commit. </p>
+<p class="image-container"><img alt="Show Diff dialog" style="width: 624.00px" src="img/21f93f03cd0b0574.png"></p>
+<p>A green coloured region in the file highlights lines that were added to file—you should see some if you&#39;re following along. Grey regions highlight lines that were removed. And blue highlights lines that were changed. Try to explore the filters and icon buttons available at the top of the <strong>Show Diff</strong> dialog to learn more about it. </p>
+<p>Note that you can also see changes to images in the <strong>Show Diff</strong> dialog!</p>
+<p>By right-clicking on a file, you also have the option to see the difference between the last commit and the current commit of that file—show diff (shortcut <strong>Control-D</strong>). You can also edit the source (<strong>F4</strong>), open the version in the repository, revert selected changes, show history for the revision, and show details of the commit for that file.</p>
+<p class="image-container"><img alt="File commit menu " style="width: 624.00px" src="img/be780c2266c2fc57.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Creating a Git Branch" duration="0">
+        <p>The master branch will be current by default. However, it&#39;s recommended to always branch out from the master and do your work on a separate, feature-specific branch. When you are done coding your feature (and when you have tested your changes), you then merge your changes to the master branch. </p>
+<p>Let&#39;s see how to create a branch from the master. </p>
+<p>Go to the bottom-right corner of Android Studio and click on the Git: master drop-down menu. </p>
+<p class="image-container"><img alt="Git master drop-down menu" style="width: 624.00px" src="img/18ff907240041365.png"></p>
+<p>Click on the <strong>New Branch</strong> button. </p>
+<p class="image-container"><img alt="New Branch button " style="width: 624.00px" src="img/c9349c51ab2fd04e.png"></p>
+<p>Enter the branch name. In our case, use <strong>dev</strong>. </p>
+<p class="image-container"><img style="width: 624.00px" src="img/387d49fc157dc987.png"></p>
+<p>Finally, click the <strong>OK</strong> button for Android Studio to automatically create the <strong>dev</strong> branch and also checkout to that branch. </p>
+<p>We are now currently in the <strong>dev</strong> branch. As you can see below:</p>
+<p class="image-container"><img alt="Currently at dev branch" style="width: 624.00px" src="img/49f6a648f59db24d.png"></p>
+<p>Under the hood, Android Studio executes the command:</p>
+<pre><code>git checkout -b dev</code></pre>
+<p>Note that we can also create a new branch by navigating to <strong>VCS &gt; Git &gt; Branches &gt; New Branch</strong>. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Merging Git Branches" duration="0">
+        <p>Inside the <strong>dev</strong> branch, just create a basic activity <strong>ProfileActivity.kt</strong> and its layout files and commit your changes. We are going to see how to merge <strong>dev</strong> to master right inside Android Studio. </p>
+<p>Go and check out from the current branch (<strong>dev</strong>) to the master branch (meaning we&#39;re switching from <strong>dev</strong> to the master). </p>
+<h3 is-upgraded>Merge, Checkout, Delete, Compare, Rename Branch</h3>
+<p>If you click on a branch, you&#39;ll be shown some operations you can perform on that branch. The operations include merging, comparing two branches, renaming the branch, rebasing, checking out, and deleting the branch. </p>
+<p class="image-container"><img alt="Checking out to the master branch" style="width: 624.00px" src="img/32e91a6b1a7b52c0.png"></p>
+<p>We&#39;re going to look at how to merge a branch in this post. In the master branch, merge the <strong>dev</strong> branch in by navigating to the <strong>dev</strong> branch and clicking <strong>Merge</strong> in the menu. </p>
+<p class="image-container"><img alt="Merging dev branch to master" style="width: 624.00px" src="img/3a3cff7611a78be.png"></p>
+<p>That&#39;s it! We&#39;ve now successfully merged our dev branch to the master branch. </p>
+<p class="image-container"><img alt="Log tab showing commits in master branch" style="width: 624.00px" src="img/359cc24fc09d54c7.png"></p>
+<p>Behind the scenes, Android Studio executes the command:</p>
+<pre><code>git merge dev</code></pre>
+<p>Note that we can also do advanced merging right inside Android Studio. We are able to specify the merging strategy (Resolve, Recursive, Octopus, Ours, or Subtree) or not to use the fast-forward merging mode. </p>
+<p>To set this up when merging, navigate to <strong>VCS &gt; Git &gt; Merge Changes</strong>...</p>
+<p class="image-container"><img alt="Merge branches dialog" style="width: 624.00px" src="img/47277956764f0024.png"></p>
+<p>Here you can select multiple branches to merge, select the merge strategy, and write a commit message. It&#39;s highly recommended you really understand these merging strategies and whether to use the fast forward mode before merging. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Pushing to a Remote Repository" duration="0">
+        <p>Every Git project should have a remote or central repository where other developers can collaborate on the project from anywhere in the world. In Android Studio, it&#39;s also possible to push our commits or changes to a remote repository. To do that, navigate to <strong>VCS &gt; Git &gt; Push</strong>... </p>
+<p class="image-container"><img alt="Push Commits dialog" style="width: 624.00px" src="img/6dcf7aa93facc037.png"></p>
+<p>Here we can add the remote repository URL by clicking on the <strong>Define remote</strong> link in the <strong>Push Commits</strong> dialog that pops up. Finally, click on the <strong>Push</strong> button when done! A shortcut is to use <strong>Control-Shift-K</strong>. </p>
+<p>Android Studio executes the following command behind the scenes:</p>
+<pre><code>git push</code></pre>
+<p>You can also quickly make a commit with a push by clicking on the commit changes icon in the main toolbar or using <strong>Control-K</strong>. </p>
+<p class="image-container"><img alt="commit changes icon" style="width: 624.00px" src="img/aa495a36da432de7.png"></p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Pulling From a Remote Repository" duration="0">
+        <p>To update your project (to make a pull) with the latest changes from the remote repository (you should have already added the remote origin), navigate to <strong>VCS &gt; Git &gt; Pull</strong>. This will automatically update your Android Studio project with the most recent code from the remote repository. </p>
+<p>To initiate a pull, you can also click on the update project icon in the main toolbar or use the <strong>Control-T</strong> shortcut. </p>
+<p class="image-container"><img alt="Update project icon" style="width: 624.00px" src="img/8102e26ddf71bd9f.png"></p>
+<p>If you do this, Android Studio will execute the Git pull command behind the scenes:</p>
+<pre><code>git pull</code></pre>
+<p>Note that if you encounter a merge conflict while pulling or pushing, Android Studio will show a really handy merge conflict dialog which will help you resolve that conflict. </p>
+
+
+      </google-codelab-step>
+    
+      <google-codelab-step label="Conclusion" duration="0">
+        <p>In this tutorial, you learned how easy it is to perform different Git operations you might typically do on the command line or in the terminal. Using Android Studio&#39;s Git tools makes it easier and more efficient to collaborate on Android projects with other developers. </p>
+
+
+      </google-codelab-step>
+    
+  </google-codelab>
+
+  <script src="https://storage.googleapis.com/claat-public/native-shim.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/custom-elements.min.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/prettify.js"></script>
+  <script src="https://storage.googleapis.com/claat-public/codelab-elements.js"></script>
+  <script src="//support.google.com/inapp/api.js"></script>
+
+</body>
+</html>

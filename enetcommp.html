@@ -1,0 +1,212 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Une série d&#39;ateliers de codes qui vous apprennent les bases de la création d&#39;application Android. Dans ce matériel, vous apprendrez les concepts de base de la programmation Android et construirez différentes applications, des applications liées à votre spécialité, tout en travaillant sur votre propre projet d&#39;application Android.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="Projet tutoré Programmation Mobile">
+<meta name="application-name" content="Projet tutoré Programmation Mobile">
+<link rel="canonical" href="https://example.com/enetcommp/">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.google-analytics.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E0H6JSF2N3"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-E0H6JSF2N3');
+</script>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-3295395-7', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<title>Projet tutoré Programmation Mobile</title>
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="import" href="/elements/elements.html">
+<style is="custom-style">
+:root{--paper-tabs-selection-bar-color:currentcolor;--paper-input-container-underline:{display:none};--paper-input-container-underline-focus:{display:none};}.dropdown-filter{--paper-input-container:{padding:8px}} </style>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#455a64">
+<meta name="apple-mobile-web-app-title" content="Projet tutoré Programmation Mobile">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="194x194" href="/images/favicons/favicon-194x194.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/images/favicons/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#455a64">
+<meta name="msapplication-TileColor" content="#455a64">
+<meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+<meta name="theme-color" content="#455a64">
+<meta name="og:type" property="og:type" content="website">
+<meta name="og:title" property="og:title" content="Projet tutoré Programmation Mobile">
+<meta name="og:description" property="og:description" content="Une série d&#39;ateliers de codes qui vous apprennent les bases de la création d&#39;application Android. Dans ce matériel, vous apprendrez les concepts de base de la programmation Android et construirez différentes applications, des applications liées à votre spécialité, tout en travaillant sur votre propre projet d&#39;application Android.">
+<meta name="og:url" property="og:url" content="https://example.com/enetcommp/">
+<meta name="og:site_name" property="og:site_name" content="Codelabs">
+<meta name="og:determiner" property="og:determiner" content="the">
+<meta name="og:locale" property="og:locale" content="en_US">
+<meta name="og:image" property="og:image" content="/images/og-image.png">
+<meta name="og:image:url" property="og:image:url" content="/images/og-image.png">
+<meta name="og:image:type" property="og:image:type" content="image/png">
+<meta name="og:image:width" property="og:image:width" content="1200">
+<meta name="og:image:height" property="og:image:height" content="1200">
+<meta name="og:image:alt" property="og:image:alt" content="Codelabs">
+<meta name="twitter:card" property="twitter:card" content="summary_large_image">
+<meta name="twitter:title" property="twitter:title" content="Projet tutoré Programmation Mobile">
+<meta name="twitter:description" property="twitter:description" content="Une série d&#39;ateliers de codes qui vous apprennent les bases de la création d&#39;application Android. Dans ce matériel, vous apprendrez les concepts de base de la programmation Android et construirez différentes applications, des applications liées à votre spécialité, tout en travaillant sur votre propre projet d&#39;application Android.">
+<meta name="twitter:image" property="twitter:image" content="/images/og-image.png">
+<meta name="twitter:url" property="twitter:url" content="https://example.com/enetcommp/">
+</head>
+<body id="app" is="body-bind" class="loading fullbleed view">
+<paper-header-panel id="main" mode="standard" main>
+<div id="mainToolbar" class="paper-header">
+<div class="site-width layout horizontal">
+<a href="/">
+<img src="/images/exycodelabs_light_color.svg" class="logo-devs" alt="Codelabs Logo">
+</a>
+<div id="searchbar">
+<paper-input-container no-label-float>
+<paper-icon-button prefix icon="search"></paper-icon-button>
+<label>Recherche</label>
+<input is="iron-input" bind-value="{{searchVal}}" on-keydown="onSearchKeyDown">
+</paper-input-container>
+</div>
+</div>
+</div>
+<header id="banner" down>
+<div class="site-width">
+<div class="banner-description">
+<img id="logo" src="/enetcommp/enetcom_logo.png" alt="Event logo">
+<div class="banner-meta">
+<h3>Projet tutoré Programmation Mobile</h3>
+<p>Une série d&#39;ateliers de codes qui vous apprennent les bases de la création d&#39;application Android. Dans ce matériel, vous apprendrez les concepts de base de la programmation Android et construirez différentes applications, des applications liées à votre spécialité, tout en travaillant sur votre propre projet d&#39;application Android.</p>
+</div>
+</div>
+</div>
+</header>
+<main>
+<div id="filters" class="site-width layout horizontal center justified">
+<div id="sortby">
+<paper-tabs selected="0" noink on-iron-activate="sortBy">
+<paper-tab>A-Z</paper-tab>
+<paper-tab>Récent</paper-tab>
+<paper-tab>Durée</paper-tab>
+</paper-tabs>
+</div>
+</div>
+<card-sorter id="cards" class="site-width">
+<a href="/codelabs/vcs-git-android-studio/index.html?index=..%2F..enetcommp" on-tap="navigate" class="codelab-card category-android" data-category="Android" data-title="P 01: Version Control With Git in Android Studio" data-duration="0" data-updated="2020-10-18T12:25:48Z" data-tags="enetcommp,enetcommpie,enetcomtppem,enetcomtppm,kiosk,web" data-pin="">
+<div class="description">P 01: Version Control With Git in Android Studio</div>
+<div class="card-duration">
+<span></span>
+<span>Mis à jour Oct 18, 2020</span>
+</div>
+<div class="card-footer">
+<div class="category-icon android-icon"></div>
+<paper-button class="android-bg">Démarrer</paper-button>
+</div>
+</a>
+<a href="/codelabs/networking-connecting-to-internet/index.html?index=..%2F..enetcommp" on-tap="navigate" class="codelab-card category-android" data-category="Android" data-title="P 02.1: Networking - Connecting to the internet" data-duration="0" data-updated="2020-10-14T07:35:56Z" data-tags="enetcommpie,enetcommp,kiosk,web" data-pin="">
+<div class="description">P 02.1: Networking - Connecting to the internet</div>
+<div class="card-duration">
+<span></span>
+<span>Mis à jour Oct 14, 2020</span>
+</div>
+<div class="card-footer">
+<div class="category-icon android-icon"></div>
+<paper-button class="android-bg">Démarrer</paper-button>
+</div>
+</a>
+<a href="/codelabs/making-phone-calls/index.html?index=..%2F..enetcommp" on-tap="navigate" class="codelab-card category-android" data-category="Android" data-title="P 03.1: Making Phone Calls" data-duration="0" data-updated="2020-11-10T15:01:19Z" data-tags="enetcommp,enetcommpie,kiosk,web" data-pin="">
+<div class="description">P 03.1: Making Phone Calls</div>
+<div class="card-duration">
+<span></span>
+<span>Mis à jour Nov 10, 2020</span>
+</div>
+<div class="card-footer">
+<div class="category-icon android-icon"></div>
+<paper-button class="android-bg">Démarrer</paper-button>
+</div>
+</a>
+<a href="/codelabs/sending-receiving-sms-messages/index.html?index=..%2F..enetcommp" on-tap="navigate" class="codelab-card category-android" data-category="Android" data-title="P 03.2: Sending and Receiving SMS Messages" data-duration="0" data-updated="2020-10-18T12:23:19Z" data-tags="enetcommp,enetcommpie,kiosk,web" data-pin="">
+<div class="description">P 03.2: Sending and Receiving SMS Messages</div>
+<div class="card-duration">
+<span></span>
+<span>Mis à jour Oct 18, 2020</span>
+</div>
+<div class="card-footer">
+<div class="category-icon android-icon"></div>
+<paper-button class="android-bg">Démarrer</paper-button>
+</div>
+</a>
+<a href="/codelabs/getting-sensor-data/index.html?index=..%2F..enetcommp" on-tap="navigate" class="codelab-card category-android" data-category="Android" data-title="P 04.1: Getting sensor data" data-duration="0" data-updated="2020-11-16T13:05:56Z" data-tags="enetcommp,enetcommpie,kiosk,web" data-pin="">
+<div class="description">P 04.1: Getting sensor data</div>
+<div class="card-duration">
+<span></span>
+<span>Mis à jour Nov 16, 2020</span>
+</div>
+<div class="card-footer">
+<div class="category-icon android-icon"></div>
+<paper-button class="android-bg">Démarrer</paper-button>
+</div>
+</a>
+<a href="/codelabs/sensor-based-orientation/index.html?index=..%2F..enetcommp" on-tap="navigate" class="codelab-card category-android" data-category="Android" data-title="P 04.2: Sensor-based orientation" data-duration="0" data-updated="2020-11-16T14:36:25Z" data-tags="enetcommp,enetcommpie,kiosk,web" data-pin="">
+<div class="description">P 04.2: Sensor-based orientation</div>
+<div class="card-duration">
+<span></span>
+<span>Mis à jour Nov 16, 2020</span>
+</div>
+<div class="card-footer">
+<div class="category-icon android-icon"></div>
+<paper-button class="android-bg">Démarrer</paper-button>
+</div>
+</a>
+</card-sorter>
+<div id="loading-placeholder" class="site-width">
+Chargement de Codelabs, veuillez patienter ...
+</div>
+</main>
+<footer id="footer">
+<div class="footer-wrapper site-width">
+<div class="link-list">
+<label>Annexes</label>
+<ul>
+<li><a href="https://developer.android.com/">Android Developers</a></li>
+<li><a href="https://developers.google.com/">Google Developers</a></li>
+<li><a href="https://app.pluralsight.com/score/skill-assessment/android/intro#/v2/landing">Android skill assessment</a></li>
+<li><a href="https://github.com/googlecodelabs/tools">Codelab tools on GitHub</a></li>
+</ul>
+</div>
+<div class="link-list">
+<label>Consoles</label>
+<ul>
+<li><a href="https://console.firebase.google.com/">Firebase</a></li>
+<li><a href="https://play.google.com/apps/publish/">Google Play</a></li>
+<li><a href="https://console.cloud.google.com/">Google Cloud</a></li>
+</ul>
+</div>
+<div class="link-list">
+<label>Contact</label>
+<ul>
+<li><a href="mailto:khalil.hammami@enetcom.usf.tn">Khalil Hammami</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<div class="footerbar">
+<div class="site-width layout horizontal center justified">
+<span>
+<a href="#">Terms</a>
+&nbsp; | &nbsp;
+<a href="#">Privacy</a>
+</span>
+</div>
+</div>
+</paper-header-panel>
+<script src="/scripts/main.js"></script>
+</body>
+</html>

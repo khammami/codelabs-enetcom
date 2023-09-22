@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-3295395-7",
+  "updated": "2022-12-24T09:43:31Z",
+  "id": "soumettre-compte-rendu",
+  "duration": 0,
+  "title": "Comment soumettre votre compte rendu",
+  "authors": "Khalil Hammami",
+  "summary": "",
+  "source": "14V2kAVBx6SYb92LxcprvrsPyhmntNx3RSw2QNbvH46o",
+  "theme": "android",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Android"
+  ],
+  "tags": [
+    "enetcomtppem",
+    "enetcomtppm",
+    "kiosk",
+    "web"
+  ],
+  "url": "soumettre-compte-rendu"
+}

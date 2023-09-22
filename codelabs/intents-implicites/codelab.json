@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-3295395-7",
+  "updated": "2022-10-18T08:09:34Z",
+  "id": "intents-implicites",
+  "duration": 0,
+  "title": "TP 02.3: Les \"Intents\" implicites",
+  "authors": "Khalil Hammami",
+  "summary": "",
+  "source": "15DwHNo1DV7UFS25oRN_l4SGfj-GZ3TrZ8bmB2oLCtNw",
+  "theme": "android",
+  "status": [
+    "published"
+  ],
+  "category": [
+    "Android"
+  ],
+  "tags": [
+    "enetcomtppem",
+    "enetcomtppm",
+    "kiosk",
+    "web"
+  ],
+  "url": "intents-implicites"
+}

@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-3295395-7",
+  "updated": "2019-11-14T08:41:29Z",
+  "id": "deleting-data-room-database",
+  "duration": 0,
+  "title": "TP 04.2B: Deleting data from a Room database",
+  "authors": "Khalil Hammami",
+  "summary": "",
+  "source": "1Qb4fXou7YUNi-jnLQj5U8HjViVFdaEwQucJIkcrBOTM",
+  "theme": "android",
+  "status": [
+    "hidden"
+  ],
+  "category": [
+    "Android"
+  ],
+  "tags": [
+    "enetcomtppem",
+    "enetcomtppm",
+    "kiosk",
+    "web"
+  ],
+  "url": "deleting-data-room-database"
+}

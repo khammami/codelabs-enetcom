@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-3295395-7",
+  "updated": "2019-11-10T09:20:00Z",
+  "id": "sqlite-database",
+  "duration": 0,
+  "title": "TP 04.1A: SQLite Database",
+  "authors": "Khalil Hammami",
+  "summary": "",
+  "source": "1SAuplVcxUpPtcnwaTlNF9z9km7kSqkFtuk17e-dIUwg",
+  "theme": "android",
+  "status": [
+    "hidden"
+  ],
+  "category": [
+    "Android"
+  ],
+  "tags": [
+    "enetcomtppem",
+    "enetcomtppm",
+    "kiosk",
+    "web"
+  ],
+  "url": "sqlite-database"
+}

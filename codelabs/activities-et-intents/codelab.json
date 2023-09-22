@@ -1,0 +1,27 @@
+{
+  "environment": "web",
+  "format": "html",
+  "prefix": "https://storage.googleapis.com",
+  "mainga": "UA-3295395-7",
+  "updated": "2019-10-13T09:26:34Z",
+  "id": "activities-et-intents",
+  "duration": 0,
+  "title": "TP 02.1: Activités et \"intents\"",
+  "authors": "Khalil Hammami",
+  "summary": "",
+  "source": "1al07Cg0AUmvb4FXd35KCQT1VvdRU7cGlrEEMdKqgo1I",
+  "theme": "android",
+  "status": [
+    "hidden"
+  ],
+  "category": [
+    "Android"
+  ],
+  "tags": [
+    "enetcomtppem",
+    "enetcomtppm",
+    "kiosk",
+    "web"
+  ],
+  "url": "activities-et-intents"
+}

@@ -1,0 +1,168 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="description" content="Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application.">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="generator" content="Codelabs">
+<meta name="application-name" content="Codelabs">
+<link rel="canonical" href="https://example.com/">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<link rel="preconnect" href="https://www.google-analytics.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E0H6JSF2N3"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-E0H6JSF2N3');
+</script>
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+    ga('create', 'UA-3295395-7', 'auto');
+    ga('send', 'pageview');
+</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+<title>Codelabs</title>
+<link rel="stylesheet" href="/styles/main.css">
+<link rel="import" href="/elements/elements.html">
+<style is="custom-style">
+:root{--paper-tabs-selection-bar-color:currentcolor;--paper-input-container-underline:{display:none};--paper-input-container-underline-focus:{display:none};}.dropdown-filter{--paper-input-container:{padding:8px}} </style>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#455a64">
+<meta name="apple-mobile-web-app-title" content="Codelabs">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="194x194" href="/images/favicons/favicon-194x194.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/images/favicons/android-chrome-192x192.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="mask-icon" href="/images/favicons/safari-pinned-tab.svg" color="#455a64">
+<meta name="msapplication-TileColor" content="#455a64">
+<meta name="msapplication-TileImage" content="/images/favicons/mstile-144x144.png">
+<meta name="theme-color" content="#455a64">
+<meta name="og:type" property="og:type" content="website">
+<meta name="og:title" property="og:title" content="Codelabs">
+<meta name="og:description" property="og:description" content="Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application.">
+<meta name="og:url" property="og:url" content="https://example.com/">
+<meta name="og:site_name" property="og:site_name" content="Codelabs">
+<meta name="og:determiner" property="og:determiner" content="the">
+<meta name="og:locale" property="og:locale" content="en_US">
+<meta name="og:image" property="og:image" content="/images/og-image.png">
+<meta name="og:image:url" property="og:image:url" content="/images/og-image.png">
+<meta name="og:image:type" property="og:image:type" content="image/png">
+<meta name="og:image:width" property="og:image:width" content="1200">
+<meta name="og:image:height" property="og:image:height" content="1200">
+<meta name="og:image:alt" property="og:image:alt" content="Codelabs">
+<meta name="twitter:card" property="twitter:card" content="summary_large_image">
+<meta name="twitter:title" property="twitter:title" content="Codelabs">
+<meta name="twitter:description" property="twitter:description" content="Codelabs provide a guided, tutorial, hands-on coding experience. Most codelabs will step you through the process of building a small application, or adding a new feature to an existing application.">
+<meta name="twitter:image" property="twitter:image" content="/images/og-image.png">
+<meta name="twitter:url" property="twitter:url" content="https://example.com/">
+</head>
+<body id="app" is="body-bind" class="loading fullbleed">
+<paper-header-panel id="main" mode="standard" main>
+<div id="mainToolbar" class="paper-header">
+<div class="site-width layout horizontal">
+<a href="/">
+<img src="/images/exycodelabs_light_color.svg" class="logo-devs" alt="Codelabs Logo">
+</a>
+<div id="searchbar">
+<paper-input-container no-label-float>
+<paper-icon-button prefix icon="search"></paper-icon-button>
+<label>Recherche</label>
+<input is="iron-input" bind-value="{{searchVal}}" on-keydown="onSearchKeyDown">
+</paper-input-container>
+</div>
+</div>
+</div>
+<header id="banner" down$="[[_toBoolean(selectedFilter)]]">
+<div class="site-width">
+<h2 class="banner-title">Bienvenue sur Codelabs!</h2>
+<div class="banner-description" data-filter-selected$="[[_toBoolean(selectedFilter)]]">
+<p class="banner-info">
+Codelabs fournit une expérience de codage pratique guidée, basée sur un tutoriel. La plupart des codelabs vous guideront tout au long du processus de création d'une petite application ou de l'ajout d'une nouvelle fonctionnalité à une application existante.
+</p>
+</div>
+</div>
+</header>
+<main>
+<div id="filters" class="site-width layout horizontal center justified">
+<div id="sortby">
+<paper-tabs selected="0" noink on-iron-activate="sortBy">
+<paper-tab>A-Z</paper-tab>
+<paper-tab>Récent</paper-tab>
+<paper-tab>Durée</paper-tab>
+</paper-tabs>
+</div>
+<paper-dropdown-menu label="Choisissez un événement" class="dropdown-filter" no-label-float noink no-animations>
+<paper-listbox id="eventList" slot="dropdown-content" class="dropdown-content"><a href="/enetcommpie/" tabindex="-1">
+<paper-item>Mini projet informatique embarquée</paper-item>
+</a>
+<a href="/enetcomtppem/" tabindex="-1">
+<paper-item>TP Programmation Embarqué &amp; Mobile</paper-item>
+</a>
+<a href="/enetcomtppm/" tabindex="-1">
+<paper-item>TP Atelier Programmation Mobile</paper-item>
+</a>
+</paper-listbox>
+</paper-dropdown-menu>
+</div>
+<card-sorter id="cards" class="site-width">
+<a href="/codelabs/soumettre-compte-rendu/index.html?index=..%2F..index" on-tap="navigate" class="codelab-card category-android" data-category="Android" data-title="Comment soumettre votre compte rendu" data-duration="0" data-updated="2022-12-24T09:43:31Z" data-tags="enetcomtppem,enetcomtppm,kiosk,web" data-pin="">
+<div class="description">Comment soumettre votre compte rendu</div>
+<div class="card-duration">
+<span></span>
+<span>Mis à jour Dec 24, 2022</span>
+</div>
+<div class="card-footer">
+<div class="category-icon android-icon"></div>
+<paper-button class="android-bg">Démarrer</paper-button>
+</div>
+</a>
+</card-sorter>
+<div id="loading-placeholder" class="site-width">
+Chargement de Codelabs, veuillez patienter ...
+</div>
+</main>
+<footer id="footer">
+<div class="footer-wrapper site-width">
+<div class="link-list">
+<label>Annexes</label>
+<ul>
+<li><a href="https://developer.android.com/">Android Developers</a></li>
+<li><a href="https://developers.google.com/">Google Developers</a></li>
+<li><a href="https://app.pluralsight.com/score/skill-assessment/android/intro#/v2/landing">Android skill assessment</a></li>
+<li><a href="https://github.com/googlecodelabs/tools">Codelab tools on GitHub</a></li>
+</ul>
+</div>
+<div class="link-list">
+<label>Consoles</label>
+<ul>
+<li><a href="https://console.firebase.google.com/">Firebase</a></li>
+<li><a href="https://play.google.com/apps/publish/">Google Play</a></li>
+<li><a href="https://console.cloud.google.com/">Google Cloud</a></li>
+</ul>
+</div>
+<div class="link-list">
+<label>Contact</label>
+<ul>
+<li><a href="mailto:khalil.hammami@enetcom.usf.tn">Khalil Hammami</a></li>
+</ul>
+</div>
+</div>
+</footer>
+<div class="footerbar">
+<div class="site-width layout horizontal center justified">
+<span>
+<a href="#">Terms</a>
+&nbsp; | &nbsp;
+<a href="#">Privacy</a>
+</span>
+</div>
+</div>
+</paper-header-panel>
+<script src="/scripts/main.js"></script>
+</body>
+</html>
