@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-3295395-7",
-  "updated": "2019-09-29T08:51:40Z",
+  "updated": "2023-09-24T13:19:05Z",
   "id": "interface-utilisateur-interactive",
   "duration": 0,
   "title": "TP 01.2: Votre première interface utilisateur interactive",
@@ -23,5 +23,7 @@
     "kiosk",
     "web"
   ],
+  "feedback": "https://github.com/khammami/codelabs-enetcom/issues",
+  "ga": "UA-3295395-7",
   "url": "interface-utilisateur-interactive"
 }

@@ -18,23 +18,15 @@
       color: red;
     }
   </style>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T70T90JTWB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-T70T90JTWB');
-  </script>
 </head>
 <body>
-  <google-codelab-analytics gaid="UA-3295395-7"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
+  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-T70T90JTWB"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-3295395-7"
+                  codelab-ga4id="G-T70T90JTWB"
                   id="interface-utilisateur-interactive"
                   title="TP 01.2: Votre première interface utilisateur interactive"
                   environment="web"
-                  feedback-link="">
+                  feedback-link="https://github.com/khammami/codelabs-enetcom/issues">
     
       <google-codelab-step label="Bienvenue" duration="0">
         <p>Ces travaux pratiques se base sur le cours de base pour les développeurs Android fourni par Google afin de  les préparer pour le test de certification <a href="https://developers.google.com/training/certification/associate-android-developer/" target="_blank">Associate Android Developer</a>. Vous obtiendrez le plus de valeur de ce TP si vous travaillez successivement dans les codelabs.</p>
@@ -44,7 +36,7 @@
 <li><a href="http://developer.android.com/reference/android/widget/TextView.html" target="_blank"><code>TextView</code></a> pour afficher du texte.</li>
 <li><a href="https://developer.android.com/reference/android/widget/EditText.html" target="_blank"><code>EditText</code></a> pour permettre à l&#39;utilisateur d&#39;entrer et de modifier du texte.</li>
 <li><a href="https://developer.android.com/reference/android/widget/Button.html" target="_blank"><code>Bouton</code></a> et autres éléments cliquables (tels que <a href="https://developer.android.com/reference/android/widget/RadioButton.html" target="_blank"><code>RadioButton</code></a>, <a href="https://developer.android.com/reference/android/widget/CheckBox.html" target="_blank"><code>CheckBox</code></a> et <a href="https://developer.android.com/reference/android/widget/Spinner.html" target="_blank"><code>Spinner</code></a>) pour fournir un comportement interactif.</li>
-<li><a href="https://developer.android.com/reference/android/widget/ScrollView.html" target="_blank"><code>ScrollView</code></a> et <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html" target="_blank"><code>RecyclerView</code></a> pour afficher des éléments défilables.</li>
+<li><a href="https://developer.android.com/reference/android/widget/ScrollView.html" target="_blank"><code>ScrollView</code></a> et <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html" target="_blank"><code>RecyclerView</code></a> pour afficher des éléments déroulables.</li>
 <li><a href="https://developer.android.com/reference/android/widget/ImageView.html" target="_blank"><code>ImageView</code></a> pour afficher des images.</li>
 <li><a href="https://developer.android.com/reference/android/support/constraint/ConstraintLayout.html" target="_blank"><code>ConstraintLayout</code></a> et <a href="https://developer.android.com/reference/android/widget/LinearLayout.html" target="_blank"><code>LinearLayout</code></a> pour contenir d&#39;autres éléments <code>View</code> et les positionner.</li>
 </ul>
@@ -64,7 +56,7 @@
 <li>Comment créer une application avec un comportement interactif.</li>
 <li>Comment utiliser l&#39;éditeur de mise en page pour concevoir une mise en page.</li>
 <li>Comment éditer la mise en page en XML.</li>
-<li>Beaucoup de nouvelle terminologie. Consultez <a href="https://developers.google.com/android/for-all/vocab-words/" target="_blank">le glossaire des mots et des concepts du vocabulaire</a> pour des définitions conviviales.</li>
+<li>Beaucoup de nouvelles terminologies. Consultez <a href="https://developers.google.com/android/for-all/vocab-words/" target="_blank">le glossaire des mots et des concepts du vocabulaire</a> pour des définitions conviviales.</li>
 </ul>
 <h2 is-upgraded>What you&#39;ll do</h2>
 <ul>
@@ -80,15 +72,28 @@
       </google-codelab-step>
     
       <google-codelab-step label="Aperçu de l&#39;application" duration="0">
-        <p>L&#39;application HelloToast comprend deux <code>Button</code> et un TextView. Lorsque l&#39;utilisateur appuie sur le premier bouton, un message court (<a href="https://developer.android.com/reference/android/widget/Toast.html" target="_blank"><code>Toast</code></a>) est affiché à l&#39;écran. Appuyer sur le deuxième bouton (<code>Button</code>) augmente le compteur de &#34;clics&#34; affiché dans le <code>TextView</code>, qui commence à zéro.</p>
+        <p>L&#39;application &#34;Hello Toast&#34; comprend deux boutons (<code>Button</code>) et un champ de texte (<code>TextView</code>). Lorsque l&#39;utilisateur appuie sur le premier bouton, un message court (<code>Toast</code>) est affiché à l&#39;écran. Appuyer sur le deuxième bouton augmente le compteur de clics affiché dans le champ de texte, qui commence à 0.</p>
 <p>Voici à quoi ressemble l&#39;application finie:</p>
-<p class="image-container"><img alt="Hello Toast App after tapping the Toast button" style="width: 336.15px" src="img/9048846fe18c96b7.png"></p>
+<p class="image-container"><img style="width: 318.00px" src="img/18becb42f2ec7f38.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Tâche 1: créer et explorer un nouveau projet" duration="0">
-        <p>Dans cette pratique, vous concevez et implémentez un projet pour l&#39;application HelloToast. Un lien vers le code de la solution est fourni à la fin.</p>
+        <p>Dans cette pratique, vous concevez et implémentez un projet pour l&#39;application HelloToast.<br><br></p>
+<aside class="warning"><p>Pour suivre ce codelab, vous devez activer la nouvelle interface utilisateur dans Android Studio Giraffe:</p>
+<ul>
+<li>à partir de la fenêtre &#34;Welcome to Android Studio&#34;:<br><strong>Customize &gt; All settings</strong></li>
+<li>à partir de la fenêtre du projet ouvert:<br><strong>File &gt; Settings</strong></li>
+</ul>
+<p class="image-container"><img style="width: 610.00px" src="img/3918482f0c611fa1.png"></p>
+<p>Pour activer la nouvelle interface utilisateur et afficher le menu principal dans une barre d&#39;outils séparée, cochez les deux paramètres suivants :</p>
+<ul>
+<li><strong>Enable new UI</strong></li>
+<li><strong>Show main menu in separate toolbar</strong></li>
+</ul>
+<p>Une fois ces paramètres cochés, vous devez redémarrer Android Studio pour que les changements soient appliqués.</p>
+</aside>
 <h2 is-upgraded>1.1 Créer le projet Android Studio</h2>
 <ol type="1" start="1">
 <li>Démarrez Android Studio et créez un nouveau projet avec les paramètres suivants:</li>
@@ -100,37 +105,32 @@
 <tr><td colspan="1" rowspan="1"><p>Application Name</p>
 </td><td colspan="1" rowspan="1"><p><strong>Hello Toast</strong></p>
 </td></tr>
-<tr><td colspan="1" rowspan="1"><p>Company Name</p>
-</td><td colspan="1" rowspan="1"><p><strong>com.example.android (or your own domain)</strong></p>
+<tr><td colspan="1" rowspan="1"><p>Package Name</p>
+</td><td colspan="1" rowspan="1"><p><strong>com.example.enetcom.hellotoast</strong></p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Phone and Tablet Minimum SDK</p>
-</td><td colspan="1" rowspan="1"><p><strong>API15: Android 4.0.3 IceCreamSandwich</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>API 16: Android 4.1 Jelly Bean</strong></p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>Template</p>
-</td><td colspan="1" rowspan="1"><p><strong>Empty Activity</strong></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>Generate Layout file box</p>
-</td><td colspan="1" rowspan="1"><p><strong>sélectionné</strong></p>
-</td></tr>
-<tr><td colspan="1" rowspan="1"><p>Backwards Compatibility box</p>
-</td><td colspan="1" rowspan="1"><p><strong>sélectionné</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Empty Views Activity</strong></p>
 </td></tr>
 </table>
 <ol type="1" start="2">
-<li>Sélectionnez <strong>Run &gt; Run app</strong> ou cliquez sur l&#39;<strong>icône Run </strong><img alt="Run Icon" style="width: 24.00px" src="img/6c65750f2ce7f651.png"> de la barre d&#39;outils pour créer et exécuter l&#39;application sur l&#39;émulateur ou sur votre appareil.</li>
+<li>Sélectionnez <strong>Run &gt; Run app</strong> ou cliquez sur l&#39;icône<strong> Run </strong><img style="width: 35.00px" src="img/f422b524a52e48e0.png">de la barre d&#39;outils pour créer et exécuter l&#39;application sur l&#39;émulateur ou sur votre appareil.</li>
 </ol>
 <h2 is-upgraded>1.2 Explorez l&#39;éditeur de mise en page (layout)</h2>
 <p>Android Studio fournit l&#39;éditeur de disposition (layout) pour construire rapidement la disposition des éléments d&#39;interface utilisateur (UI) d&#39;une application. Il vous permet de faire glisser des éléments vers une conception visuelle et une vue de plan directeur, de les positionner dans la présentation, d&#39;ajouter des contraintes et de définir des attributs. Les contraintes déterminent la position d&#39;un élément d&#39;interface utilisateur dans la présentation. Une contrainte représente une connexion ou un alignement sur une autre vue, la mise en page parent ou un repère invisible.</p>
-<p>Explorez l&#39;éditeur de lyaout et reportez-vous à la figure ci-dessous lorsque vous suivez les étapes numérotées:</p>
+<p>Explorez l&#39;éditeur de layout et reportez-vous à la figure ci-dessous lorsque vous suivez les étapes numérotées:</p>
 <ol type="1" start="1">
 <li>Dans le dossier <strong>app &gt; res &gt; layout</strong> du volet <strong>Project &gt; Android</strong>, double-cliquez sur le fichier <strong><code>activity_main.xml</code></strong> pour l&#39;ouvrir, s&#39;il ne l&#39;est pas déjà.</li>
-<li>Cliquez sur l&#39;onglet <strong>Design</strong> s&#39;il n&#39;est pas déjà sélectionné. Vous utilisez l&#39;onglet <strong>Design</strong> pour manipuler les éléments et le layout, et l&#39;onglet <strong>Text</strong> pour modifier le code XML du layout.</li>
+<li>Sélectionnez le mode de vue <strong>Design</strong> s&#39;il n&#39;est pas déjà sélectionné. Vous utilisez le mode <strong>Design</strong> pour manipuler les éléments et le layout, et le mode <strong>Code</strong> pour modifier le code XML du layout.</li>
 <li>Le volet <strong>Palettes</strong> affiche les éléments d&#39;interface utilisateur (UI) que vous pouvez utiliser dans le &#34;layout&#34; de votre application.</li>
 <li>Le volet de l&#39;arborescence des composants (<strong>Components tree</strong>) affiche la hiérarchie des éléments de l&#39;interface utilisateur (UI). Les éléments de vue sont organisés dans une arborescence de parents et d&#39;enfants, dans laquelle un enfant hérite des attributs de son parent. Dans la figure ci-dessus, <code>TextView</code> est un enfant de <code>ConstraintLayout</code>. Vous en apprendrez plus sur ces éléments plus tard dans ce TP.</li>
 <li>Les panneaux de Design et de Blue print de l&#39;éditeur de disposition (layout) affichant les éléments d&#39;interface utilisateur (UI) de la disposition (layout). Dans la figure ci-dessus, le layout ne montre qu&#39;un seul élément: un <code>TextView</code> qui affiche &#34;Hello World&#34;.</li>
 <li>L&#39;onglet <strong>Attributes</strong> affiche le volet <strong>Attributes</strong> pour la définition des propriétés d&#39;un élément d&#39;interface utilisateur (UI).</li>
 </ol>
-<p><strong>Conseil</strong>: voir <a href="https://developer.android.com/studio/write/layout-editor.html" target="_blank">Building a UI with Layout Editor</a>  pour plus de détails sur l&#39;utilisation de l&#39;éditeur de mises en page, et <a href="https://developer.android.com/studio/intro/index.html" target="_blank">Meet Android Studio</a> pour la documentation complète sur Android Studio.</p>
+<aside class="special"><p><strong>Conseil</strong>: voir <a href="https://developer.android.com/studio/write/layout-editor.html" target="_blank">Building a UI with Layout Editor</a>  pour plus de détails sur l&#39;utilisation de l&#39;éditeur de mises en page, et <a href="https://developer.android.com/studio/intro/index.html" target="_blank">Meet Android Studio</a> pour la documentation complète sur Android Studio.</p>
+</aside>
 
 
       </google-codelab-step>
@@ -140,12 +140,12 @@
 <h2 is-upgraded>2.1 Examiner les contraintes d&#39;éléments</h2>
 <p>Suivez ces étapes:</p>
 <ol type="1" start="1">
-<li>Ouvrez <code>activity_main.xml</code> à partir du volet <strong>Project &gt; Android</strong> s&#39;il n&#39;est pas déjà ouvert. Si l&#39;onglet <strong>Design</strong> n&#39;est pas déjà sélectionné, cliquez dessus.</li>
+<li>Ouvrez <code>activity_main.xml</code> à partir du volet <strong>Project &gt; Android</strong> s&#39;il n&#39;est pas déjà ouvert. Si le mode de vue  <strong>Design</strong> n&#39;est pas déjà sélectionné, cliquez dessus.</li>
 </ol>
-<p>S&#39;il n&#39;y a pas de modèle (blueprint), cliquez sur le bouton <strong>Select Design Surface </strong><img alt="click the Select Design Surface button [ICON HERE] in the toolbar and choose Design + Blueprint. [IMAGEINFO]: ic_blueprint_icon.png, Blueprint button" style="width: 47.00px" src="img/51cea7d6d81ab452.png"> dans la barre d&#39;outils et choisissez <strong>Design + Blueprint</strong>.</p>
+<p>S&#39;il n&#39;y a pas de modèle (blueprint), cliquez sur le bouton <strong>Select Design Surface </strong><img style="width: 28.00px" src="img/72dbd44b62bfe30c.png">dans la barre d&#39;outils et choisissez <strong>Design + Blueprint</strong>.</p>
 <ol type="1" start="2">
-<li>L&#39;outil de connexion automatique (<strong>Autoconnect</strong>) <img alt="ensure that the tool is not disabled. [IMAGEINFO]: ic_autoconnect_enabled_icon.png, Autoconnect button" style="width: 24.00px" src="img/dd3846009e393c48.png"> est également situé dans la barre d&#39;outils. Il est activé par défaut. Pour cette étape, assurez-vous que l&#39;outil n&#39;est pas désactivé.</li>
-<li>Cliquez sur le bouton de zoom in <img alt="Zoom in or out" style="width: 173.00px" src="img/bc1044ef5631de25.png"> pour effectuer un zoom avant sur les volets de conception (design) et de plan (blueprint) détaillé.</li>
+<li>L&#39;outil de connexion automatique (<strong>Autoconnect</strong>) <img style="width: 26.00px" src="img/15294c424bc47399.png">est également situé dans la barre d&#39;outils. Il est activé par défaut. Pour cette étape, assurez-vous que l&#39;outil n&#39;est pas désactivé.</li>
+<li>Cliquez sur le bouton de zoom in pour effectuer un zoom avant sur les volets de conception (design) et de plan (blueprint) détaillé.<br><img style="width: 32.00px" src="img/ca6d8484077137a5.png"></li>
 <li>Sélectionnez <strong><code>TextView</code></strong> dans le volet Component Tree. Le <code>TextView</code> &#34;Hello World&#34; est mis en surbrillance dans les volets Design and blueprint et les contraintes pour l&#39;élément sont visibles.</li>
 <li>Reportez-vous à la figure animée ci-dessous pour cette étape. Cliquez sur la poignée circulaire située à droite de <code>TextView</code> pour supprimer la contrainte horizontale qui lie la vue au côté droit de la présentation (layout). <code>TextView</code> saute du côté gauche car il n&#39;est plus contraint du côté droit. Pour rajouter la contrainte horizontale, cliquez sur la même poignée et faites glisser une ligne vers le côté droit de la présentation (layout).</li>
 </ol>
@@ -160,7 +160,7 @@
 </ul>
 <p class="image-container"><img alt="Constraint handle" style="width: 100.00px" src="img/df8aacf0d83e0af7.png"></p>
 <h2 is-upgraded>2.2 Ajouter un bouton à la mise en page (layout)</h2>
-<p>Lorsqu&#39;il est activé, l&#39;outil de connexion automatique (<strong>Autoconnect</strong>) crée automatiquement deux contraintes ou plus pour un élément d&#39;interface utilisateur (UI) dans la présentation (layout) parent. Une fois que vous avez fait glisser l&#39;élément sur la présentation (layout), des contraintes sont créées en fonction de la position de l&#39;élément.</p>
+<p>Lorsqu&#39;il est activé, l&#39;outil de connexion automatique (<strong>Autoconnect </strong><img style="width: 26.00px" src="img/15294c424bc47399.png">) crée automatiquement deux contraintes ou plus pour un élément d&#39;interface utilisateur (UI) dans la présentation (layout) parent. Une fois que vous avez fait glisser l&#39;élément sur la présentation (layout), des contraintes sont créées en fonction de la position de l&#39;élément.</p>
 <p>Suivez ces étapes pour ajouter un bouton (<code>Button</code>):</p>
 <ol type="1" start="1">
 <li>Commencez avec une ardoise vierge. L&#39;élément <code>TextView</code> n&#39;est pas nécessaire. Ainsi, même s&#39;il est toujours sélectionné, appuyez sur la touche <strong>Suppr</strong> ou choisissez <strong>Edit&gt; Delete</strong>. Vous avez maintenant une mise en page (layout) complètement vide.</li>
@@ -173,7 +173,7 @@
 <li>Faites glisser une contrainte verticale vers le bas de la présentation (layout) (reportez-vous à la figure ci-dessous).</li>
 </ol>
 <p class="image-container"><img alt="Adding a second button with constraints" style="width: 459.00px" src="img/cce2d93530c4d77f.gif"></p>
-<p>Vous pouvez supprimer les contraintes d&#39;un élément en le sélectionnant et en plaçant le pointeur de la souris dessus pour afficher le bouton Clear Constraints <img alt="click the specific handle that sets the constraint. [IMAGEINFO]: ic_remove_constraints_button.png" style="width: 46.00px" src="img/59d14927db41ffe.png">. Cliquez sur ce bouton pour supprimer toutes les contraintes sur l&#39;élément sélectionné. Pour effacer une seule contrainte, cliquez sur le descripteur spécifique qui définit la contrainte.</p>
+<p>Vous pouvez supprimer les contraintes d&#39;un élément en le sélectionnant et en plaçant le pointeur de la souris dessus pour afficher le bouton Clear Constraints <img style="width: 28.00px" src="img/16714e5bdbce773f.png">. Cliquez sur ce bouton pour supprimer toutes les contraintes sur l&#39;élément sélectionné. Pour effacer une seule contrainte, cliquez sur le descripteur spécifique qui définit la contrainte.</p>
 <p>Pour effacer toutes les contraintes de la mise en page (layout) complète, cliquez sur l&#39;outil <strong>Clear All Constraints</strong> dans la barre d&#39;outils. Cet outil est utile si vous souhaitez rétablir toutes les contraintes de votre mise en page (layout).</p>
 
 
@@ -185,11 +185,11 @@
 <h2 is-upgraded>3.1 Changer la taille du bouton (Button)</h2>
 <p>L&#39;éditeur de disposition (layout) propose des poignées de redimensionnement aux quatre coins d&#39;une vue (<code>View</code>), ce qui vous permet de redimensionner rapidement la vue (<code>View</code>). Vous pouvez faire glisser les poignées situées à chaque coin de la Vue (<code>View</code>) pour la redimensionner, mais ce faisant, codez en dur les dimensions width et height. Évitez de coder les tailles en dur pour la plupart des éléments <code>View</code>, car les dimensions en codage en dur ne peuvent pas s&#39;adapter à différentes tailles de contenu et d&#39;écran.</p>
 <p>Utilisez plutôt le volet <strong>Attributes</strong> situé à droite de l&#39;éditeur de présentation pour sélectionner un mode de dimensionnement qui n&#39;utilise pas de dimensions codées en dur. Le volet <strong>Attributes</strong> comprend un panneau de dimensionnement carré appelé inspecteur de vue (<em>view inspector)</em> en haut. Les symboles à l&#39;intérieur du carré représentent les paramètres de hauteur et de largeur comme suit:</p>
-<p class="image-container"><img alt="Sizing panel in the Attributes pane" style="width: 424.00px" src="img/e4ff6d4d6e81b109.png"></p>
+<p class="image-container"><img style="width: 335.00px" src="img/8cb923d54b7b5e35.png"></p>
 <p>Dans la figure ci-dessus:</p>
 <ol type="1" start="1">
 <li>Contrôle de la hauteur (<strong>Height control</strong>). Ce contrôle spécifie l&#39;attribut <code>layout_height</code> et apparaît en deux segments sur les côtés supérieur et inférieur du carré. Les angles indiquent que ce contrôle est défini sur <code>wrap_content</code>, ce qui signifie que la vue (<code>View</code>) se développera verticalement si nécessaire pour s&#39;adapter à son contenu. Le &#34;8&#34; indique une marge standard définie à 8dp.</li>
-<li>Contrôle de la largeur (<strong>Width control</strong>). Ce contrôle spécifie <code>layout_width</code> et apparaît en deux segments à gauche et à droite du carré. Les angles indiquent que ce contrôle est défini sur wrap_content, ce qui signifie que la vue (<code>View</code>) s&#39;agrandira horizontalement si nécessaire pour s&#39;ajuster à son contenu, jusqu&#39;à une marge de 8dp.</li>
+<li>Contrôle de la largeur (<strong>Width control</strong>). Ce contrôle spécifie <code>layout_width</code> et apparaît en deux segments à gauche et à droite du carré. Les angles indiquent que ce contrôle est défini sur wrap_content, ce qui signifie que la vue (<code>View</code>) s&#39;agrandit horizontalement si nécessaire pour s&#39;ajuster à son contenu, jusqu&#39;à une marge de 8dp.</li>
 <li>Bouton de fermeture du volet <strong>Attributes</strong>. Cliquez pour fermer le volet.</li>
 </ol>
 <p>Suivez ces étapes:</p>
@@ -197,7 +197,7 @@
 <li>Sélectionnez le bouton (<code>Button</code>) du haut dans le volet <strong>Component Tree</strong>.</li>
 <li>Cliquez sur l&#39;onglet <strong>Attributes</strong> sur le côté droit de la fenêtre de l&#39;éditeur de disposition (layout).</li>
 </ol>
-<p class="image-container"><img alt="Attributes tab" style="width: 406.00px" src="img/db4f5ee183f1b18e.png"></p>
+<p class="image-container"><img style="width: 245.00px" src="img/66c957be0bc1f379.png"></p>
 <ol type="1" start="3">
 <li>Cliquez deux fois sur le contrôle de largeur - le premier clic le modifie en Fixé (<strong>Fixed</strong>) avec des lignes droites, et le second clic le modifie en <strong>Match Constraints</strong> avec des bobines de ressort, comme illustré dans la figure animée ci-dessous.</li>
 </ol>
@@ -213,14 +213,15 @@
 <li>Le paramètre <code>wrap_content</code> réduit les dimensions de l&#39;élément <code>View</code> afin qu&#39;il soit assez grand pour en contenir le contenu. S&#39;il n&#39;y a pas de contenu, l&#39;élément View devient invisible.</li>
 <li>Pour spécifier une taille fixe adaptée à la taille de l&#39;écran du périphérique, utilisez un nombre fixe de <a href="https://developer.android.com/training/multiscreen/screendensities.html" target="_blank">pixels indépendants de la densité</a> (unités dp). Par exemple, 16dp signifie 16 pixels indépendants de la densité.</li>
 </ul>
-<p><strong>Conseil</strong>: Si vous modifiez l&#39;attribut <code>layout_width</code> à l&#39;aide de son menu contextuel, l&#39;attribut <code>layout_width</code> est défini sur zéro car il n&#39;y a pas de dimension définie. Ce paramètre est identique à <code>match_constraint</code>: la vue peut être agrandie autant que possible pour répondre aux contraintes et aux paramètres de marge.</p>
+<aside class="special"><p><strong>Conseil</strong>: Si vous modifiez l&#39;attribut <code>layout_width</code> à l&#39;aide de son menu contextuel, l&#39;attribut <code>layout_width</code> est défini sur zéro car il n&#39;y a pas de dimension définie. Ce paramètre est identique à <code>match_constraint</code>: la vue peut être agrandie autant que possible pour répondre aux contraintes et aux paramètres de marge.</p>
+</aside>
 <h2 is-upgraded>3.2 Changer les attributs du bouton (Button)</h2>
 <p>Pour identifier chaque vue (<code>View</code>) de manière unique dans une présentation (layout) d&#39;activité (<code>Activity</code>), chaque sous-classe <code>View</code> (telle que <code>Button</code>) ou <code>View</code> nécessite un <code>ID</code> unique. Et pour être utile, les éléments Button ont besoin de texte. Les éléments de vue peuvent également avoir des arrière-plans qui peuvent être des couleurs ou des images.</p>
-<p>Le volet <strong>Attributes</strong> permet d&#39;accéder à tous les attributs que vous pouvez affecter à un élément <code>View</code>. Vous pouvez entrer des valeurs pour chaque attribut, telles que les attributs <code>android:id</code>, <code>background</code>, <code>textColor</code> et <code>text</code>.</p>
+<p>Le volet <strong>Attributes</strong> permet d&#39;accéder à tous les attributs que vous pouvez affecter à un élément <code>View</code>. Vous pouvez entrer des valeurs pour chaque attribut, telles que les attributs <code>android:id</code>, <code>backgroundTint</code>, <code>textColor</code> et <code>text</code>.</p>
 <p>La figure animée suivante montre comment effectuer ces étapes:</p>
 <ol type="1" start="1">
 <li>Après avoir sélectionné le premier bouton (<code>Button</code>), modifiez le champ <code>ID</code> en haut du volet <strong>Attributes</strong> en <strong><code>button_toast</code></strong> pour l&#39;attribut <code>android:id</code>, utilisé pour identifier l&#39;élément dans la présentation (layout).</li>
-<li>Définissez l&#39;attribut <code>background</code> sur <strong>@color/colorPrimary</strong>. (Lorsque vous entrez <strong>@c</strong>, des choix apparaissent pour faciliter la sélection.)</li>
+<li>Définissez l&#39;attribut <code>backgroundTint</code> sur <strong>@color/colorPrimary</strong>. (vous devez définir <code>colorPrimay</code> sous <code>colors.xml</code> avec la valeur <code>#410081</code>)</li>
 <li>Définissez l&#39;attribut <code>textColor</code> sur <strong>@android:color/white</strong>.</li>
 <li>Modifiez l&#39;attribut de <code>text</code> en <strong>Toast</strong>.</li>
 </ol>
@@ -250,19 +251,19 @@
 <li>Définissez <code>ID</code> sur <strong>show_count</strong>.</li>
 <li>Définissez <code>text</code> sur <strong>0</strong>.</li>
 <li>Réglez le <code>textSize</code> à <strong>160sp</strong>.</li>
-<li>Définissez <code>textStyle</code> sur <strong>B</strong> (gras) et textAlignment sur <strong><code>ALIGNCENTER</code></strong> (centre du paragraphe).</li>
+<li>Définissez <code>textStyle</code> sur <strong>Bold</strong> (gras) et <code>textAlignment</code> sur <strong><code>center</code></strong> (utilisez le mode de vue Code pour l&#39;ajouter).</li>
 <li>Modifiez les contrôles de taille de vue horizontale et verticale (<code>layout_width</code> et <code>layout_height</code>) en <strong>match_constraint</strong>.</li>
 <li>Définissez <code>textColor</code> sur <strong>@color/colorPrimary</strong>.</li>
 <li>Faites défiler le volet et cliquez sur Afficher tous les attributs, faites défiler la deuxième page d&#39;attributs vers <code>background</code>, puis entrez <strong>#FFFF00</strong> pour obtenir une nuance de jaune.</li>
-<li>Faites défiler jusqu&#39;à <code>gravity</code>, développez <code>gravity</code> et sélectionnez <strong>center_ver</strong> (pour center-vertical).</li>
+<li>Faites défiler jusqu&#39;à <code>gravity</code>, développez <code>gravity</code> et sélectionnez <strong>center</strong>.</li>
 </ol>
 <p class="image-container"><img alt="Setting the TextEdit attributes" style="width: 624.00px" src="img/258936eb9c1962e7.gif"></p>
 <ul>
 <li><code>textSize</code>: La taille du texte de <code>TextView</code>. Pour ce TP, la taille est définie sur <code>160sp</code>. <code>sp</code> signifie pixel indépendant de l&#39;échelle, comme <code>dp</code>, et est une unité qui s&#39;adapte à la densité de l&#39;écran et aux préférences de taille de police de l&#39;utilisateur. Utilisez les unités dp lorsque vous spécifiez les tailles de police afin que les tailles soient ajustées à la fois pour la densité de l&#39;écran et les préférences de l&#39;utilisateur.</li>
-<li><code>textStyle</code> et <code>textAlignment</code>: style de texte défini sur <strong>B</strong> (gras) dans ce TP et alignement du texte défini sur <code>ALIGNCENTER</code> (centre du paragraphe).</li>
+<li><code>textStyle</code> et <code>textAlignment</code>: style de texte défini sur <strong>Bold</strong> (gras) dans ce TP et alignement du texte défini sur <code>center</code> (centre du paragraphe).</li>
 <li><code>gravity</code>: l&#39;attribut <code>gravity</code> spécifie comment une vue (<code>View</code>) est alignée dans sa vue parent ou son groupe de vues (<code>ViewGroup</code>). Dans cette étape, vous centrez le <code>TextView</code> pour qu&#39;il soit centré verticalement dans le parent <code>ConstraintLayout</code>.</li>
 </ul>
-<p>Vous remarquerez peut-être que l&#39;attribut d&#39;arrière-plan (<code>background</code>) se trouve sur la première page du volet <strong>Attributes</strong> pour un bouton (<code>Button</code>), mais sur la deuxième page du volet <strong>Attributes</strong> pour un <code>TextView</code>. Le volet <strong>Attributes</strong> change pour chaque type d&#39;affichage: Les attributs les plus populaires pour le type d&#39;affichage apparaissent sur la première page et les autres sont répertoriés sur la deuxième page. Pour revenir à la première page du volet <strong>Attributes</strong>, cliquez sur l&#39;icône <img alt="but on the second page of the Attributes pane for a TextView. The Attributes pane changes for each type of View: The most popular attributes for the View type appear on the first page, and the rest are listed on the second page. To return to the first page of the Attributes pane, click the [ICON HERE] icon in the toolbar at the top of the pane. [IMAGEINFO]: attributes_pane_switch_pages.png, Switch Attribute pane pages" style="width: 54.00px" src="img/5f47abca46809dd4.png"> dans la barre d&#39;outils en haut du volet.</p>
+<p>Vous remarquerez peut-être que l&#39;attribut d&#39;arrière-plan (<code>background</code>) se trouve sur la première page du volet <strong>Attributes</strong> pour un bouton (<code>Button</code>), mais sur la deuxième page du volet <strong>Attributes</strong> pour un <code>TextView</code>. </p>
 
 
       </google-codelab-step>
@@ -272,20 +273,20 @@
 <p class="image-container"><img alt="Viewing UI element warnings" style="width: 624.00px" src="img/c8bc20b26ff606d3.gif"></p>
 <p>Le moyen le plus simple de résoudre les problèmes de mise en page (layout) consiste à modifier la mise en page (layout) en XML. Bien que l&#39;éditeur de disposition (layout) soit un outil puissant, certaines modifications sont plus faciles à effectuer directement dans le code source XML.</p>
 <h2 is-upgraded>5.1 Ouvrez le code XML pour la mise en page (layout)</h2>
-<p>Pour cette tâche, ouvrez le fichier <code>activity_main.xml</code> s&#39;il ne l&#39;est pas déjà, puis cliquez sur l&#39;onglet <strong>Text </strong><img alt="Switch from Design to Text (XML editing)" style="width: 148.58px" src="img/bed1f9edd9f4251b.png"> en bas de l&#39;éditeur de disposition (layout).</p>
-<p>L&#39;éditeur XML apparaît, remplaçant les volets de conception et de plan (design and blueprint). Comme vous pouvez le voir dans la figure ci-dessous, qui présente une partie du code XML de la présentation (layout), les avertissements sont mis en surbrillance, à savoir les chaînes codées en dur <code>&#34;Toast&#34;</code> et <code>&#34;Count</code>&#34;. (Le <code>&#34;0&#34;</code> codé en dur est également mis en surbrillance mais n&#39;est pas illustré dans la figure.) Passez votre pointeur sur la chaîne codée en dur <code>&#34;Toast&#34;</code> pour voir le message d&#39;avertissement.</p>
-<p class="image-container"><img alt="The XML code for the Hello Toast layout showing the first warning" style="width: 624.00px" src="img/59a67ac295325197.png"></p>
+<p>Pour cette tâche, ouvrez le fichier <code>activity_main.xml</code> s&#39;il ne l&#39;est pas déjà, puis sélectionnez le mode <strong>Code </strong><img style="width: 97.00px" src="img/cf5ac3b407529400.png">en haut de l&#39;éditeur de disposition (layout).</p>
+<p>L&#39;éditeur XML apparaît, remplaçant les volets de conception et de plan (design and blueprint). Comme vous pouvez le voir dans la figure ci-dessous, qui présente une partie du code XML de la présentation (layout), les avertissements sont mis en surbrillance, à savoir les chaînes codées en dur <code>"Toast"</code> et <code>"Count</code>&#34;. (Le <code>"0"</code> codé en dur est également mis en surbrillance mais n&#39;est pas illustré dans la figure.) Passez votre pointeur sur la chaîne codée en dur <code>"Toast"</code> pour voir le message d&#39;avertissement.</p>
+<p class="image-container"><img style="width: 1079.95px" src="img/2ababc774249de81.png"></p>
 <h2 is-upgraded>5.2 Extraire les ressources de chaîne de caractères</h2>
 <p>Au lieu de coder en dur, il est recommandé d&#39;utiliser des ressources de chaîne de caractères, qui représentent les chaînes de caractères. Le fait de disposer les chaînes dans un fichier séparé facilite leur gestion, surtout si vous utilisez ces chaînes plusieurs fois. De plus, les ressources de chaîne de caractères sont obligatoires pour la traduction et la localisation de votre application, car vous devez créer un fichier de ressources de chaîne de caractères pour chaque langue.</p>
 <ol type="1" start="1">
-<li>Cliquez une fois sur le mot <code>&#34;Toast&#34;</code> (le premier avertissement en surbrillance).</li>
-<li>Appuyez sur <strong>Alt-Entrée</strong> sous Windows ou <strong>Option-Entrée</strong> sous macOS, puis choisissez <strong>Extract string resource</strong> dans le menu contextuel.</li>
+<li>Cliquez une fois sur le mot <code>"Toast"</code> (le premier avertissement en surbrillance).</li>
+<li>Appuyez sur <strong>Alt-Entrée</strong>, puis choisissez <strong>Extract string resource</strong> dans le menu contextuel.</li>
 <li>Entrez <code>button_label_toast</code> pour le nom de la ressource (<strong>Resource name</strong>).</li>
 <li>Cliquez sur <strong>OK</strong>. Une ressource de chaîne de caractères est créée dans le fichier <code>values/res/string.xml</code> et la chaîne de votre code est remplacée par une référence à la ressource:</li>
 </ol>
 <p><code>@string/button_label_toast</code></p>
 <ol type="1" start="5">
-<li>Extrayez les chaînes restantes: <code>button_label_count</code> pour <code>&#34;Count&#34;</code> et <code>count_initial_value</code> pour <code>&#34;0&#34;</code>.</li>
+<li>Extrayez les chaînes restantes: <code>button_label_count</code> pour <code>"Count"</code> et <code>count_initial_value</code> pour <code>"0"</code>.</li>
 <li>Dans le volet <strong>Project &gt; Android</strong>, développez <strong>values</strong> dans <strong>res</strong>, puis double-cliquez sur <strong>strings.xml</strong> pour afficher vos ressources de chaîne de caractères dans le fichier <code>strings.xml</code>:</li>
 </ol>
 <pre><code>&lt;resources&gt;
@@ -295,7 +296,7 @@
     &lt;string name=&#34;count_initial_value&#34;&gt;0&lt;/string&gt;
 &lt;/resources&gt;</code></pre>
 <ol type="1" start="7">
-<li>Vous avez besoin d&#39;une autre chaîne à utiliser dans une tâche ultérieure qui affiche un message. Ajoutez au fichier <code>strings.xml</code> une autre ressource chaîne nommée <code>toast_message</code> pour la phrase <code>&#34;Hello Toast!&#34;</code>:</li>
+<li>Vous avez besoin d&#39;une autre chaîne à utiliser dans une tâche ultérieure qui affiche un message. Ajoutez au fichier <code>strings.xml</code> une autre ressource chaîne nommée <code>toast_message</code> pour la phrase <code>"Hello Toast!"</code>:</li>
 </ol>
 <pre><code>&lt;resources&gt;
     &lt;string name=&#34;app_name&#34;&gt;Hello Toast&lt;/string&gt;
@@ -304,7 +305,8 @@
     &lt;string name=&#34;count_initial_value&#34;&gt;0&lt;/string&gt;
     &lt;string name=&#34;toast_message&#34;&gt;Hello Toast!&lt;/string&gt;
 &lt;/resources&gt;</code></pre>
-<p><strong>Conseil</strong>: Les ressources de chaîne de caractères incluent le nom de l&#39;application, qui apparaît dans la barre d&#39;application en haut de l&#39;écran si vous démarrez votre projet d&#39;application à l&#39;aide du modèle vide. Vous pouvez modifier le nom de l&#39;application en modifiant la ressource <code>app_name</code>.</p>
+<aside class="special"><p><strong>Conseil</strong>: Les ressources de chaîne de caractères incluent le nom de l&#39;application, qui apparaît dans la barre d&#39;application en haut de l&#39;écran si vous démarrez votre projet d&#39;application à l&#39;aide du modèle vide. Vous pouvez modifier le nom de l&#39;application en modifiant la ressource <code>app_name</code>.</p>
+</aside>
 
 
       </google-codelab-step>
@@ -323,11 +325,11 @@
         app:layout_constraintStart_toStartOf=&#34;parent&#34;
         app:layout_constraintTop_toTopOf=&#34;parent&#34; /&gt;</code></pre>
 <ol type="1" start="2">
-<li>Ajoutez l&#39;attribut <code>android:onClick</code> à la fin de l&#39;élément <code>button_toast</code> après le dernier attribut et avant l&#39;indicateur de fin  <code>/&gt;</code> :</li>
+<li>Ajoutez l&#39;attribut <code>android:onClick</code> à la fin de l&#39;élément <code>button_toast</code> après le dernier attribut et avant l&#39;indicateur de fin  <code>/></code> :</li>
 </ol>
 <pre><code>android:onClick=&#34;showToast&#34; /&gt;</code></pre>
 <ol type="1" start="3">
-<li>Cliquez sur l&#39;icône en forme d&#39;ampoule rouge qui apparaît à côté de l&#39;attribut. Sélectionnez <strong>Create click handler</strong>, choisissez <strong>MainActivity</strong>, puis cliquez sur <strong>OK</strong>.<br><br>Si l&#39;icône en forme d&#39;ampoule rouge n&#39;apparaît pas, cliquez sur le nom de la méthode (<code>&#34;showToast&#34;</code>). Appuyez sur <strong>Alt-Entrée</strong> (<strong>Option-Entrée</strong> sur Mac), sélectionnez <strong>Create &#39;showToast(view)&#39; in MainActivity</strong>, puis cliquez sur <strong>OK</strong>. <br><br>Cette action crée un talon de méthode d&#39;espace réservé pour la méthode <code>showToast()</code> dans <code>MainActivity</code>, comme indiqué à la fin de ces étapes.<br></li>
+<li>Cliquez sur l&#39;icône en forme d&#39;ampoule rouge qui apparaît à côté de l&#39;attribut. Sélectionnez <strong>Create click handler</strong>, choisissez <strong>MainActivity</strong>, puis cliquez sur <strong>OK</strong>.<br><br>Si l&#39;icône en forme d&#39;ampoule rouge n&#39;apparaît pas, cliquez sur le nom de la méthode (<code>"showToast"</code>). Appuyez sur <strong>Alt-Entrée</strong>, sélectionnez <strong>Create &#39;showToast(view)&#39; in MainActivity</strong>, puis cliquez sur <strong>OK</strong>. <br><br>Cette action crée un talon de méthode d&#39;espace réservé pour la méthode <code>showToast()</code> dans <code>MainActivity</code>, comme indiqué à la fin de ces étapes.<br></li>
 <li>Répétez les deux dernières étapes avec le bouton <code>button_count</code>: Ajoutez l&#39;attribut <code>android:onClick</code> à la fin, puis ajoutez le gestionnaire de clics:</li>
 </ol>
 <pre><code>android:onClick=&#34;countUp&#34; /&gt;</code></pre>
@@ -339,7 +341,7 @@
         android:layout_marginEnd=&#34;8dp&#34;
         android:layout_marginStart=&#34;8dp&#34;
         android:layout_marginTop=&#34;8dp&#34;
-        android:background=&#34;@color/colorPrimary&#34;
+        app:backgroundTint=&#34;@color/colorPrimary&#34;
         android:text=&#34;@string/button_label_toast&#34;
         android:textColor=&#34;@android:color/white&#34;
         app:layout_constraintEnd_toEndOf=&#34;parent&#34;
@@ -353,7 +355,7 @@
         android:layout_marginBottom=&#34;8dp&#34;
         android:layout_marginEnd=&#34;8dp&#34;
         android:layout_marginStart=&#34;8dp&#34;
-        android:background=&#34;@color/colorPrimary&#34;
+        app:backgroundTint=&#34;@color/colorPrimary&#34;
         android:text=&#34;@string/button_label_count&#34;
         android:textColor=&#34;@android:color/white&#34;
         app:layout_constraintBottom_toBottomOf=&#34;parent&#34;
@@ -370,7 +372,7 @@
         android:layout_marginStart=&#34;8dp&#34;
         android:layout_marginTop=&#34;8dp&#34;
         android:background=&#34;#FFFF00&#34;
-        android:gravity=&#34;center_vertical&#34;
+        android:gravity=&#34;center&#34;
         android:text=&#34;@string/count_initial_value&#34;
         android:textAlignment=&#34;center&#34;
         android:textColor=&#34;@color/colorPrimary&#34;
@@ -381,22 +383,19 @@
         app:layout_constraintStart_toStartOf=&#34;parent&#34;
         app:layout_constraintTop_toBottomOf=&#34;@+id/button_toast&#34; /&gt;</code></pre>
 <ol type="1" start="5">
-<li>Si <code>MainActivity.java</code> n&#39;est pas déjà ouvert, développez <strong>java</strong> dans la vue <strong>Project&gt; Android</strong>, développez <strong>com.example.android.hellotoast</strong>, puis double-cliquez sur <strong>MainActivity</strong>. L&#39;éditeur de code apparaît avec le code dans <code>MainActivity</code>:</li>
+<li>Si <code>MainActivity.java</code> n&#39;est pas déjà ouvert, développez <strong>java</strong> dans la vue <strong>Project&gt; Android</strong>, développez <strong>com.example.enetcom.hellotoast</strong>, puis double-cliquez sur <strong>MainActivity</strong>. L&#39;éditeur de code apparaît avec le code dans <code>MainActivity</code>:</li>
 </ol>
-<pre><code>package com.example.android.hellotoast;
+<pre><code>public class MainActivity extends AppCompatActivity {
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.view.View;
-
-public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
     public void showToast(View view) {
     }
+
     public void countUp(View view) {
     }
 }</code></pre>
@@ -506,26 +505,9 @@ protected void onCreate(Bundle savedInstanceState) {
 <ol type="1" start="9">
 <li>Exécutez l&#39;application pour vérifier que le nombre augmente lorsque vous appuyez sur le bouton &#34;<strong>Count</strong>&#34;.</li>
 </ol>
-<p class="image-container"><img alt="The Hello Toast app showing the count as you tap the Count button" style="width: 464.48px" src="img/1963d74e64b44a2f.png"></p>
-<p><strong>Conseil</strong>: Pour un didacticiel approfondi sur l&#39;utilisation de <code>ConstraintLayout</code>, voir le Codelab <a href="https://codelabs.developers.google.com/codelabs/constraint-layout/index.html" target="_blank">Using ConstraintLayout to design your views</a>.</p>
-<h2 is-upgraded>Solution code : Projet Android Studio: <a href="https://github.com/khammami/android-fundamentals-apps-v2/tree/master/HelloToast" target="_blank">HelloToast</a></h2>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Défi de codage" duration="0">
-        <p>L&#39;application HelloToast a l&#39;air bien lorsque le périphérique ou l&#39;émulateur est orienté verticalement. Toutefois, si vous basculez le périphérique ou l&#39;émulateur en orientation horizontale, le bouton &#34;Count&#34; peut recouvrir le <code>TextView</code> en bas, comme indiqué dans la figure ci-dessous.</p>
-<p class="image-container"><img alt="The Hello Toast app in horizontal orientation" style="width: 624.00px" src="img/dab672435d737157.png"></p>
-<p>Défi: Modifiez la mise en page de sorte qu&#39;elle soit bien dans les orientations horizontale et verticale:</p>
-<ol type="1" start="1">
-<li>Sur votre ordinateur, copiez le dossier du projet HelloToast et renommez-le en HelloToastChallenge.</li>
-<li>Ouvrez HelloToastChallenge dans Android Studio et refactorisez-le. (Voir <a href="https://docs.google.com/document/d/e/2PACX-1vSlGJ91CAs33e1rDQwa-k6e2jLjaRtyj3qgbVKCBlkX5LE98YZgzkHnehgUqY5C6e5dtyKwS0KjI14X/pub" target="_blank">Appendix: Utilities</a> pour des instructions sur la copie et la refactorisation d&#39;un projet.)</li>
-<li>Modifiez la disposition (layout) de sorte que les boutons Toast et Count apparaissent sur le côté gauche, comme indiqué dans la figure ci-dessous. Le TextView apparaît à côté d&#39;eux, mais seulement assez large pour montrer son contenu. (Astuce: utilisez wrap_content.)</li>
-<li>Exécutez l&#39;application dans les orientations horizontale et verticale.</li>
-</ol>
-<p class="image-container"><img alt="The Hello Toast app with a different layout" style="width: 624.00px" src="img/e58d084127ccfc20.png"></p>
-<p class="image-container"><img alt="The Hello Toast app with a different layout in horizontal orientation" style="width: 624.00px" src="img/4ad6eff0cc982129.png"></p>
-<h2 is-upgraded>Challenge solution code: Projet Android Studio: <a href="https://github.com/khammami/android-fundamentals-apps-v2/tree/master/HelloToastChallenge" target="_blank">HelloToastChallenge</a></h2>
+<p class="image-container"><img style="width: 318.00px" src="img/d42d67228d1e726e.png"></p>
+<aside class="special"><p><strong>Conseil</strong>: Pour un didacticiel approfondi sur l&#39;utilisation de <code>ConstraintLayout</code>, voir le Codelab <a href="https://codelabs.developers.google.com/codelabs/constraint-layout/index.html" target="_blank">Using ConstraintLayout to design your views</a>.</p>
+</aside>
 
 
       </google-codelab-step>
