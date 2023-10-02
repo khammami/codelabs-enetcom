@@ -69,6 +69,19 @@
     
       <google-codelab-step label="Tâche 1: Ajouter des rappels (callbacks) de cycle de vie à TwoActivities" duration="0">
         <p>Dans cette tâche, vous allez implémenter toutes les méthodes de rappel du cycle de vie d&#39;Activité pour imprimer des messages dans logcat lorsque ces méthodes sont appelées. Ces messages de journal vous permettent de savoir quand le cycle de vie de l&#39;activité change d&#39;état et comment ces changements affectent votre application lors de son exécution.</p>
+<aside class="warning"><p>Pour suivre ce codelab, vous devez activer la nouvelle interface utilisateur dans Android Studio Giraffe:</p>
+<ul>
+<li>à partir de la fenêtre &#34;Welcome to Android Studio&#34;:<br><strong>Customize &gt; All settings</strong></li>
+<li>à partir de la fenêtre du projet ouvert:<br><strong>File &gt; Settings</strong></li>
+</ul>
+<p class="image-container"><img style="width: 610.00px" src="img/3918482f0c611fa1.png"></p>
+<p>Pour activer la nouvelle interface utilisateur et afficher le menu principal dans une barre d&#39;outils séparée, cochez les deux paramètres suivants :</p>
+<ul>
+<li><strong>Enable new UI</strong></li>
+<li><strong>Show main menu in separate toolbar</strong></li>
+</ul>
+<p>Une fois ces paramètres cochés, vous devez redémarrer Android Studio pour que les changements soient appliqués.</p>
+</aside>
 <h2 is-upgraded>1.1 (Facultatif) Copiez le projet TwoActivities</h2>
 <p>Pour les tâches de cette pratique, vous modifierez le projet <a href="https://github.com/khammami/android-fundamentals-apps-v2/tree/master/TwoActivities" target="_blank">TwoActivities</a> existant que vous avez construit dans la dernière pratique. Si vous préférez conserver le projet TwoActivities précédent, suivez les étapes de l&#39;<a href="https://google-developer-training.github.io/android-developer-fundamentals-course-concepts-v2/appendix/appendix-utilities/appendix-utilities.html" target="_blank">Appendix: Utilities</a> pour en créer une copie.</p>
 <h2 is-upgraded>1.2 Implémenter des rappels (callbacks) dans MainActivity</h2>
@@ -116,9 +129,9 @@ D/MainActivity: onResume</code></pre>
 <li>Exécutez votre application.</li>
 <li>Cliquez sur l&#39;onglet <strong>Logcat</strong> au bas d&#39;Android Studio pour afficher le volet <strong>Logcat</strong>.</li>
 <li>Entrez <strong>Activity</strong> dans le champ de recherche.</li>
-<li>Le logcat Android peut être très long et encombré. Comme la variable <code>LOG_TAG</code> de chaque classe contient les mots <code>MainActivity</code> ou <code>SecondActivity</code>, ce mot-clé vous permet de filtrer le journal uniquement pour les éléments qui vous intéressent.</li>
+<li>Le <strong>Logcat</strong> Android peut être très long et encombré. La variable <code>LOG_TAG</code> de chaque classe contient les mots <code>MainActivity</code> ou <code>SecondActivity</code>. Ce mot-clé permet de filtrer le journal uniquement pour les éléments qui vous intéressent.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img/585cb6c122fdad7b.png"></p>
+<p class="image-container"><img style="width: 624.00px" src="img/f3f0d115d10d2ae3.png"></p>
 <p>Faites des essais avec votre application et notez que les événements du cycle de vie se produisent en réponse à différentes actions. En particulier, essayez ces choses:</p>
 <ul>
 <li>Utilisez l&#39;application normalement (envoyez un message, répondez avec un autre message).</li>
@@ -140,11 +153,11 @@ protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Log the start of the onCreate() method.
+        // Journaliser le début de la méthode onCreate().
         Log.d(LOG_TAG, &#34;-------&#34;);
         Log.d(LOG_TAG, &#34;onCreate&#34;);
 
-        // Initialize all the view variables.
+        // Initialiser toutes les variables de vue.
         mMessageEditText = findViewById(R.id.editText_main);
         mReplyHeadTextView = findViewById(R.id.text_header_reply);
         mReplyTextView = findViewById(R.id.text_message_reply);
@@ -215,7 +228,7 @@ protected void onDestroy() {
 <h2 is-upgraded>2.1 Enregistrez l&#39;état de l&#39;instance d&#39;activité avec onSaveInstanceState()</h2>
 <p>Vous avez peut-être remarqué que la rotation de l&#39;appareil n&#39;affecte en rien l&#39;état de la deuxième activité. Cela est dû au fait que la deuxième présentation (layout) et l&#39;état de l&#39;activité sont générés à partir de la présentation (layout) et de l&#39;intention (<code>Intent</code>) qui l&#39;a activée. Même si l&#39;activité est recréée, l&#39;intention (<code>Intent</code>) est toujours présente et les données de cette intention sont toujours utilisées chaque fois que la méthode <code>onCreate()</code> de la deuxième activité est appelée.</p>
 <p>En outre, vous remarquerez peut-être que dans chaque activité, le texte que vous avez saisi dans les éléments message ou réponse <code>EditText</code> est conservé, même lorsque le périphérique est pivoté. Cela est dû au fait que les informations d&#39;état de certains des éléments <code>View</code> de votre présentation (layout) sont automatiquement enregistrées lors des modifications de configuration et que la valeur actuelle d&#39;un <code>EditText</code> est l&#39;un de ces cas.</p>
-<p>Ainsi, les seuls états d&#39;activité qui vous intéressent sont les éléments <code>TextView</code> pour l&#39;en-tête de réponse et le texte de réponse dans l&#39;activité principale. Les deux éléments <code>TextView</code> sont invisibles par défaut. ils n&#39;apparaissent que lorsque vous envoyez un message à l&#39;activité principale à partir de la deuxième activité.</p>
+<p>Ainsi, les seuls états d&#39;activité qui vous intéressent sont les éléments <code>TextView</code> pour l&#39;en-tête de réponse et le texte de réponse dans l&#39;activité principale. Les deux éléments <code>TextView</code> sont invisibles par défaut. Ils n&#39;apparaissent que lorsque vous envoyez un message à l&#39;activité principale à partir de la deuxième activité.</p>
 <p>Dans cette tâche, vous ajoutez du code pour préserver l&#39;état d&#39;instance de ces deux éléments <code>TextView</code> à l&#39;aide de <code>onSaveInstanceState()</code>.</p>
 <ol type="1" start="1">
 <li>Ouvrez <strong>MainActivity</strong>.</li>
@@ -250,7 +263,7 @@ mMessageEditText = findViewById(R.id.editText_main);
 mReplyHeadTextView = findViewById(R.id.text_header_reply);
 mReplyTextView = findViewById(R.id.text_message_reply);
 
-// Restore the state.
+// Restaurer l&#39;état.
 if (savedInstanceState != null) {
 }</code></pre>
 <p>Lorsque votre activité est créée, le système passe le <code>Bundle</code> d&#39;état à <code>onCreate()</code> comme seul argument. La première fois que <code>onCreate()</code> est appelé et que votre application démarre, le <code>Bundle</code> est <code>nul</code>. Il n&#39;y a pas d&#39;état existant au premier démarrage de votre application. Les appels suivants dans <code>onCreate()</code> ont un <code>Bundle</code> rempli avec les données que vous avez stockées dans <code>onSaveInstanceState()</code>.</p>
@@ -314,7 +327,7 @@ protected void onCreate(Bundle savedInstanceState) {
    mReplyHeadTextView = findViewById(R.id.text_header_reply);
    mReplyTextView = findViewById(R.id.text_message_reply);
 
-   // Restaurer l&#39;état enregistré. 
+  // Restaurer l&#39;état enregistré. 
   // Voir onSaveInstanceState() pour ce qui est enregistré.
 
    if (savedInstanceState != null) {
@@ -427,7 +440,7 @@ protected void onCreate(Bundle savedInstanceState) {
 <li>Un clic sur le bouton incrémente le compteur de 1.</li>
 <li>Lors de la rotation du périphérique, les états counter et <code>EditText</code> sont conservés.</li>
 <li>L&#39;implémentation de <code>MainActivity.java</code> utilise la méthode <code>onSaveInstanceState()</code> pour stocker la valeur du compteur.</li>
-<li>L&#39;implémentation de <code>onCreate()</code> teste l&#39;existence du <code>bundle</code> <code>outState</code>. Si cet <code>Bundle</code> existe, la valeur du compteur est restaurée et enregistrée dans <code>TextView</code>.</li>
+<li>L&#39;implémentation de <code>onCreate()</code> teste l&#39;existence du <code>bundle</code> <code>outState</code>. Si ce <code>Bundle</code> existe, la valeur du compteur est restaurée et enregistrée dans <code>TextView</code>.</li>
 </ul>
 
 

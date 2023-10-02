@@ -78,6 +78,19 @@
     
       <google-codelab-step label="Tâche 1: Créer le projet et la mise en page (layout)" duration="0">
         <p>Pour cet exercice, vous créez un nouveau projet et une application appelés Intentions implicites, avec une nouvelle présentation (layout).</p>
+<aside class="warning"><p>Pour suivre ce codelab, vous devez activer la nouvelle interface utilisateur dans Android Studio Giraffe:</p>
+<ul>
+<li>à partir de la fenêtre &#34;Welcome to Android Studio&#34;:<br><strong>Customize &gt; All settings</strong></li>
+<li>à partir de la fenêtre du projet ouvert:<br><strong>File &gt; Settings</strong></li>
+</ul>
+<p class="image-container"><img style="width: 610.00px" src="img/3918482f0c611fa1.png"></p>
+<p>Pour activer la nouvelle interface utilisateur et afficher le menu principal dans une barre d&#39;outils séparée, cochez les deux paramètres suivants :</p>
+<ul>
+<li><strong>Enable new UI</strong></li>
+<li><strong>Show main menu in separate toolbar</strong></li>
+</ul>
+<p>Une fois ces paramètres cochés, vous devez redémarrer Android Studio pour que les changements soient appliqués.</p>
+</aside>
 <h2 is-upgraded>1.1 Créer le projet</h2>
 <ol type="1" start="1">
 <li>Démarrez Android Studio et créez un nouveau projet Android Studio. Nommez l&#39;application sous <strong>Implicit Intents</strong>.</li>
@@ -477,7 +490,6 @@ shareIntent.setType(mimeType)
                         .setText(txt)
                         .startChooser();
 }</code></pre>
-<p class="image-container"><img style="width: 300.04px" src="img/75924fd32283279b.png"></p>
 <h2 is-upgraded>4.3 Exécutez l&#39;application</h2>
 <ol type="1" start="1">
 <li>Exécutez l&#39;application.</li>
