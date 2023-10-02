@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-3295395-7",
-  "updated": "2019-10-13T09:25:43Z",
+  "updated": "2023-10-01T12:19:12Z",
   "id": "cycle-vie-et-etat-activite",
   "duration": 0,
   "title": "TP 02.2: Cycle de vie et état de l'activité",
@@ -23,5 +23,7 @@
     "kiosk",
     "web"
   ],
+  "feedback": "https://github.com/khammami/codelabs-enetcom/issues",
+  "ga": "UA-3295395-7",
   "url": "cycle-vie-et-etat-activite"
 }

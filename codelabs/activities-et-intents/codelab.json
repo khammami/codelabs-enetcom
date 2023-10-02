@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-3295395-7",
-  "updated": "2019-10-13T09:26:34Z",
+  "updated": "2023-10-01T09:43:57Z",
   "id": "activities-et-intents",
   "duration": 0,
   "title": "TP 02.1: Activités et \"intents\"",
@@ -23,5 +23,7 @@
     "kiosk",
     "web"
   ],
+  "feedback": "https://github.com/khammami/codelabs-enetcom/issues",
+  "ga": "UA-3295395-7",
   "url": "activities-et-intents"
 }

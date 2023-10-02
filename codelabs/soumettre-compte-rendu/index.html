@@ -20,9 +20,9 @@
   </style>
 </head>
 <body>
-  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-T70T90JTWB"></google-codelab-analytics>
+  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-E0H6JSF2N3"></google-codelab-analytics>
   <google-codelab codelab-gaid="UA-3295395-7"
-                  codelab-ga4id="G-T70T90JTWB"
+                  codelab-ga4id="G-E0H6JSF2N3"
                   id="soumettre-compte-rendu"
                   title="Soumission de compte rendu"
                   environment="web"
@@ -151,7 +151,7 @@ $ git config --global user.email &#34;khalil.hammami@enetcom.usf.tn&#34;</code><
 <aside class="warning"><p>Ce lien est uniquement à titre d&#39;exemple. Vous recevrez un lien pour chaque compte rendu sur la plateforme de votre institut.</p>
 </aside>
 <ol type="1" start="1">
-<li>Ouvre le lien.</li>
+<li>Ouvrez le lien que vous avez reçu.</li>
 <li>Autorisez l&#39;application GitHub Classroom à accéder à votre compte GitHub.<br><img style="width: 348.97px" src="img/7a8b75f630211c3d.png"><br><br></li>
 <li>Pour continuer, sélectionnez votre nom dans la liste. Si votre nom n&#39;est pas dans la liste, cliquez sur &#34;<strong>Skip to the next step</strong>&#34;.<br><img style="width: 624.00px" src="img/102b4b3134b36a7d.png"><br><br></li>
 <li>Acceptez la tâche.<br><img style="width: 624.00px" src="img/6ea7ab38f634b097.png"><br><br></li>
@@ -196,8 +196,10 @@ $ git branch</pre>
 </ol>
 <p class="image-container"><img style="width: 624.00px" src="img/7b3d142440d91b30.png"><br></p>
 <ol type="1" start="5">
-<li>Une fois que vous avez terminé de travailler sur votre projet, vous devez ajouter et enregistrer vos modifications dans votre dépôt local avec un commit. Répétez ces instructions après chaque modification ou changement dans votre dépôt Git local.<br></li>
+<li>Une fois que vous avez terminé de travailler sur votre projet, vous devez ajouter et enregistrer vos modifications dans votre dépôt local avec un commit. Répétez ces instructions après chaque modification ou changement dans votre dépôt Git local.<br><br></li>
 </ol>
+<aside class="warning"><p>Assurez-vous que les modifications ont été effectuées sur la branche <code>dev</code> avant de valider. Si vous avez apporté des modifications sur GitHub, récupérez ces modifications dans votre dépôt local avant de valider localement. Sinon, vous risquez d&#39;obtenir des conflits et de devoir les résoudre.<br><br><strong>Important</strong>: Ne faites pas de modifications sur la branche <code>main</code> ou <code>master</code>. Les modifications sur ces branches ne seront pas considérées comme travail soumis et peuvent influencer votre note.</p>
+</aside>
 <pre>$ git add --all
 ou
 $ git add .
@@ -208,6 +210,8 @@ $ git commit -m &#39;A message to describe the changes&#39;</pre>
 <li>Jusqu&#39;à présent, votre travail est uniquement stocké sur votre ordinateur. Pour le partager, vous devez pousser vos commits locaux vers votre dépôt distant. Pour ce faire, utilisez la commande <code>git push</code>.<br></li>
 </ol>
 <pre>$ git push -u origin dev</pre>
+<aside class="special"><p>Facultatif : vous pouvez créer une demande de fusion (pull request) sur GitHub pour fusionner la branche <code>dev</code> dans la branche principale sans la fusionner. Je répète <strong>sans la fusionner</strong></p>
+</aside>
 
 
       </google-codelab-step>

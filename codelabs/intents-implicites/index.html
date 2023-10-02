@@ -18,29 +18,21 @@
       color: red;
     }
   </style>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T70T90JTWB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-T70T90JTWB');
-  </script>
 </head>
 <body>
-  <google-codelab-analytics gaid="UA-3295395-7"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
+  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-E0H6JSF2N3"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-3295395-7"
+                  codelab-ga4id="G-E0H6JSF2N3"
                   id="intents-implicites"
                   title="TP 02.3: Les &#34;Intents&#34; implicites"
                   environment="web"
-                  feedback-link="">
+                  feedback-link="https://github.com/khammami/codelabs-enetcom/issues">
     
       <google-codelab-step label="Bienvenue" duration="0">
-        <p>Ces travaux pratiques se base sur le cours de base pour les développeurs Android fourni par Google afin de  les préparer pour le test de certification <a href="https://developers.google.com/training/certification/associate-android-developer/" target="_blank">Associate Android Developer</a>. Vous obtiendrez le plus de valeur de ce TP si vous travaillez successivement dans les codelabs.</p>
+        <p>Ces travaux pratiques sont basés sur le cours de base pour les développeurs Android fourni par Google, qui prépare les participants au test de certification <a href="https://developers.google.com/training/certification/associate-android-developer/" target="_blank">Associate Android Developer</a>. Pour tirer le meilleur parti de ce TP, il est recommandé de travailler successivement dans les codelabs.</p>
 <h2 is-upgraded>Introduction</h2>
 <p>Dans une section précédente, vous avez découvert les intentions explicites. Dans une intention explicite, vous effectuez une activité dans votre application, ou dans une application différente, en envoyant une intention avec le nom de classe complet de l&#39;activité. Dans cette section, vous en apprendrez plus sur les intentions implicites et sur la façon de les utiliser pour mener à bien des activités.</p>
-<p>Avec une intention implicite, vous démarrez une activité sans savoir quelle application ou activité gérera la tâche. Par exemple, si vous souhaitez que votre application prend une photo, envoie un courrier électronique ou affiche un emplacement sur une carte, vous ne vous souciez généralement pas de l&#39;application ou de l&#39;activité qui effectue la tâche.</p>
+<p>Avec une intention implicite, vous démarrez une activité sans savoir quelle application ou activité gérera la tâche. Par exemple, si vous souhaitez que votre application prenne une photo, envoie un courrier électronique ou affiche un emplacement sur une carte, vous ne vous souciez généralement pas de l&#39;application ou de l&#39;activité qui effectue la tâche.</p>
 <p>Inversement, votre activité peut déclarer un ou plusieurs filtres d&#39;intention dans le fichier <code>AndroidManifest.xml</code> pour annoncer qu&#39;elle peut accepter des intentions implicites et définir les types d&#39;intentions acceptées par l&#39;activité.</p>
 <p>Pour faire correspondre votre demande à une application installée sur le périphérique, le système Android associe votre intention implicite à une activité dont les filtres d&#39;intention indiquent qu&#39;ils peuvent effectuer l&#39;action. Si plusieurs applications correspondent, un sélecteur d&#39;applications est présenté à l&#39;utilisateur qui lui permet de sélectionner l&#39;application qu&#39;il souhaite utiliser pour gérer l&#39;intention.</p>
 <p>Dans cette pratique, vous construisez une application qui envoie une intention implicite d&#39;exécuter chacune des tâches suivantes:</p>
@@ -50,7 +42,7 @@
 <li>Partager du texte.</li>
 </ul>
 <p>Le partage - envoi d&#39;une information à d&#39;autres personnes par courrier électronique ou via les médias sociaux - est une fonctionnalité répandue dans de nombreuses applications. Pour l&#39;action de partage, vous utilisez la classe <code>ShareCompat.IntentBuilder</code>, ce qui facilite la création d&#39;une intention implicite pour le partage de données.</p>
-<p>Enfin, vous créez un simple intention récepteur qui accepte une intention implicite pour une action spécifique.</p>
+<p>Enfin, vous créez un simple récepteur qui accepte une intention implicite pour une action spécifique.</p>
 <h2 is-upgraded>What you should already know</h2>
 <p>Vous devriez être familier avec:</p>
 <ul>
@@ -79,7 +71,7 @@
     
       <google-codelab-step label="Aperçu de l&#39;application" duration="0">
         <p>Dans cette section, vous créez une nouvelle application avec une activité et trois options pour les actions: ouvrir un site Web, ouvrir un emplacement sur une carte et partager un extrait de texte. Tous les champs de texte sont modifiables (<code>EditText</code>), mais contiennent des valeurs par défaut.</p>
-<p class="image-container"><img style="width: 344.97px" src="img/75924fd32283279b.png"></p>
+<p class="image-container"><img style="width: 269.28px" src="img/f5d42d30cb2daed1.png"></p>
 
 
       </google-codelab-step>
@@ -89,14 +81,14 @@
 <h2 is-upgraded>1.1 Créer le projet</h2>
 <ol type="1" start="1">
 <li>Démarrez Android Studio et créez un nouveau projet Android Studio. Nommez l&#39;application sous <strong>Implicit Intents</strong>.</li>
-<li>Choisissez <strong>Empty Activity</strong> pour le modèle de projet. Cliquez sur <strong>Next</strong>.</li>
-<li>Acceptez le nom d&#39;activité par défaut (<code>MainActivity</code>). Assurez-vous que la case <strong>Generate Layout file</strong> est cochée. Cliquez sur <strong>Finish</strong>.</li>
+<li>Choisissez <strong>Empty Views Activity</strong> pour le modèle de projet. Cliquez sur <strong>Next</strong>.</li>
+<li>Assurez-vous que la langue du projet est Java. Cliquez sur <strong>Finish</strong>.</li>
 </ol>
 <h2 is-upgraded>1.2 Créer la mise en page (layout)</h2>
 <p>Dans cette tâche, créez la mise en page (layout) de l&#39;application. Utilisez un <code>LinearLayout</code>, trois éléments <code>Button</code> et trois éléments <code>EditText</code>, comme ceci:</p>
-<p class="image-container"><img style="width: 528.00px" src="img/81d759e805e91097.png"></p>
+<p class="image-container"><img style="width: 535.16px" src="img/468656a1981927e5.png"></p>
 <ol type="1" start="1">
-<li>Ouvrez <strong>app&gt; res&gt; values&gt; strings.xml</strong> dans le volet <strong>Project&gt; Android</strong>, puis ajoutez les ressources de chaîne suivantes:</li>
+<li>Ouvrez <strong>app &gt; res &gt; values &gt; strings.xml</strong> dans le volet <strong>Project &gt; Android</strong>, puis ajoutez les ressources de chaîne suivantes:</li>
 </ol>
 <pre><code>&lt;string name=&#34;edittext_uri&#34;&gt;http://developer.android.com&lt;/string&gt;
 &lt;string name=&#34;button_uri&#34;&gt;Open Website&lt;/string&gt;
@@ -107,9 +99,9 @@
 &lt;string name=&#34;edittext_share&#34;&gt;\&#39;Twas brillig and the slithy toves&lt;/string&gt;
 &lt;string name=&#34;button_share&#34;&gt;Share This Text&lt;/string&gt;</code></pre>
 <ol type="1" start="2">
-<li>Ouvrez <strong>res&gt; layout&gt; activity_main.xml</strong> dans le volet <strong>Project&gt; Android</strong>. Cliquez sur l&#39;onglet <strong>Text</strong> pour passer au code XML.</li>
+<li>Ouvrez <strong>res &gt; layout &gt; activity_main.xml</strong> dans le volet <strong>Project &gt; Android</strong>. Sélectionnez le mode de vue <strong>Code</strong> pour passer au code XML.</li>
 <li>Changez <code>androidx.constraintlayout.widget.ConstraintLayout</code> en <code>LinearLayout</code>.</li>
-<li>Ajoutez l&#39;attribut <code>android:orientation</code> avec la valeur <code>&#34;vertical&#34;</code>. Ajoutez l&#39;attribut <code>android:padding</code> avec la valeur <code>&#34;16dp&#34;</code>.</li>
+<li>Ajoutez l&#39;attribut <code>android:orientation</code> avec la valeur <code>"vertical"</code>. Ajoutez l&#39;attribut <code>android:padding</code> avec la valeur <code>"16dp"</code>.</li>
 </ol>
 <pre><code>&lt;LinearLayout xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
     xmlns:app=&#34;http://schemas.android.com/apk/res-auto&#34;
@@ -276,8 +268,8 @@
         <p>Dans cette tâche, vous implémentez la méthode du gestionnaire sur clic pour le premier bouton de la présentation (layout), Open Website. Cette action utilise une intention (<code>Intent</code>) implicite pour envoyer l&#39;URI donné à une activité pouvant gérer cette intention implicite (telle qu&#39;un navigateur Web).</p>
 <h2 is-upgraded>2.1 Définir openWebsite()</h2>
 <ol type="1" start="1">
-<li>Cliquez sur <code>&#34;openWebsite&#34;</code> dans le code XML <code>activity_main.xml</code>.</li>
-<li>Appuyez sur <strong>Alt + Entrée</strong> (<strong>Option + Entrée</strong> sur un Mac) et sélectionnez <strong>Create &#39;openWebsite(View)&#39; in &#39;MainActivity&#39;</strong>.</li>
+<li>Cliquez sur <code>"openWebsite"</code> dans le code XML <code>activity_main.xml</code>.</li>
+<li>Appuyez sur <strong>Alt + Entrée</strong> et sélectionnez <strong>Create &#39;openWebsite(View)&#39; in &#39;MainActivity&#39;</strong>.</li>
 </ol>
 <p>Le fichier <code>MainActivity</code> s&#39;ouvre et Android Studio génère une méthode squelette pour le gestionnaire <code>openWebsite()</code>.</p>
 <pre><code>public void openWebsite(View view) {
@@ -336,9 +328,9 @@
        Log.d(&#34;ImplicitIntents&#34;, &#34;Can&#39;t handle this intent!&#34;);
    }
 }</code></pre>
-<p>Pour Android 11 (API niveau 30) et les versions supérieures d&#39;Android, cette démarche ne suffit pas. Android 11 introduit des modifications liées à <a href="https://developer.android.com/about/versions/11/privacy/package-visibility" target="_blank">la visibilité des packages</a>. Ces modifications n&#39;affectent les applications que si elles ciblent Android 11.</p>
-<p>Lorsqu&#39;une application cible Android 11 (API niveau 30) ou supérieur et demande des informations sur les autres applications installées sur un appareil, le système filtre ces informations par défaut. Ce comportement de filtrage signifie que votre application ne peut pas détecter toutes les applications installées sur un appareil, ce qui permet de minimiser les informations potentiellement sensibles auxquelles votre application peut accéder mais n&#39;a pas besoin de remplir ses cas d&#39;utilisation. </p>
-<p>Pour les scénarios les plus courants, y compris les intents implicites démarrés avec <code>startActivity()</code>, vous n&#39;aurez rien à changer ! Pour d&#39;autres scénarios, comme l&#39;ouverture d&#39;une application tierce spécifique directement à partir de votre interface utilisateur, les développeurs devront répertorier explicitement les noms de package d&#39;application ou <a href="https://developer.android.com/training/package-visibility/use-cases#open-urls" target="_blank">les signatures de filtre d&#39;intention</a> comme ceci :</p>
+<p>Pour Android 11 (API niveau 30) et les versions supérieures d&#39;Android, cette démarche ne suffit pas. En effet, Android 11 introduit des modifications liées à <a href="https://developer.android.com/about/versions/11/privacy/package-visibility" target="_blank">la visibilité des packages</a>. Ces modifications n&#39;affectent les applications que si elles sont conçues pour Android 11.</p>
+<p>Sur les appareils Android 11 (API niveau 30) ou supérieurs, le système filtre par défaut les informations sur les autres applications installées. Cela signifie que votre application ne peut pas détecter toutes les applications installées sur un appareil, ce qui permet de minimiser l&#39;accès aux informations potentiellement sensibles dont votre application n&#39;a pas besoin pour fonctionner.</p>
+<p>Pour les scénarios les plus courants, y compris les intents implicites démarrés avec <code>startActivity()</code>, vous n&#39;aurez rien à changer. Pour d&#39;autres scénarios, comme l&#39;ouverture d&#39;une application tierce spécifique directement à partir de votre interface utilisateur, les développeurs devront explicitement répertorier les noms de package d&#39;application ou <a href="https://developer.android.com/training/package-visibility/use-cases#open-urls" target="_blank">les signatures de filtre d&#39;intention</a> comme suit :</p>
 <pre><code>&lt;manifest xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
     package=&#34;com.example.android.implicitintents&#34;&gt;
 
@@ -357,8 +349,8 @@
         <p>Dans cette tâche, vous implémentez la méthode du gestionnaire de clic pour le deuxième bouton de l&#39;interface utilisateur, <strong>Open Location</strong>. Cette méthode est presque identique à la méthode <code>openWebsite()</code>. La différence est l&#39;utilisation d&#39;un URI géographique pour indiquer un emplacement sur la carte. Vous pouvez utiliser un URI géographique avec la latitude et la longitude, ou utiliser une chaîne de requête pour un emplacement général. Dans cet exemple, nous avons utilisé ce dernier.</p>
 <h2 is-upgraded>3.1 Définir openLocation()</h2>
 <ol type="1" start="1">
-<li>Cliquez sur <code>&#34;openLocation&#34;</code> dans le code XML <code>activity_main.xml</code>.</li>
-<li>Appuyez sur <strong>Alt + Entrée</strong> (<strong>Option + Entrée</strong> sur un Mac) et sélectionnez <strong>Create &#39;openLocation(View)&#39; in MainActivity&#39;</strong>.</li>
+<li>Cliquez sur <code>"openLocation"</code> dans le code XML <code>activity_main.xml</code>.</li>
+<li>Appuyez sur <strong>Alt + Entrée</strong> et sélectionnez <strong>Create &#39;openLocation(View)&#39; in MainActivity&#39;</strong>.</li>
 </ol>
 <p>Android Studio génère une méthode squelette dans <code>MainActivity</code> pour le gestionnaire <code>openLocation()</code>.</p>
 <pre><code>public void openLocation(View view) {
@@ -418,8 +410,8 @@
 <p>Dans cette tâche, vous implémentez le partage d&#39;un peu de texte dans une édition de texte, à l&#39;aide de la classe <code>ShareCompat.IntentBuilder</code>.</p>
 <h2 is-upgraded>4.1 Définir shareText()</h2>
 <ol type="1" start="1">
-<li>Cliquez sur <code>&#34;shareText&#34;</code> dans le code XML <code>activity_main.xml</code>.</li>
-<li>Appuyez sur <strong>Alt + Entrée</strong> (<strong>Option + Entrée</strong> sur un Mac) et sélectionnez <strong>Create &#39;shareText(View)&#39; dans MainActivity</strong>.</li>
+<li>Cliquez sur <code>"shareText"</code> dans le code XML <code>activity_main.xml</code>.</li>
+<li>Appuyez sur <strong>Alt + Entrée</strong> et sélectionnez <strong>Create &#39;shareText(View)&#39; dans MainActivity</strong>.</li>
 </ol>
 <p>Android Studio génère une méthode squelette dans <code>MainActivity</code> pour le gestionnaire <code>shareText()</code>.</p>
 <pre><code>public void shareText(View view) {
@@ -444,9 +436,8 @@
 <ol type="1" start="3">
 <li>Appelez <code>ShareCompat.IntentBuilder</code> avec ces méthodes:</li>
 </ol>
-<pre><code>ShareCompat.IntentBuilder
-           .from(this)
-           .setType(mimeType)
+<pre><code>ShareCompat.IntentBuilder shareIntent = new ShareCompat.IntentBuilder(this);
+shareIntent.setType(mimeType)
            .setChooserTitle(&#34;Share this text with: &#34;)
            .setText(txt)
            .startChooser();</code></pre>
@@ -465,7 +456,7 @@
 </td><td colspan="1" rowspan="1"><p>Le type MIME de l&#39;élément à partager.</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>setChooserTitle()</p>
-</td><td colspan="1" rowspan="1"><p>Le titre qui apparaît dans le sélecteur d&#39;applications du système.</p>
+</td><td colspan="1" rowspan="1"><p>Le titre apparaît dans le sélecteur d&#39;applications du système.</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>setText()</p>
 </td><td colspan="1" rowspan="1"><p>Le texte à partager</p>
@@ -492,17 +483,15 @@
 <li>Exécutez l&#39;application.</li>
 <li>Cliquez sur le bouton <strong>Open Website</strong> pour lancer un navigateur avec l&#39;URL du site Web dans l&#39; <code>EditText</code> situé au-dessus du bouton. Le navigateur et le site Web doivent apparaître comme indiqué ci-dessous.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img/b3a9870ac16965c5.png"></p>
+<p class="image-container"><img style="width: 610.57px" src="img/cd1b6bb8c7442117.png"></p>
 <ol type="1" start="3">
 <li>Cliquez sur le bouton <strong>Open Location </strong>pour lancer la carte avec l&#39;emplacement dans l&#39; <code>EditText</code> situé au-dessus du bouton. La carte avec l&#39;emplacement devrait apparaître comme indiqué ci-dessous.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img/ccd65e1e3c10de05.png"></p>
+<p class="image-container"><img style="width: 610.80px" src="img/2073d20db9c78d26.png"></p>
 <ol type="1" start="4">
 <li>Cliquez sur le bouton <strong>Share This Text</strong> pour lancer une boîte de dialogue avec des choix de partage du texte. Le dialogue avec les choix devrait apparaître comme indiqué ci-dessous.</li>
 </ol>
-<p class="image-container"><img style="width: 624.00px" src="img/508db7c26b66e167.png"></p>
-<h2 is-upgraded>Code de solution de la tâche 4</h2>
-<p>Projet Android Studio: <a href="https://github.com/khammami/android-fundamentals-apps-v2/tree/master/ImplicitIntents" target="_blank">ImplicitIntents</a></p>
+<p class="image-container"><img style="width: 610.57px" src="img/7fab2a3a04711c70.png"></p>
 
 
       </google-codelab-step>
@@ -519,9 +508,7 @@
 <p>Dans cette tâche, vous créez une application très simple qui reçoit une intention implicite d&#39;ouvrir l&#39;URI d&#39;une page Web. Lorsqu&#39;elle est activée par une intention implicite, cette application affiche l&#39;URI demandé sous forme de chaîne dans un <code>TextView</code>.</p>
 <h2 is-upgraded>5.1 Créer le projet et la mise en page (layout)</h2>
 <ol type="1" start="1">
-<li>Créez un nouveau projet Android Studio avec le nom de l&#39;application <strong>Implicit Intents Receiver</strong> et choisissez <strong>Empty Activity</strong> pour le modèle de projet.</li>
-<li>Acceptez le nom d&#39;activité par défaut (<code>MainActivity</code>). Cliquez sur <strong>Next</strong>.</li>
-<li>Assurez-vous que la case <strong>Generate Layout file</strong> est cochée. Cliquez sur <strong>Finish</strong>.</li>
+<li>Créez un nouveau projet Android Studio avec le nom de l&#39;application <strong>Implicit Intents Receiver</strong> et choisissez <strong>Empty Views Activity</strong> pour le modèle de projet.</li>
 <li>Ouvrez <strong><code>activity_main.xml</code></strong>.</li>
 <li>Dans le <code>TextView</code> existant (&#34;Hello World&#34;), supprimez l&#39;attribut <code>android:text</code>. Il n&#39;y a pas de texte dans cette <code>TextView</code> par défaut, mais vous allez ajouter l&#39;URI de l&#39;intention dans <code>onCreate()</code>.</li>
 <li>Laissez les attributs <code>layout_constraint</code> seuls, mais ajoutez les attributs suivants:</li>
@@ -549,9 +536,9 @@
    &lt;action android:name=&#34;android.intent.action.MAIN&#34; /&gt;
    &lt;category android:name=&#34;android.intent.category.LAUNCHER&#34; /&gt;
 &lt;/intent-filter&gt;</code></pre>
-<p>Ce filtre d&#39;intention, qui fait partie du manifeste de projet par défaut, indique que cette activité est le point d&#39;entrée principal de votre application (elle comporte une action d&#39;intention <code>&#34;android.intent.action.MAIN&#34;</code>) et que cette activité doit apparaître sous la forme suivante: un élément de niveau supérieur dans le lanceur (sa catégorie est <code>&#34;android.intent.category.LAUNCHER&#34;</code>).</p>
+<p>Ce filtre d&#39;intention, qui fait partie du manifeste de projet par défaut, indique que cette activité est le point d&#39;entrée principal de votre application (elle comporte une action d&#39;intention <code>"android.intent.action.MAIN"</code>) et que cette activité doit apparaître sous la forme suivante: un élément de niveau supérieur dans le lanceur (sa catégorie est <code>"android.intent.category.LAUNCHER"</code>).</p>
 <ol type="1" start="3">
-<li>Ajoutez une deuxième balise <code>&lt;intent-filter&gt;</code> dans <code>&lt;activity&gt;</code> et incluez ces éléments:</li>
+<li>Ajoutez une deuxième balise <code><intent-filter></code> dans <code><activity></code> et incluez ces éléments:</li>
 </ol>
 <pre><code>&lt;action android:name=&#34;android.intent.action.VIEW&#34; /&gt;
 &lt;category android:name=&#34;android.intent.category.DEFAULT&#34; /&gt;
@@ -573,7 +560,7 @@
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>category</p>
 </td><td colspan="1" rowspan="1"><p>&#34;android.intent.category.BROWSABLE&#34;</p>
-</td><td colspan="1" rowspan="1"><p>Demandes de liens de navigation sur des pages Web, des courriels ou d&#39;autres sources.</p>
+</td><td colspan="1" rowspan="1"><p>Demande de liens de navigation sur des pages Web, des courriels ou d&#39;autres sources.</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>data</p>
 </td><td colspan="1" rowspan="1"><p>android:scheme=&#34;http&#34;</p>
@@ -581,7 +568,7 @@
 </td><td colspan="1" rowspan="1"><p>Les URI contenant un schéma http et un nom d&#39;hôte developer.android.com.</p>
 </td></tr>
 </table>
-<p>Notez que le filtre de données (<a href="https://developer.android.com/guide/topics/manifest/data-element.html" target="_blank">data</a>) a une restriction à la fois sur le type de liens qu&#39;il acceptera et sur le nom d&#39;hôte de ces URI. Si vous préférez que votre récepteur puisse accepter n&#39;importe quel lien, vous pouvez omettre l&#39;élément <code>&lt;data&gt;</code>.</p>
+<p>Notez que le filtre de données (<a href="https://developer.android.com/guide/topics/manifest/data-element.html" target="_blank">data</a>) a une restriction à la fois sur le type de liens qu&#39;il acceptera et sur le nom d&#39;hôte de ces URI. Si vous préférez que votre récepteur puisse accepter n&#39;importe quel lien, vous pouvez omettre l&#39;élément <code><data></code>.</p>
 <p>La section d&#39;<code>application</code> de <code>AndroidManifest.xml</code> devrait maintenant ressembler à ceci:</p>
 <pre><code>&lt;application
     android:allowBackup=&#34;true&#34;
@@ -606,7 +593,7 @@
     &lt;/activity&gt;
 &lt;/application&gt;</code></pre>
 <h2 is-upgraded>5.3 Traiter l&#39;intention (Intent)</h2>
-<p>Dans la méthode <code>onCreate()</code> de votre activité, traitez l&#39;intention entrante pour toutes les données ou extras qu&#39;elle inclut. Dans ce cas, l&#39;intention implicite entrante a l&#39;URI stocké dans les données d&#39;intention.</p>
+<p>Dans la méthode <code>onCreate()</code> de votre activité, traitez l&#39;intention entrante pour toutes les données ou extras qu&#39;elle inclut. Dans ce cas, l&#39;intention implicite entrant à l&#39;URI stocké dans les données d&#39;intention.</p>
 <ol type="1" start="1">
 <li>Ouvrez <strong>MainActivity</strong>.</li>
 <li>Dans la méthode <code>onCreate()</code>, obtenez l&#39;intention entrante utilisée pour activer l&#39;activité:</li>
@@ -623,7 +610,7 @@
    String uri_string = &#34;URI: &#34; + uri.toString();
 }</code></pre>
 <ol type="1" start="5">
-<li>Extrayez la partie <code>&#34;URI: &#34;</code> ci-dessus dans une ressource chaîne (<code>uri_label</code>).</li>
+<li>Extrayez la partie <code>"URI:"</code> ci-dessus dans une ressource chaîne (<code>uri_label</code>).</li>
 <li>Dans ce même <code>if</code> bloc, obtenez le <code>TextView</code> pour le message:</li>
 </ol>
 <pre><code>TextView textView = findViewById(R.id.text_uri_message);</code></pre>
@@ -657,19 +644,11 @@ protected void onCreate(Bundle savedInstanceState) {
 </ol>
 <p>Un sélecteur d&#39;application apparaît vous demandant si vous souhaitez utiliser le navigateur par défaut (Chrome dans la figure ci-dessous) ou l&#39;application <strong>Implicit Intents Receiver</strong>. Sélectionnez <strong>Implicit Intents Receiver</strong>, puis cliquez sur Une seule fois. L&#39;application <strong>Implicit Intents Receiver</strong> est lancée et le message indique l&#39;URI de la demande d&#39;origine.</p>
 <p>An app chooser appears asking if you want to use the default browser (Chrome in the figure below) or the Implicit Intents Receiver app. Select Implicit Intents Receiver, and click <strong>Just Once</strong>. The Implicit Intents Receiver app launches and the message shows the URI from the original request.</p>
-<p class="image-container"><img style="width: 319.39px" src="img/89b11282a092d7e2.png"></p>
+<p class="image-container"><img style="width: 288.09px" src="img/3dc4f187ef0e88bf.png"></p>
 <ol type="1" start="3">
 <li>Appuyez sur le bouton Retour (Back) et entrez un autre URI. Cliquez sur <strong>Open Website</strong>.</li>
 </ol>
 <p>L&#39;application du destinataire dispose d&#39;un filtre d&#39;intention très restrictif qui correspond uniquement au protocole URI exact (<code>http</code>) et à l&#39;hôte (<code>developer.android.com</code>). Tout autre URI s&#39;ouvre dans le navigateur Web par défaut.</p>
-<h2 is-upgraded>Code de solution de la tâche 5</h2>
-<p>Projet Android Studio: <a href="https://github.com/khammami/android-fundamentals-apps-v2/tree/master/ImplicitIntentsReceiver" target="_blank">ImplicitIntentsReceiver</a></p>
-
-
-      </google-codelab-step>
-    
-      <google-codelab-step label="Défi de codage" duration="0">
-        <p>Lors d&#39;un précédent défi pratique, vous avez créé un générateur d&#39;application pour les listes d&#39;achat avec une activité pour afficher la liste et une autre activité pour sélectionner un élément. Ajoutez un <code>EditText</code> et un <code>Button</code> à la liste d&#39;achats Activity pour localiser un magasin particulier sur une carte.</p>
 
 
       </google-codelab-step>
@@ -696,8 +675,8 @@ protected void onCreate(Bundle savedInstanceState) {
 <li><a href="https://developers.google.com/maps/documentation/urls/android-intents" target="_blank">Google Maps Intents for Android</a></li>
 <li><a href="http://developer.android.com/reference/android/app/Activity.html" target="_blank"><code>Activity</code></a></li>
 <li><a href="http://developer.android.com/reference/android/content/Intent.html" target="_blank"><code>Intent</code></a></li>
-<li><a href="https://developer.android.com/guide/topics/manifest/intent-filter-element.html" target="_blank"><code>&lt;intent-filter&gt;</code></a></li>
-<li><a href="https://developer.android.com/guide/topics/manifest/activity-element.html" target="_blank"><code>&lt;activity&gt;</code></a></li>
+<li><a href="https://developer.android.com/guide/topics/manifest/intent-filter-element.html" target="_blank"><code><intent-filter></code></a></li>
+<li><a href="https://developer.android.com/guide/topics/manifest/activity-element.html" target="_blank"><code><activity></code></a></li>
 <li><a href="http://developer.android.com/reference/android/net/Uri.html" target="_blank"><code>Uri</code></a></li>
 <li><a href="http://developer.android.com/reference/android/support/v4/app/ShareCompat.IntentBuilder.html" target="_blank"><code>ShareCompat.IntentBuilder</code></a></li>
 </ul>
@@ -705,8 +684,11 @@ protected void onCreate(Bundle savedInstanceState) {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Travail à faire" duration="0">
-        <h2 is-upgraded>Créer et exécuter une application</h2>
+      <google-codelab-step label="Travail à faire (Compte Rendu)" duration="0">
+        <aside class="warning"><p>Pour soumettre votre compte rendu, veuillez suivre ce codelab : </p>
+<p><a href="https://codelabs-enetcom.khammami.tn/codelabs/soumettre-compte-rendu/" target="_blank">Comment soumettre votre compte rendu</a></p>
+</aside>
+<h2 is-upgraded>Créer et exécuter une application</h2>
 <p>Ouvrez l&#39;application <a href="https://github.com/khammami/android-fundamentals-apps-v2/tree/master/ImplicitIntents" target="_blank">ImplicitIntents</a> que vous avez créée.</p>
 <ol type="1" start="1">
 <li>Ajoutez un autre bouton au bas de l&#39;écran.</li>
@@ -721,7 +703,7 @@ protected void onCreate(Bundle savedInstanceState) {
 <p>Quelle méthode de constructeur utilisez-vous pour créer une intention implicite de lancer une application de caméra?</p>
 <ul>
 <li><code>new Intent()</code></li>
-<li><code>new Intent(Context context, Class&lt;?&gt; class)</code></li>
+<li><code>new Intent(Context context, Class<?> class)</code></li>
 <li><code>new Intent(String action, Uri uri)</code></li>
 <li><code>new Intent(String action)</code></li>
 </ul>
