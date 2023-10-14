@@ -18,163 +18,275 @@
       color: red;
     }
   </style>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T70T90JTWB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-T70T90JTWB');
-  </script>
 </head>
 <body>
-  <google-codelab-analytics gaid="UA-3295395-7"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
+  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-E0H6JSF2N3"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-3295395-7"
+                  codelab-ga4id="G-E0H6JSF2N3"
                   id="recyclerview"
                   title="TP 03.2: RecyclerView"
                   environment="web"
-                  feedback-link="">
+                  feedback-link="https://github.com/khammami/codelabs-enetcom/issues">
     
       <google-codelab-step label="Bienvenue" duration="0">
         <p>Ces travaux pratiques se base sur le cours de base pour les développeurs Android fourni par Google afin de  les préparer pour le test de certification <a href="https://developers.google.com/training/certification/associate-android-developer/" target="_blank">Associate Android Developer</a>. Vous obtiendrez le plus de valeur de ce TP si vous travaillez successivement dans les codelabs.</p>
 <h2 is-upgraded>Introduction</h2>
-<p>Letting the user display, scroll, and manipulate a list of similar data items is a common app feature. Examples of scrollable lists include contact lists, playlists, saved games, photo directories, dictionaries, shopping lists, and indexes of documents.</p>
-<p>In the practical on scrolling views, you use <code>ScrollView</code> to scroll a <code>View</code> or <code>ViewGroup</code>. <code>ScrollView</code> is easy to use, but it&#39;s not recommended for long, scrollable lists.</p>
-<p><a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html" target="_blank"><code>RecyclerView</code></a> is a subclass of <code>ViewGroup</code> and is a more resource-efficient way to display scrollable lists. Instead of creating a <code>View</code> for each item that may or may not be visible on the screen, <code>RecyclerView</code> creates a limited number of list items and reuses them for visible content.</p>
-<p>In this practical you do the following:</p>
+<p>Réfléchissez un instant aux applications que vous utilisez fréquemment sur votre téléphone. Presque toutes disposent d&#39;au moins une liste. L&#39;écran de l&#39;historique des appels, l&#39;application Contacts et votre application de réseaux sociaux préférée affichent tous une liste de données. Comme le montre la capture d&#39;écran ci-dessous, certaines de ces applications affichent une simple liste de mots ou d&#39;expressions, tandis que d&#39;autres affichent des éléments plus complexes, tels que des fiches contenant du texte et des images. Quel que soit le contenu, l&#39;affichage d&#39;une liste de données est l&#39;une des tâches d&#39;UI les plus courantes dans Android.</p>
+<p class="image-container"><img alt="cf10a913f9db0ee4.png" style="width: 245.16px" src="img/cf10a913f9db0ee4.png"></p>
+<p>Android fournit <a href="https://developer.android.com/reference/androidx/recyclerview/widget/package-summary" target="_blank"><code>RecyclerView</code></a> pour vous aider à créer des applications avec des listes. RecyclerView garantit une efficacité optimale, même avec de longues listes, grâce à la réutilisation (ou au recyclage) des vues qui ne sont plus affichées à l&#39;écran. Lorsqu&#39;un élément de liste n&#39;est plus affiché à l&#39;écran, <code>RecyclerView</code> réutilise cette vue pour l&#39;élément suivant qui est sur le point d&#39;être affiché. Cela signifie que l&#39;élément est rempli avec le nouveau contenu qui défile à l&#39;écran. Ce comportement <code>RecyclerView</code> vous fait gagner beaucoup de temps de traitement et garantit un défilement plus fluide des listes.</p>
+<p>Dans la séquence ci-dessous, vous pouvez voir que les données <code>ABC</code> ont été affichées dans une vue. Une fois que cette vue est sortie de l&#39;écran, <code>RecyclerView</code> la réutilise pour les nouvelles données, <code>XYZ</code>.</p>
+<p class="image-container"><img alt="dcf4599789b9c2a1.png" style="width: 344.69px" src="img/dcf4599789b9c2a1.png"></p>
+<p>Dans ce cours pratique, vous ferez ce qui suit :</p>
 <ul>
-<li>Use <code>RecyclerView</code> to display a scrollable list.</li>
-<li>Add a click handler to each list item.</li>
-<li>Add items to the list using a <a href="https://material.google.com/components/buttons-floating-action-button.html" target="_blank">floating action button (FAB)</a>, the pink button in the screenshot in the app overview section. Use a FAB for the primary action that you want the user to take.</li>
+<li>Utiliser <code>RecyclerView</code> pour afficher une liste défilante.</li>
+<li>Ajouter un gestionnaire de clics à chaque élément de la liste.</li>
+<li>Ajouter des éléments à la liste à l&#39;aide d&#39;un bouton d&#39;action flottant (<a href="https://m3.material.io/components/floating-action-button/overview" target="_blank">FAB</a>), le bouton rose sur la capture d&#39;écran dans la section Aperçu de l&#39;application. Utilisez un <a href="https://m3.material.io/components/floating-action-button/overview" target="_blank">FAB</a> pour l&#39;action principale que vous souhaitez que l&#39;utilisateur effectue.</li>
 </ul>
 <h2 is-upgraded>What you should already know</h2>
 <p>Vous devriez être familier avec:</p>
 <ul>
-<li>Create and run apps in Android Studio.</li>
-<li>Create and edit UI elements using the layout editor, entering XML code directly, and accessing elements from your Java code.</li>
-<li>Create and use string resources.</li>
-<li>Convert the text in a <code>View</code> to a string using <a href="https://developer.android.com/reference/android/widget/EditText.html#getText()" target="_blank"><code>getText()</code></a>.</li>
-<li>Add an <code>onClick()</code> handler to a <code>View</code>.</li>
-<li>Display a <code>Toast</code> message.</li>
+<li>Créer et exécuter des applications dans Android Studio</li>
+<li>Créez et modifiez des éléments d&#39;interface utilisateur à l&#39;aide de l&#39;éditeur de mise en page, en saisissant directement le code XML et en accédant aux éléments à partir de votre code Java.</li>
+<li>Créez et utilisez des ressources de chaîne.</li>
+<li>Convertissez le texte d&#39;une vue en chaîne à l&#39;aide de la méthode <a href="https://developer.android.com/reference/android/widget/EditText.html#getText()" target="_blank">getText()</a>.</li>
+<li>Ajoutez un gestionnaire <code>onClick()</code> à une vue.</li>
+<li>Affichez un message <code>Toast</code>.</li>
 </ul>
 <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
 <ul class="checklist">
-<li>How to use the <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html" target="_blank"><code>RecyclerView</code></a> class to display items in a scrollable list.</li>
-<li>How to dynamically add items to the <code>RecyclerView</code> as they become visible through scrolling.</li>
-<li>How to perform an action when the user taps a specific item.</li>
-<li>How to show a FAB and perform an action when the user taps it.</li>
+<li>Comment utiliser la classe <a href="https://developer.android.com/reference/androidx/recyclerview/widget/package-summary" target="_blank"><code>RecyclerView</code></a> pour afficher des éléments dans une liste défilante.</li>
+<li>Comment ajouter dynamiquement des éléments au <code>RecyclerView</code> lorsqu&#39;ils deviennent visibles grâce au défilement.</li>
+<li>Comment effectuer une action lorsque l&#39;utilisateur tape sur un élément spécifique.</li>
+<li>Comment afficher un FAB et effectuer une action lorsque l&#39;utilisateur tape dessus.</li>
 </ul>
 <h2 is-upgraded>What you&#39;ll do</h2>
 <ul>
-<li>Create a new app that uses a <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html" target="_blank"><code>RecyclerView</code></a> to display a list of items as a scrollable list and associate click behavior with the list items.</li>
-<li>Use a FAB to let the user add items to the <code>RecyclerView</code>.</li>
+<li>Créez une nouvelle application qui utilise un <a href="https://developer.android.com/reference/androidx/recyclerview/widget/package-summary" target="_blank"><code>RecyclerView</code></a> pour afficher une liste d&#39;éléments sous forme de liste déroulante et associer un comportement de clic aux éléments de la liste. </li>
+<li>Utilisez un FAB (Floating Action Button) pour permettre à l&#39;utilisateur d&#39;ajouter des éléments au <code>RecyclerView</code>.</li>
 </ul>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Aperçu de l&#39;application" duration="0">
-        <p>The RecyclerView app demonstrates how to use a <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html" target="_blank"><code>RecyclerView</code></a> to display a long scrollable list of words. You create the dataset (the words), the <code>RecyclerView</code> itself, and the actions the user can take:</p>
+        <p>L&#39;application <a href="https://developer.android.com/reference/androidx/recyclerview/widget/package-summary" target="_blank"><code>RecyclerView</code></a> démontre comment utiliser un RecyclerView pour afficher une longue liste de mots défilent. Vous créez le jeu de données (les mots), le <code>RecyclerView</code> lui-même et les actions que l&#39;utilisateur peut effectuer :</p>
 <ul>
-<li>Tapping a word marks it clicked.</li>
-<li>Tapping the floating action button (FAB) adds a new word.</li>
+<li>Toucher un mot le marque comme cliqué.</li>
+<li>Toucher le bouton d&#39;action flottant (FAB) ajoute un nouveau mot.</li>
 </ul>
-<p class="image-container"><img style="width: 348.59px" src="img/86fabc5476249934.png"></p>
+<p class="image-container"><img style="width: 221.59px" src="img/6ead92bf24dfd495.png"></p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Tâche 1: Create a new project and dataset" duration="0">
-        <p>Before you can display a <code>RecyclerView</code>, you need data to display. In this task, you will create a new project for the app and a dataset. In a more sophisticated app, your data might come from internal storage (a file, SQLite database, saved preferences), from another app (Contacts, Photos), or from the internet (cloud storage, Google Sheets, or any data source with an API). Storing and retrieving data is a topic of its own covered in the data storage chapter. For this exercise, you will simulate data by creating it in the <code>onCreate()</code> method of <code>MainActivity</code>.</p>
-<h2 is-upgraded>1.1. Create the project and layout</h2>
+      <google-codelab-step label="Tâche 1: Créer un nouveau projet et un nouvel ensemble de données" duration="0">
+        <p>Avant de pouvoir afficher un <code>RecyclerView</code>, vous avez besoin de données à afficher. Dans cette tâche, vous allez créer un nouveau projet pour l&#39;application et un ensemble de données. Dans une application plus sophistiquée, vos données peuvent provenir du stockage interne (un fichier, une base de données SQLite, des préférences enregistrées), d&#39;une autre application (Contacts, Photos) ou d&#39;Internet (stockage en nuage, Google Sheets ou toute source de données avec une API). Le stockage et la récupération de données sont un sujet à part entière qui est abordé dans le chapitre sur le stockage de données. Pour cet exercice, vous allez simuler des données en les créant dans la méthode <code>onCreate()</code> de <code>MainActivity</code>.</p>
+<h2 is-upgraded>1.1. Créer le projet et la mise en page</h2>
 <ol type="1" start="1">
-<li>Start Android Studio.</li>
-<li>Create a new project with the name <strong>RecyclerView</strong>, select the Basic Activity template, and generate the layout file.</li>
+<li>Créez un nouveau projet avec le nom <strong>RecyclerView</strong>, sélectionnez le modèle &#34;<strong>Basic Views Activity</strong>&#34;.</li>
+<li>Ouvrez <code>themes.xml</code> et changez le parent de du thème de l&#39;application par <strong>Theme.Material3.Light.NoActionBar</strong> et supprimez le fichier themes.xml (night).<br>C&#39;est juste pour avoir la même interface utilisateur, parce que le mode sombre peut être activé sur vos émulateurs ou téléphones.</li>
 </ol>
-<p>The Basic Activity template provides a floating action button (FAB) and app bar in the <code>Activity</code> layout (<code>activity_main.xml</code>), and a layout for the <code>Activity</code> content (<code>content_main.xml</code>).</p>
+<pre><code>&lt;style name=&#34;Base.Theme.RecyclerView&#34; parent=&#34;Theme.Material3.Light.NoActionBar&#34;&gt;</code></pre>
+<p>Le modèle Basic Views Activity fournit un bouton d&#39;action flottant (FAB) et une barre d&#39;application dans la mise en page de l&#39;activité (<code>activity_main.xml</code>), ainsi qu&#39;une mise en page pour le contenu de l&#39;activité <code>(content_main.xml</code>).</p>
+<aside class="warning"><p>Dans la dernière version d&#39;Android Studio, le modèle d&#39;activité &#34;Basic Views Activity&#34; utilise <a href="https://developer.android.com/guide/navigation" target="_blank">une bibliothèque de navigation</a> dont nous n&#39;avons pas besoin dans ce cours pratique. Veuillez suivre la vidéo ci-dessous pour la supprimer.</p>
+<iframe class="youtube-video" src="https://www.youtube.com/embed/Svqrc5NLGfU?rel=0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</aside>
 <ol type="1" start="3">
-<li>Run your app. You should see the RecyclerView app title and &#34;Hello World&#34; on the screen.</li>
+<li>Supprimez le répertoire &#34;<strong>navigation</strong>&#34; sous les ressources (<code>res</code>).</li>
+<li>Supprimez toutes les mises en page et classes Java des <strong>fragments</strong>.<br><code>FirstFragment.java</code>, <code>SecondFragment.java</code>, <code>fragment_first.xml</code> et <code>fragment_second.xml</code>.</li>
+<li>Supprimez la balise <code>fragment</code> de &#34;<code>content_main.xml</code>&#34; et la remplacez par un TextView qui contient &#34;Hello World&#34;.</li>
+<li>Supprimez les dépendances de la bibliothèque de <strong>navigation</strong> et synchronisez le projet.</li>
 </ol>
-<p>If you encounter Gradle-related errors, sync your project as described in the practical on installing Android Studio and running Hello World.</p>
-<h2 is-upgraded>1.2. Add code to create data</h2>
-<p>In this step you create a <a href="https://developer.android.com/reference/java/util/LinkedList.html" target="_blank"><code>LinkedList</code></a> of 20 word strings that end in increasing numbers, as in [&#34;Word 1&#34;, &#34;Word 2&#34;, &#34;Word 3&#34;, .... ].</p>
+<pre><code>    implementation &#39;androidx.navigation:navigation-fragment:*&#39;
+    implementation &#39;androidx.navigation:navigation-ui:*&#39;</code></pre>
+<ol type="1" start="7">
+<li>Nettoyez &#34;<code>MainActivity.java</code>&#34; (les imports, methode de navigation et tous les variables en rouge en relation avec la bibliothèque de navigation...)</li>
+<li>Exécutez votre application. Vous devriez voir le titre de l&#39;application <code>RecyclerView</code> et &#34;Hello World&#34; à l&#39;écran.</li>
+</ol>
+<h2 is-upgraded>1.2. Créer des données</h2>
+<p>L&#39;étape suivante du processus de création de l&#39;application <code>RecyclerView</code> consiste à ajouter des ressources. Vous allez ajouter les éléments suivants à votre projet.</p>
+<ul>
+<li>Des mots à afficher dans l&#39;application.</li>
+<li>Une source de données pour fournir une liste des mots à votre application.</li>
+</ul>
+<aside class="special"><p><strong>Remarque</strong> : Dans la plupart des projets de production Android, vous récupérez les données des affirmations à partir d&#39;une base de données ou d&#39;un serveur. La mise en réseau et les bases de données ne sont pas couvertes dans cet atelier de programmation. Vous utiliserez donc une liste de chaînes d&#39;affirmation définies dans l&#39;application.</p>
+</aside>
+<p>Dans l&#39;application RecyclerView, en plus d&#39;importer les classes Android et Java, vous allez organiser votre application dans plusieurs packages. Même si votre application ne contient pas beaucoup de classes, il est recommandé d&#39;utiliser des packages pour les regrouper par fonctionnalité.</p>
+<aside class="special"><p>En organisant votre code de manière logique, vous et d&#39;autres développeurs pouvez le comprendre, le gérer et l&#39;étendre. À l&#39;instar des documents, que vous pouvez organiser en fichiers et dossiers, vous pouvez organiser votre code en fichiers et packages.</p>
+<p><strong>Qu&#39;est-ce qu&#39;un package ?</strong></p>
 <ol type="1" start="1">
-<li>Open <strong>MainActivity</strong> and add a private member variable for the <code>mWordList</code> linked list.</li>
+<li>Dans la fenêtre <strong>Project</strong> (Projet) (<strong>Android</strong>) d&#39;Android Studio, examinez les nouveaux fichiers de projet sous <strong>app &gt; java</strong> pour l&#39;application RecyclerView. Ils doivent ressembler à la capture d&#39;écran ci-dessous qui présente trois packages : un pour votre code (<strong>com.example.recyclerview</strong>) et deux pour les fichiers de test (<strong>com.example.recyclerview (androidTest)</strong> et <strong>com.example.recyclerview (test)</strong>).<br><img style="width: 381.00px" src="img/929854eb1180fc9f.png"></li>
+<li>Notez que le nom du package comprend plusieurs mots séparés par un point.</li>
 </ol>
-<pre><code>public class MainActivity extends AppCompatActivity {
-    private final LinkedList&lt;String&gt; mWordList = new LinkedList&lt;&gt;();
-    // ... Rest of MainActivity code ...
+</aside>
+<h3 is-upgraded>1.2.1. Créer un package &#34;model&#34;</h3>
+<ol type="1" start="1">
+<li>Dans le volet Projet d&#39;Android Studio, effectuez un clic droit sur <strong>app &gt; java &gt; com.example.recyclerview</strong>, puis sélectionnez <strong>New &gt; Package</strong>.</li>
+<li>Dans le pop-up <strong>New package</strong>, notez le préfixe du nom de package suggéré. La première partie est le nom du package sur lequel vous avez effectué un clic droit. Bien que les noms de package ne créent pas de hiérarchie de packages, des parties du nom sont réutilisées pour indiquer une relation et une organisation du contenu.</li>
+<li>Dans le pop-up, ajoutez <strong>model</strong> à la fin du nom de package suggéré. Les développeurs utilisent souvent model comme nom de package pour les classes qui modélisent (ou représentent) les données.</li>
+<li>Appuyez sur <strong>Entrée</strong>. Un package est créé sous le package <strong>com.example.recyclerview</strong> (racine). Ce nouveau package contiendra toutes les classes liées aux données définies dans votre application.</li>
+</ol>
+<h3 is-upgraded>1.2.2. Créer la classe de données &#34;Word&#34;</h3>
+<p>Dans cette tâche, vous allez créer une classe appelée <strong>Word</strong>. Une instance d&#39;objet de <strong>Word</strong> représente un mot et contient &#34;<strong>word</strong>&#34;avec le mot en question.</p>
+<ol type="1" start="5">
+<li>Effectuez un clic droit sur le package <strong>com.example.recyclerview.model</strong>, puis sélectionnez <strong>New &gt; Java Class</strong>.<br><img style="width: 624.00px" src="img/147e5a0c474d093c.png"></li>
+<li>Dans le pop-up, sélectionnez <strong>Class</strong>, puis saisissez <strong>Word</strong> comme nom de classe. Cette opération crée un fichier nommé <strong>Word.java</strong> dans le package <strong>model</strong>.</li>
+<li>Pour créer un mot on a besoin juste d&#39;un constructeur pour initialiser le mot dans la classe <code>Word</code> et une méthode qui retourne le mot pour l&#39;affichage (getter) si l&#39;attribut word est privé.</li>
+</ol>
+<p><code>Word.java</code></p>
+<pre><code>package com.example.recyclerview.model;
+
+public class Word {
+    private String mWord;
+
+    public Word(String word){
+        this.mWord = word;
+    }
+
+    public void setWord(String word) {
+        this.mWord = word;
+    }
+
+    public String getWord() {
+        return mWord;
+    }
 }</code></pre>
-<ol type="1" start="2">
-<li>Add code within the <code>onCreate()</code> method that populates <code>mWordList</code> with words:</li>
+<h3 is-upgraded>1.2.3. Créer une classe en tant que source de données</h3>
+<p>Les données affichées dans votre application peuvent provenir de différentes sources (par exemple, de votre projet d&#39;application ou d&#39;une source externe qui nécessite une connexion à Internet pour télécharger des données). Par conséquent, il se peut que les données ne soient pas exactement au format dont vous avez besoin. Le reste de l&#39;application ne doit pas se préoccuper de la provenance ni du format d&#39;origine des données. Vous pouvez (et c&#39;est même conseillé) dissimuler cette préparation de données dans une classe Datasource distincte qui prépare les données pour l&#39;application.</p>
+<p>La préparation des données étant un problème distinct, placez la classe Datasource dans un package data séparé.</p>
+<ol type="1" start="1">
+<li>Dans la fenêtre Projet d&#39;Android Studio, effectuez un clic droit sur <strong>app &gt; java &gt; com.example.recyclerview</strong>, puis sélectionnez <strong>New &gt; Package</strong>.</li>
+<li>Saisissez <strong>data</strong> comme dernière partie du nom du package.</li>
+<li>Effectuez un clic droit sur le package <code>data</code>, puis sélectionnez <strong>New &gt; Java Class</strong>.</li>
+<li>Saisissez <strong>Datasource</strong> comme nom de classe.</li>
+<li>Dans la classe <strong><code>Datasource</code></strong>, créez une fonction appelée <code>loadWords()</code>.</li>
 </ol>
-<pre><code>// Put initial data into the word list.
+<p>La fonction <code>loadWords()</code> doit renvoyer une liste de mots. Pour ce faire, créez une liste et insérez-y une instance Word pour chaque mot.</p>
+<ol type="1" start="6">
+<li>Déclarez <code>LinkedList<Word></code> comme type renvoyé de la méthode <code>loadWords()</code>.</li>
+<li>Dans le corps de <code>loadWords()</code>, ajoutez ce code pour générer 20 mots.<br></li>
+</ol>
+<pre><code>// Mettre les données initiales dans la liste de mots.
+LinkedList&lt;String&gt; wordList = new LinkedList&lt;&gt;();
 for (int i = 0; i &lt; 20; i++) {
-            mWordList.addLast(&#34;Word &#34; + i);
+            wordList.addLast(new Word(&#34;Word &#34; + i));
+}
+return wordList;</code></pre>
+<p>Le code concatène la chaîne <code>"Word "</code> avec la valeur de <code>i</code> tout en augmentant sa valeur. C&#39;est tout ce dont vous avez besoin comme ensemble de données pour cet exercice.</p>
+<p><code>Datasource.java</code></p>
+<pre><code>package com.example.recyclerview.data;
+
+import com.example.recyclerview.model.Word;
+
+import java.util.LinkedList;
+
+public class Datasource {
+    public LinkedList&lt;Word&gt; loadWords(){
+        // Mettre les données initiales dans la liste de mots.
+        LinkedList&lt;Word&gt; wordList = new LinkedList&lt;&gt;();
+        for (int i = 0; i &lt; 20; i++) {
+            wordList.addLast(new Word(&#34;Word &#34; + i));
+        }
+        return wordList;
+    }
 }</code></pre>
-<p>The code concatenates the string <code>&#34;Word &#34;</code> with the value of <code>i</code> while increasing its value. This is all you need as a dataset for this exercise.</p>
-<h2 is-upgraded>1.3. Change the FAB icon</h2>
-<p>For this practical, you will use a FAB to generate a new word to insert into the list. The Basic Activity template provides a FAB, but you may want to change its icon. As you learned in another lesson, you can choose an icon from the set of icons in Android Studio for the FAB. Follow these steps:</p>
+<h2 is-upgraded>1.3. Modifier l&#39;icône FAB</h2>
+<p>Pour cette pratique, vous utiliserez un FAB pour générer un nouveau mot à insérer dans la liste. Le modèle d&#39;activité de base fournit un FAB, mais vous pouvez modifier son icône. Comme vous l&#39;avez appris dans une autre leçon, vous pouvez choisir une icône parmi l&#39;ensemble d&#39;icônes d&#39;Android Studio pour le FAB. Suivez ces étapes :</p>
 <ol type="1" start="1">
-<li>Expand <strong>res</strong> in the <strong>Project &gt; Android</strong> pane, and right-click (or Control-click) the <strong>drawable</strong> folder.</li>
-<li>Choose <strong>New &gt; Image Asset</strong>. The Configure Image Asset dialog appears.</li>
-<li>Choose <strong>Action Bar and Tab Items</strong> in the drop-down menu at the top of the dialog.</li>
-<li>Change <strong>ic_action_name</strong> in the <strong>Name</strong> field to <strong>ic_add_for_fab</strong>.</li>
-<li>Click the clip art image (the Android logo next to <strong>Clipart</strong>:) to select a clip art image as the icon. A page of icons appears. Click the icon you want to use for the FAB, such as the plus (<strong>+</strong>) sign.</li>
-<li>Choose <strong>HOLO_DARK</strong> from the <strong>Theme</strong> drop-down menu. This sets the icon to be white against a dark-colored (or black) background. Click <strong>Next</strong>.</li>
-<li>Click <strong>Finish</strong> in the Confirm Icon Path dialog.</li>
+<li>Développez <strong>res</strong> dans le volet <strong>Project &gt; Android</strong>, puis cliquez avec le bouton droit (ou Ctrl-clic) sur le dossier <strong>drawable</strong>.</li>
+<li>Choose <strong>New &gt; Image Asset</strong>. The Configure Image Asset dialog appears.<br>Choisissez <strong>New &gt; Image Asset</strong>. La boîte de dialogue Image Asset s&#39;affiche.</li>
+<li>Choisissez <strong>Action Bar and Tab Items</strong> dans le menu déroulant en haut de la boîte de dialogue.</li>
+<li>Changez <strong>ic_action_name</strong>  dans le champ <strong>Name</strong> par <strong>ic_add_for_fab</strong>.</li>
+<li>Cliquez sur l&#39;image clipart (le logo Android à côté de <strong>Clipart</strong>) pour sélectionner une image clipart comme icône. Une page d&#39;icônes apparaît. Cliquez sur l&#39;icône que vous souhaitez utiliser pour le FAB, comme le signe plus (<strong>+</strong>).</li>
+<li>Choisissez <strong>HOLO_LIGHT</strong> dans le menu déroulant <strong>Theme</strong>. Cela définit l&#39;icône pour qu&#39;elle soit blanche sur un fond de couleur sombre (ou noir). Cliquez sur <strong>Next</strong>.</li>
+<li>Cliquez sur <strong>Finish</strong> dans la boîte de dialogue Confirmer le chemin de l&#39;icône.</li>
+<li>Ouvrez <code>activity_main.xml</code> et remplacez l&#39;icône du bouton flottant. </li>
 </ol>
-<aside class="special"><p>Tip: For a complete description of adding an icon, see <a href="http://developer.android.com/tools/help/image-asset-studio.html" target="_blank">Create app icons with Image Asset Studio</a>.</p>
+<pre><code>app:srcCompat=&#34;@drawable/ic_add_for_fab&#34;</code></pre>
+<aside class="special"><p><strong>Conseil</strong> : Pour une description complète de l&#39;ajout d&#39;une icône, voir <a href="http://developer.android.com/tools/help/image-asset-studio.html" target="_blank">Create app icons with Image Asset Studio</a>.</p>
 </aside>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Tâche 2: Create a RecyclerView" duration="0">
-        <p>In this practical, you display data in a <code>RecyclerView</code>. You need the following:</p>
+      <google-codelab-step label="Tâche 2: Ajouter une RecyclerView à votre application" duration="0">
+        <p>La création et l&#39;utilisation d&#39;une RecyclerView reposent sur un certain nombre d&#39;éléments. On peut les considérer comme une division du travail. Le schéma ci-dessous vous donne une vue d&#39;ensemble. Vous en apprendrez davantage sur chaque élément au fur et à mesure de l&#39;implémentation.</p>
 <ul>
-<li>Data to display: Use the <code>mWordList</code>.</li>
-<li>A <code>RecyclerView</code> for the scrolling list that contains the list items.</li>
-<li>Layout for one item of data. All list items look the same.</li>
-<li>A layout manager. <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.LayoutManager.html" target="_blank"><code>RecyclerView.LayoutManager</code></a> handles the hierarchy and layout of <code>View</code> elements. <code>RecyclerView</code> requires an explicit layout manager to manage the arrangement of list items contained within it. This layout could be vertical, horizontal, or a grid. You will use a vertical <a href="https://developer.android.com/reference/android/support/v7/widget/LinearLayoutManager.html" target="_blank"><code>LinearLayoutManager</code></a>.</li>
-<li>An adapter. <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.Adapter.html" target="_blank"><code>RecyclerView.Adapter</code></a> connects your data to the <code>RecyclerView</code>. It prepares the data in a <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.ViewHolder.html" target="_blank"><code>RecyclerView.ViewHolder</code></a>. You will create an adapter that inserts into and updates your generated words in your views.</li>
-<li>A <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.ViewHolder.html" target="_blank"><code>ViewHolder</code></a>. Inside your adapter, you will create a <code>ViewHolder</code> that contains the <code>View</code> information for displaying one item from the item&#39;s layout.</li>
+<li>item (élément) : élément de données de la liste à afficher. Représente un objet Affirmation de votre application.</li>
+<li>Adapter (Adaptateur) : accepte les données et les prépare pour que <code>RecyclerView</code> les affiche.</li>
+<li>ViewHolders : pool de vues que RecyclerView peut utiliser et réutiliser pour afficher des affirmations.</li>
+<li>RecyclerView : vues affichées à l&#39;écran.</li>
 </ul>
-<p>The diagram below shows the relationship between the data, the adapter, the <code>ViewHolder</code>, and the layout manager.</p>
-<p class="image-container"><img style="width: 624.00px" src="img/b2b7e77b940791a5.png"></p>
-<p>To implement these pieces, you will need to:</p>
+<p class="image-container"><img alt="4e9c18b463f00bf7.png" style="width: 624.00px" src="img/4e9c18b463f00bf7.png"></p>
+<p><br>Dans ce TP, vous allez afficher des données dans un <code>RecyclerView</code>. Vous avez besoin des éléments suivants :</p>
+<ul>
+<li>Données à afficher : Utilisez le <code>Datasource</code></li>
+<li>Un <code>RecyclerView</code> pour la liste défilante qui contient les éléments de la liste.</li>
+<li>Layout for one item of data. All list items look the same.</li>
+<li>Un gestionnaire de mise en page. <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.LayoutManager" target="_blank"><code>RecyclerView.LayoutManager</code></a> gère la hiérarchie et la mise en page des éléments View. <code>RecyclerView</code> nécessite un gestionnaire de mise en page explicite pour gérer l&#39;organisation des éléments de liste contenus en son sein. Cette mise en page peut être verticale, horizontale ou sous forme de grille. Vous utiliserez un <a href="https://developer.android.com/reference/androidx/recyclerview/widget/LinearLayoutManager" target="_blank"><code>LinearLayoutManager</code></a> vertical.</li>
+<li>Un adaptateur. <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter" target="_blank"><code>RecyclerView.Adapter</code></a> connecte vos données au <code>RecyclerView</code>. Il prépare les données dans un <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder" target="_blank"><code>RecyclerView.ViewHolder</code></a>. Vous créerez un adaptateur qui insère et met à jour vos mots générés dans vos vues.</li>
+<li>Un <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder" target="_blank"><code>ViewHolder</code></a>. Dans votre adaptateur, vous créerez un <code>ViewHolder</code> qui contient les informations de vue pour afficher un élément de la disposition de l&#39;élément.</li>
+</ul>
+<p>Le diagramme ci-dessous montre la relation entre les données, l&#39;adaptateur, le <code>ViewHolder</code> et le gestionnaire de mise en page dans notre application.</p>
+<p class="image-container"><img style="width: 624.00px" src="img/6cc2768882a8bc4a.png"></p>
+<p>Pour mettre en œuvre ces pièces, vous devrez :</p>
 <ol type="1" start="1">
-<li>Add a <code>RecyclerView</code> element to the <code>MainActivity</code> XML content layout (<code>content_main.xml</code>) for the RecyclerView app.</li>
-<li>Create an XML layout file (<code>wordlist_item.xml</code>) for one list item, which is <code>WordListItem</code>.</li>
-<li>Create an adapter (<code>WordListAdapter</code>) with a <code>ViewHolder</code> (<code>WordViewHolder</code>). Implement the method that takes the data, places it in the <code>ViewHolder</code>, and lets the layout manager know to display it.</li>
-<li>In the <code>onCreate()</code> method of <code>MainActivity</code>, create a <code>RecyclerView</code> and initialize it with the adapter and a standard layout manager.</li>
+<li>Ajoutez un élément <code>RecyclerView</code> à la mise en page du contenu XML de <code>MainActivity</code> (<code>content_main.xml</code>) pour l&#39;application RecyclerView.</li>
+<li>Créez un fichier de mise en page XML (<code>wordlist_item.xml</code>) pour un élément de liste, qui est <code>WordListItem</code>.</li>
+<li>Créez un adaptateur (<code>WordListAdapter</code>) avec un <code>ViewHolder</code> (<code>WordViewHolder</code>). </li>
+<li>Implémentez la méthode qui prend les données, les place dans le <code>ViewHolder</code> et indique au gestionnaire de mise en page qu&#39;il doit les afficher.</li>
+<li>Dans la méthode <code>onCreate()</code> de MainActivity, créez un RecyclerView et initialisez-le avec l&#39;adaptateur.</li>
 </ol>
-<p>Let&#39;s do these one at a time.</p>
-<h2 is-upgraded>2.1. Modify the layout in content_main.xml</h2>
+<p>Faisons-les une par une ⬇️</p>
+<h2 is-upgraded>2.1. Modifiez la mise en page dans content_main.xml</h2>
 <p>To add a <code>RecyclerView</code> element to the XML layout, follow these steps:</p>
 <ol type="1" start="1">
-<li>Open <strong>content_main.xml</strong> in your RecyclerView app. It shows a &#34;Hello World&#34; <code>TextView</code> at the center of a <code>ConstraintLayout</code>.</li>
-<li>Click the <strong>Text</strong> tab to show the XML code.</li>
-<li>Replace the entire <code>TextView</code> element with the following:</li>
+<li>Open <strong>content_main.xml</strong> in your RecyclerView app. It shows a &#34;Hello World&#34; <code>TextView</code> that we added earlier as replacement for the fragment.</li>
+<li>Dans la <strong>Palette</strong>, sélectionnez Conteneurs, puis recherchez <code>RecyclerView</code>.</li>
+<li>Faites glisser une vue <code>RecyclerView</code> dans la mise en page.</li>
+<li>Si le pop-up &#34;Ajouter une dépendance de projet&#34; s&#39;affiche, lisez-le, puis cliquez sur <strong>OK</strong>. (Si le pop-up ne s&#39;affiche pas, aucune action n&#39;est requise.)</li>
+<li>Si nécessaire, remplacez les attributs layout_width et layout_height de la RecyclerView par <code>match_constraint</code> pour que la <code>RecyclerView</code> puisse remplir l&#39;intégralité de l&#39;écran.</li>
+<li>Définissez l&#39;<code>ID</code> de ressource de <code>RecyclerView</code> sur <strong><code>recyclerview</code></strong>.</li>
+<li>Revenez à la vue <strong>Code</strong>. Dans l&#39;élément <code>RecyclerView</code> du code XML, ajoutez <strong><code>LinearLayoutManager</code></strong> en tant qu&#39;attribut de gestionnaire de mise en page de la <code>RecyclerView</code>, comme indiqué ci-dessous.</li>
 </ol>
-<pre><code>&lt;androidx.recyclerview.widget.RecyclerView
+<pre><code>app:layoutManager=&#34;LinearLayoutManager&#34;</code></pre>
+<p>Pour qu&#39;il soit possible de faire défiler une liste verticale d&#39;éléments plus longue que l&#39;écran, vous devez ajouter une barre de défilement verticale.</p>
+<ol type="1" start="8">
+<li>Dans <code>RecyclerView</code>, ajoutez un attribut <strong><code>android:scrollbars</code></strong> défini sur vertical.</li>
+</ol>
+<pre><code>android:scrollbars=&#34;vertical&#34;</code></pre>
+<p>La mise en page XML finale doit ressembler à ceci :</p>
+<pre><code>&lt;androidx.constraintlayout.widget.ConstraintLayout xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    xmlns:app=&#34;http://schemas.android.com/apk/res-auto&#34;
+    android:layout_width=&#34;match_parent&#34;
+    android:layout_height=&#34;match_parent&#34;
+    app:layout_behavior=&#34;@string/appbar_scrolling_view_behavior&#34;&gt;
+
+    &lt;androidx.recyclerview.widget.RecyclerView
         android:id=&#34;@+id/recyclerview&#34;
-        android:layout_width=&#34;match_parent&#34;
-        android:layout_height=&#34;match_parent&#34;/&gt;</code></pre>
-<p>You need to specify the full path (<code>androidx.recyclerview.widget.RecyclerView</code>), because <code>RecyclerView</code> is part of the Support Library.</p>
-<h2 is-upgraded>2.2. Create the layout for one list item</h2>
-<p>The adapter needs the layout for one item in the list. All the items use the same layout. You need to specify that list item layout in a separate layout resource file, because it is used by the adapter, separately from the <code>RecyclerView</code>.</p>
-<p>Create a simple word item layout using a vertical <code>LinearLayout</code> with a <code>TextView</code>:</p>
+        android:layout_width=&#34;0dp&#34;
+        android:layout_height=&#34;0dp&#34;
+        app:layoutManager=&#34;androidx.recyclerview.widget.LinearLayoutManager&#34;
+        android:scrollbars=&#34;vertical&#34;
+        app:layout_constraintBottom_toBottomOf=&#34;parent&#34;
+        app:layout_constraintEnd_toEndOf=&#34;parent&#34;
+        app:layout_constraintStart_toStartOf=&#34;parent&#34;
+        app:layout_constraintTop_toTopOf=&#34;parent&#34; /&gt;
+&lt;/androidx.constraintlayout.widget.ConstraintLayout&gt;</code></pre>
+<ol type="1" start="9">
+<li>Exécutez votre application.</li>
+</ol>
+<h2 is-upgraded>2.2. Créer la mise en page d&#39;un élément de liste</h2>
+<p>L&#39;adaptateur a besoin de la mise en page d&#39;un élément de la liste. Tous les éléments utilisent la même mise en page. Vous devez spécifier cette mise en page dans un fichier de ressources de mise en page distinct, car elle est utilisée par l&#39;adaptateur, séparément du <code>RecyclerView</code>.</p>
+<p>Créez une mise en page d&#39;élément de mot simple à l&#39;aide d&#39;une disposition <code>LinearLayout</code> verticale avec un <code>TextView</code>.</p>
 <ol type="1" start="1">
-<li>Right-click the <strong>app &gt; res &gt; layout</strong> folder and choose <strong>New &gt; Layout resource file</strong>.</li>
-<li>Name the file <strong>wordlist_item</strong> and click <strong>OK</strong>.</li>
-<li>In the new layout file, click the <strong>Text</strong> tab to show the XML code.</li>
-<li>Change the <code>ConstraintLayout</code> that was created with the file to a <code>LinearLayout</code> with the following attributes (extract resources as you go):</li>
+<li>Cliquez avec le bouton droit sur le dossier <strong>app &gt; res &gt; layout</strong> et choisissez <strong>New &gt; Layout resource file</strong>.</li>
+<li>Nommez le fichier <strong>wordlist_item </strong>et mettez LinearLayout comme &#34;Root element&#34;.</li>
+<li>les attributs de <code>LinearLayout</code> est comme suit:</li>
 </ol>
 <table>
-<tr><td colspan="1" rowspan="1"><p><strong>LinearLayout attribute</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Value</strong></p>
+<tr><td colspan="1" rowspan="1"><p><strong>Attribut (LinearLayout)</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Valeur</strong></p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>android:layout_width</p>
 </td><td colspan="1" rowspan="1"><p>&#34;match_parent&#34;</p>
@@ -190,14 +302,14 @@ for (int i = 0; i &lt; 20; i++) {
 </td></tr>
 </table>
 <ol type="1" start="5">
-<li>Add a <code>TextView</code> for the word to the <code>LinearLayout</code>. Use <code>word</code> as the ID of the word:</li>
+<li>Ajoutez un <code>TextView</code> pour l&#39;affichage du mot au <code>LinearLayout</code>. Utilisez <code>word_title</code> comme identifiant du <code>TextView</code>:</li>
 </ol>
 <table>
-<tr><td colspan="1" rowspan="1"><p><strong>Attribute</strong></p>
-</td><td colspan="1" rowspan="1"><p><strong>Value</strong></p>
+<tr><td colspan="1" rowspan="1"><p><strong>Attribut</strong></p>
+</td><td colspan="1" rowspan="1"><p><strong>Valeur</strong></p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>android:id</p>
-</td><td colspan="1" rowspan="1"><p>&#34;@+id/word&#34;</p>
+</td><td colspan="1" rowspan="1"><p>&#34;@+id/word_title&#34;</p>
 </td></tr>
 <tr><td colspan="1" rowspan="1"><p>android:layout_width</p>
 </td><td colspan="1" rowspan="1"><p>&#34;match_parent&#34;</p>
@@ -212,21 +324,21 @@ for (int i = 0; i &lt; 20; i++) {
 </td><td colspan="1" rowspan="1"><p>&#34;bold&#34;</p>
 </td></tr>
 </table>
-<h2 is-upgraded>2.3 Create a style from the TextView attributes</h2>
-<p>You can use styles to allow elements to share groups of display attributes. An easy way to create a style is to extract the style of a UI element that you already created. To extract the style information for the <code>word</code> <code>TextView</code> in <code>wordlist_item.xml</code>:</p>
+<h2 is-upgraded>2.3 Créer un style à partir des attributs TextView</h2>
+<p>Vous pouvez utiliser des styles pour permettre aux éléments de partager des groupes d&#39;attributs d&#39;affichage. Un moyen facile de créer un style est d&#39;extraire le style d&#39;un élément d&#39;interface utilisateur que vous avez déjà créé. Pour extraire les informations de style du <code>TextView</code>  de <code>word</code> dans <code>wordlist_item.xml</code>:</p>
 <ol type="1" start="1">
-<li>Open <strong>wordlist_item.xml</strong> if it is not already open.</li>
-<li>Right-click (or Control-click) the <code>TextView</code> you just created in <code>wordlist_item.xml</code>, and choose <strong>Refactor &gt; Extract &gt; Style</strong>. The <strong>Extract Android Style</strong> dialog appears.</li>
-<li>Name your style <strong>word_title</strong> and leave all other options selected. Select the <strong>Launch &#39;Use Style Where Possible&#39;</strong> option. Then click <strong>OK</strong>.</li>
-<li>When prompted, apply the style to the <strong>Whole Project</strong>.</li>
-<li>Find and examine the <code>word_title</code> style in <strong>values &gt; styles.xml</strong>.</li>
-<li>Reopen <strong>wordlist_item.xml</strong> if it is not already open. The <code>TextView</code> now uses the style in place of individual styling properties, as shown below.</li>
+<li>Ouvrez le fichier <strong><code>wordlist_item.xml</code></strong> s&#39;il n&#39;est pas déjà ouvert.</li>
+<li>Cliquez avec le bouton droit sur le <code>TextView</code> que vous venez de créer dans <code>wordlist_item.xml</code> et sélectionnez <strong>Refactor &gt; Style</strong>. La boîte de dialogue <code>Extract Android Style</code> apparaît.</li>
+<li>Nommez votre style <code>word_title</code> et laissez toutes les autres options sélectionnées. Sélectionnez l&#39;option &#34;<strong>Launch Use Style Where Possible</strong>&#39;&#34; et cliquez sur <strong>OK</strong>.</li>
+<li>Lorsque vous êtes invité, appliquez le style à l&#39;ensemble du projet &#34;<strong>Whole Project&#34;</strong>.</li>
+<li>Trouvez et examinez le style <code>word_title</code> dans <strong>values &gt; styles.xml</strong>.</li>
+<li>Réouvrez <strong><code>wordlist_item.xml</code></strong> s&#39;il n&#39;est pas déjà ouvert. Le <code>TextView</code> utilise désormais le style à la place des propriétés de style individuelles, comme indiqué ci-dessous.</li>
 </ol>
 <pre><code>&lt;?xml version=&#34;1.0&#34; encoding=&#34;utf-8&#34;?&gt;
 &lt;LinearLayout xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
+    android:orientation=&#34;vertical&#34;
     android:layout_width=&#34;match_parent&#34;
     android:layout_height=&#34;wrap_content&#34;
-    android:orientation=&#34;vertical&#34;
     android:padding=&#34;6dp&#34;&gt;
 
     &lt;TextView
@@ -234,196 +346,277 @@ for (int i = 0; i &lt; 20; i++) {
         style=&#34;@style/word_title&#34; /&gt;
 
 &lt;/LinearLayout&gt;</code></pre>
-<h2 is-upgraded>2.4. Create an adapter</h2>
-<p>Android uses adapters (from the <a href="http://developer.android.com/reference/android/widget/Adapter.html" target="_blank"><code>Adapter</code></a> class) to connect data with <code>View</code> items in a list. There are many different kinds of adapters available, and you can also write custom adapters. In this task you will create an adapter that associates your list of words with word list <code>View</code> items.</p>
-<p>To connect data with <code>View</code> items, the adapter needs to know about the <code>View</code> items. The adapter uses a <a href="http://developer.android.com/reference/android/support/v7/widget/RecyclerView.ViewHolder.html" target="_blank"><code>ViewHolder</code></a> that describes a <code>View</code> item and its position within the <code>RecyclerView</code>.</p>
-<p>First, you will build an adapter that bridges the gap between the data in your word list and the <code>RecyclerView</code> that displays it:</p>
+<h2 is-upgraded>2.4. Créer un adaptateur</h2>
+<p>Android utilise des adaptateurs (à partir de la classe <a href="http://developer.android.com/reference/android/widget/Adapter.html" target="_blank"><code>Adapter</code></a>) pour connecter les données aux éléments de vue (View) d&#39;une liste. Il existe de nombreux types d&#39;adaptateurs différents, et vous pouvez également écrire des adaptateurs personnalisés. Dans cette tâche, vous allez créer un adaptateur qui associe votre liste de mots aux éléments de vue (View) de la liste de mots.</p>
+<p>Pour connecter les données aux éléments de la vue, l&#39;adaptateur doit connaître les éléments de la vue. L&#39;adaptateur utilise un <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder" target="_blank"><code>ViewHolder</code></a> qui décrit un élément de la vue et sa position dans le <code>RecyclerView</code>.</p>
+<p>Tout d&#39;abord, vous allez créer un adaptateur qui fera le pont entre les données de votre liste de mots et le <code>RecyclerView</code> qui l&#39;affiche.</p>
 <ol type="1" start="1">
-<li>Right-click <strong>java/com.android.example.recyclerview</strong> and select <strong>New &gt; Java Class</strong>.</li>
-<li>Name the class <strong>WordListAdapter</strong>.</li>
-<li>Give <code>WordListAdapter</code> the following signature:</li>
+<li>Effectuez un clic droit sur <strong>app &gt; java &gt; com.example.recyclerview</strong>, puis sélectionnez <strong>New &gt; Package</strong>.</li>
+<li>Saisissez <strong>adapter</strong> comme dernière partie du nom du package.</li>
+<li>Effectuez un clic droit sur le package <strong>adapter</strong>, puis sélectionnez <strong>New &gt; Java Class</strong>.</li>
+<li>Saisissez <strong>WordListAdapter</strong> comme nom de classe.</li>
+<li>donner à WordListAdapter la signature suivante (n&#39;oubliez pas d&#39;importer les classes nécessaire):</li>
 </ol>
 <pre><code>public class WordListAdapter extends
     RecyclerView.Adapter&lt;WordListAdapter.WordViewHolder&gt;  {}</code></pre>
-<p><code>WordListAdapter</code> extends a generic adapter for <code>RecyclerView</code> to use a <code>View</code> holder that is specific for your app and defined inside <code>WordListAdapter</code>. <code>WordViewHolder</code> shows an error, because you have not yet defined it.</p>
+<p><code>WordListAdapter</code> hérite d&#39;un adaptateur générique pour <code>RecyclerView</code> afin d&#39;utiliser un <code>ViewHolder</code> spécifique à votre application et défini à l&#39;intérieur de <code>WordListAdapter</code>. <code>WordViewHolder</code> affiche une erreur car vous ne l&#39;avez pas encore défini.</p>
 <ol type="1" start="4">
-<li>Click the class declaration (<strong>WordListAdapter</strong>), then click the red light bulb on the left side of the pane. Choose <strong>Implement methods</strong>.</li>
+<li>Cliquez sur la déclaration de classe (<strong>WordListAdapter</strong>), puis cliquez sur l&#39;ampoule rouge sur le côté gauche du volet (ou Alt+Entrée). Choisissez <strong>Implement methods</strong>.</li>
+<li>Une boîte de dialogue apparaît et vous demande de choisir les méthodes à implémenter. Choisissez les trois méthodes et cliquez sur <strong>OK</strong>.</li>
 </ol>
-<p>A dialog appears that asks you to choose which methods to implement. Choose all three methods and click <strong>OK</strong>.</p>
-<p>Android Studio creates empty placeholders for all the methods. Note how <code>onCreateViewHolder</code> and <code>onBindViewHolder</code> both reference the <code>WordViewHolder</code>, which hasn&#39;t been implemented yet.</p>
-<h2 is-upgraded>2.5 Create the ViewHolder for the adapter</h2>
-<p>To create the <code>ViewHolder</code>, follow these steps:</p>
+<p>Android Studio crée des placeholders vides pour toutes les méthodes. Notez comment <code>onCreateViewHolder</code> et <code>onBindViewHolder</code> font toutes deux référence à <code>WordViewHolder</code>, qui n&#39;a pas encore été implémentée.</p>
+<h2 is-upgraded>2.5 Créer le ViewHolder pour l&#39;adaptateur</h2>
+<p>Pour créer le <code>ViewHolder</code>, suivez ces étapes </p>
 <ol type="1" start="1">
-<li>Inside the <code>WordListAdapter</code> class, add a new <code>WordViewHolder</code> inner class with this signature:</li>
+<li>À l&#39;intérieur de la classe <code>WordListAdapter</code>, ajoutez une nouvelle sous-classe <code>WordViewHolder</code> avec la signature suivante :</li>
 </ol>
-<pre><code>class WordViewHolder extends RecyclerView.ViewHolder {}</code></pre>
-<p>You will see an error about a missing default constructor. You can see details about the errors by hovering your mouse cursor over the red-underlined code or over any red horizontal line on the right margin of the editor pane.</p>
+<pre><code>public class WordViewHolder extends RecyclerView.ViewHolder {
+}</code></pre>
+<p>Vous verrez une erreur concernant un constructeur par défaut manquant. Vous pouvez voir les détails des erreurs en passant votre souris sur le code souligné en rouge ou sur toute ligne horizontale rouge dans la marge droite de la zone d&#39;édition.</p>
 <ol type="1" start="2">
-<li>Add variables to the <strong>WordViewHolder</strong> inner class for the <strong>TextView</strong> and the adapter:</li>
+<li>Ajoutez des variables à la sous-classe <code>WordViewHolder</code> pour le <code>TextView</code> et l&#39;adaptateur:</li>
 </ol>
 <pre><code>public final TextView wordItemView;
 final WordListAdapter mAdapter;</code></pre>
 <ol type="1" start="3">
-<li>In the inner class <strong>WordViewHolder</strong>, add a constructor that initializes the <strong>ViewHolder TextView</strong> from the <strong>word</strong> XML resource, and sets its adapter:</li>
+<li>Dans la sous-classe <code>WordViewHolder</code>, ajoutez un constructeur qui initialise le <code>ViewHolder</code>, <code>TextView</code> à partir de la ressource XML <code>word_title</code> et définit son adaptateur.</li>
 </ol>
 <pre><code>public WordViewHolder(View itemView, WordListAdapter adapter) {
    super(itemView);
-   wordItemView = itemView.findViewById(R.id.word);
+   wordItemView = itemView.findViewById(R.id.word_title);
    this.mAdapter = adapter;
 }</code></pre>
 <ol type="1" start="4">
-<li>Run your app to make sure that you have no errors. Your will still see only a blank view.</li>
-<li>Click the <strong>Logcat</strong> tab to see the <strong>Logcat</strong> pane, and note the <code>E/RecyclerView: No adapter attached; skipping layout</code> warning. You will attach the adapter to the <code>RecyclerView</code> in another step.</li>
+<li>Exécutez votre application pour vous assurer qu&#39;il n&#39;y a pas d&#39;erreurs. Vous ne verrez toujours qu&#39;une vue vide.</li>
+<li>Cliquez sur l&#39;onglet <strong><code>Logcat</code></strong> pour afficher le volet <strong><code>Logcat</code></strong>, et notez l&#39;avertissement <code>E/RecyclerView: No adapter attached; skipping layout</code>. Vous attacherez l&#39;adaptateur au <code>RecyclerView</code> dans une autre étape.</li>
 </ol>
-<h2 is-upgraded>2.6 Storing your data in the adapter</h2>
-<p>You need to hold your data in the adapter, and <code>WordListAdapter</code> needs a constructor that initializes the word list from the data. Follow these steps:</p>
+<h2 is-upgraded>2.6 Stocker vos données dans l&#39;adaptateur</h2>
+<p>Vous devez stocker vos données dans l&#39;adaptateur, et <code>WordListAdapter</code> doit avoir un constructeur qui initialise la liste de mots à partir des données. Suivez ces étapes :</p>
 <ol type="1" start="1">
-<li>To hold your data in the adapter, create a private linked list of strings in <code>WordListAdapter</code> and call it <code>mWordList</code>.</li>
+<li>Pour stocker vos données dans l&#39;adaptateur, créez une liste chaînée privée de <code>Word</code> dans <code>WordListAdapter</code> et appelez-la <code>mWordList</code>.</li>
 </ol>
-<pre><code>private final LinkedList&lt;String&gt; mWordList;</code></pre>
+<pre><code>private final LinkedList&lt;Word&gt; mWordList;</code></pre>
 <ol type="1" start="2">
-<li>You can now fill in the <code>getItemCount()</code> method to return the size of <code>mWordList</code>:</li>
+<li>Implémentez le constructeur pour <code>WordListAdapter</code>. Le constructeur doit avoir une liste chaînée de mots avec les données de l&#39;application. La méthode doit définir <code>mWordList</code> sur les données passées en entrée.</li>
+</ol>
+<pre><code>public WordListAdapter(LinkedList&lt;Word&gt; mWordList) {
+        this.mWordList = mWordList;
+    }</code></pre>
+<ol type="1" start="3">
+<li>Vous pouvez maintenant remplir la méthode <code>getItemCount()</code> pour renvoyer la taille de <code>mWordList</code>.<br>La méthode getItemCount() doit renvoyer la taille de votre ensemble de données. Les données de votre application se trouvent dans la propriété mWordList que vous transmettez au constructeur WordListAdapter. Vous pouvez obtenir leur taille avec size:</li>
 </ol>
 <pre><code>@Override
 public int getItemCount() {
    return mWordList.size();
 }</code></pre>
-<ol type="1" start="3">
-<li><code>WordListAdapter</code> needs a constructor that initializes the word list from the data. To create a View for a list item, the <code>WordListAdapter</code> needs to inflate the XML for a list item. You use a <em>layout inflator </em>for that job. <a href="http://developer.android.com/reference/android/view/LayoutInflater.html" target="_blank"><code>LayoutInflator</code></a> reads a layout XML description and converts it into the corresponding <code>View</code> items. Start by creating a member variable for the inflater in <code>WordListAdapter</code>:</li>
-</ol>
-<pre><code>private LayoutInflater mInflater;</code></pre>
 <ol type="1" start="4">
-<li>Implement the constructor for <code>WordListAdapter</code>. The constructor needs to have a context parameter, and a linked list of words with the app&#39;s data. The method needs to instantiate a <code>LayoutInflator</code> for <code>mInflater</code> and set <code>mWordList</code> to the passed in data:</li>
+<li>La méthode <code>onCreateViewHolder()</code> est appelée par le gestionnaire de mises en page afin de créer des conteneurs de vues pour la <code>RecyclerView</code> (s&#39;il n&#39;existe aucun conteneur de vues pouvant être réutilisé). N&#39;oubliez pas qu&#39;un conteneur de vues représente une seule vue d&#39;élément de liste.<br><br>Dans la méthode <code>onCreateViewHolder()</code>, vous devez obtenir une instance de <code>LayoutInflater</code> à partir du contexte fourni (<code>context</code> du <code>parent</code>). Le système de gonflage de mise en page sait comment gonfler une mise en page XML dans une hiérarchie d&#39;objets de vue.<br><br>Une fois que vous disposez d&#39;une instance d&#39;objet LayoutInflater, ajoutez un point suivi d&#39;un autre appel de méthode pour gonfler la vue d&#39;élément de liste. Transmettez l&#39;<code>ID</code> de ressource de mise en page XML <code>R.layout.wordlist_item</code> et le groupe de vues <code>parent</code>. Le troisième argument booléen est <code>attachToRoot</code>. Cet argument doit être <code>false</code>, car <code>RecyclerView</code> ajoute automatiquement cet élément à la hiérarchie des vues le moment venu.<br><br>Remplissez la méthode <code>onCreateViewHolder()</code> avec ce code:</li>
 </ol>
-<pre><code>public WordListAdapter(Context context, 
-                               LinkedList&lt;String&gt; wordList) {
-   mInflater = LayoutInflater.from(context);
-   this.mWordList = wordList;
-}</code></pre>
-<ol type="1" start="5">
-<li>Fill out the <code>onCreateViewHolder()</code> method with this code:</li>
-</ol>
-<pre><code>@Override
-public WordViewHolder onCreateViewHolder(ViewGroup parent, 
-                                                     int viewType) {
-   View mItemView = mInflater.inflate(R.layout.wordlist_item, 
-                                                     parent, false);
-   return new WordViewHolder(mItemView, this);
-}</code></pre>
-<p>The <code>onCreateViewHolder()</code> method is similar to the <code>onCreate()</code> method. It inflates the item layout, and returns a <code>ViewHolder</code> with the layout and the adapter.</p>
+<pre><code>    @NonNull
+    @Override
+    public WordListAdapter.WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View adapterLayout = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.wordlist_item, parent, false);
+
+        return new WordViewHolder(adapterLayout, this);
+    }</code></pre>
+<aside class="special"><p>La méthode <code>onCreateViewHolder()</code> utilise deux paramètres et renvoie un nouveau <code>ViewHolder</code>.</p>
+<ul>
+<li>Un paramètre <code>parent</code>, qui est le groupe de vues auquel la nouvelle vue d&#39;élément de liste sera associée en tant qu&#39;enfant. La vue parente est la <code>RecyclerView</code>.</li>
+<li>Un paramètre <code>viewType</code>, qui devient important lorsqu&#39;une même <code>RecyclerView</code> contient plusieurs types de vue d&#39;élément. Si différentes mises en page d&#39;élément de liste sont affichées dans la RecyclerView, il existe différents types de vue d&#39;élément. Vous ne pouvez recycler que des vues d&#39;éléments ayant le même type. Dans votre cas, il n&#39;existe qu&#39;une seule mise en page d&#39;élément de liste et un seul type de vue d&#39;élément. Vous ne devez donc pas vous soucier de ce paramètre.</li>
+</ul>
+</aside>
 <ol type="1" start="6">
-<li>Fill out the <code>onBindViewHolder()</code> method with the code below:</li>
+<li>La dernière méthode que vous devez remplacer est <code>onBindViewHolder()</code>. Cette méthode est appelée par le gestionnaire de mise en page afin de remplacer le contenu d&#39;une vue d&#39;élément de liste.<br><br>La méthode <code>onBindViewHolder()</code> comporte deux paramètres : un <code>WordViewHolder</code> créé précédemment par la méthode <code>onCreateViewHolder()</code> et un <code>int</code> représentant la position actuelle de l&#39;élément dans la liste. Cette méthode vous permet de trouver l&#39;objet Word approprié dans l&#39;ensemble de données en fonction de la position.<br><br>Vous devez mettre à jour toutes les vues référencées par le conteneur de vues afin de tenir compte des données correctes pour cet élément. Dans le cas présent, il n&#39;y a qu&#39;une seule vue : <code>TextView</code> dans <code>WordViewHolder</code>. Définissez le texte de <code>TextView</code> pour afficher la chaîne <code>Word</code> de cet élément.<br><br>Remplissez la méthode <code>onBindViewHolder()</code> avec le code suivant :</li>
 </ol>
 <pre><code>@Override
-public void onBindViewHolder(WordViewHolder holder, int position) {
-   String mCurrent = mWordList.get(position);
-   holder.wordItemView.setText(mCurrent);
+    public void onBindViewHolder(@NonNull WordListAdapter.WordViewHolder holder, int position) {
+        Word mCurrent = mWordList.get(position);
+        holder.wordItemView.setText(mCurrent.getWord());
+    }</code></pre>
+<p>Voici le code d&#39;adaptateur terminé.</p>
+<pre><code>public class WordListAdapter extends RecyclerView.Adapter&lt;WordListAdapter.WordViewHolder&gt;
+{
+   private final LinkedList&lt;Word&gt; mWordList;
+
+   public WordListAdapter(LinkedList&lt;Word&gt; mWordList) {
+       this.mWordList = mWordList;
+   }
+
+   /**
+    * Créer de nouvelles vues
+    * (appelé par le gestionnaire de disposition &#34;LayoutManager&#34;)
+    */
+   @NonNull
+   @Override
+   public WordListAdapter.WordViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+       // créer une nouvelle vue
+       View adapterLayout = LayoutInflater.from(parent.getContext())
+               .inflate(R.layout.wordlist_item, parent, false);
+
+       return new WordViewHolder(adapterLayout, this);
+   }
+
+   /**
+    * Remplacer le contenu d&#39;une vue
+    * (appelé par le gestionnaire de disposition &#34;LayoutManager&#34;)
+    */
+   @Override
+   public void onBindViewHolder(@NonNull WordListAdapter.WordViewHolder holder, int position) {
+       Word mCurrent = mWordList.get(position);
+       holder.wordItemView.setText(mCurrent.getWord());
+   }
+
+   /**
+    * Renvoyer la taille de votre ensemble de données
+    * (appelé par le gestionnaire de disposition &#34;LayoutManager&#34;)
+    */
+   @Override
+   public int getItemCount() {
+       return mWordList.size();
+   }
+
+   public class WordViewHolder extends RecyclerView.ViewHolder {
+      public final TextView wordItemView;
+       final WordListAdapter mAdapter;
+
+       public WordViewHolder(View itemView, WordListAdapter adapter) {
+           super(itemView);
+           wordItemView = itemView.findViewById(R.id.word_title);
+           this.mAdapter = adapter;
+       }
+   }
 }</code></pre>
-<p>The <code>onBindViewHolder()</code> method connects your data to the view holder.</p>
 <ol type="1" start="7">
-<li>Run your app to make sure that there are no errors.</li>
+<li>Exécutez votre application pour vous assurer qu&#39;il n&#39;y a pas d&#39;erreurs.</li>
 </ol>
 <h2 is-upgraded>2.7. Create the RecyclerView in the Activity</h2>
-<p>Now that you have an adapter with a <code>ViewHolder</code>, you can finally create a <code>RecyclerView</code> and connect all the pieces to display your data.</p>
+<p>Pour terminer, vous devez utiliser vos classes <code>Datasource</code> et <code>WordListAdapter</code> pour créer et afficher des éléments dans <code>RecyclerView</code>. Cette opération est effectuée dans <code>MainActivity</code>.</p>
+<p>Maintenant que vous avez un adaptateur avec un <code>ViewHolder</code>, vous pouvez enfin créer un <code>RecyclerView</code> et connecter toutes les pièces pour afficher vos données.</p>
 <ol type="1" start="1">
-<li>Open <strong>MainActivity</strong>.</li>
-<li>Add member variables for the <code>RecyclerView</code> and the adapter.</li>
+<li>Ouvrez <strong><code>MainActivity</code></strong>.</li>
+<li>Dans <code>MainActivity</code>, accédez à la méthode <code>onCreate()</code>. Insérez le nouveau code décrit dans les étapes suivantes après l&#39;appel vers <code>setContentView(binding.getRoot())</code>.</li>
+<li>Créez une instance de <code>Datasource</code> sous le nom  <code>mDataSource</code> et appelez la méthode <code>loadWords()</code> sur cette instance. Stockez la liste des mots renvoyée dans un variable local nommé <code>mWordList</code>.</li>
+<li>Ajouter une variable membre de la classe <code>MainActivity</code> pour l&#39;adaptateur. Par contre pour le <code>RecyclerView</code>, nous utiliserons la bibliothèque de liaison de vues (<a href="https://developer.android.com/topic/libraries/view-binding#java" target="_blank">View Binding</a>), utilisée par le nouveau modèle d&#39;activité de vue de base, au lieu de la méthode <code>findViewById()</code>:</li>
 </ol>
-<pre><code>private RecyclerView mRecyclerView;
-private WordListAdapter mAdapter;</code></pre>
+<pre><code>private WordListAdapter mAdapter;</code></pre>
+<aside class="special"><p>La liaison de vues est une fonctionnalité qui facilite l&#39;écriture de code qui interagit avec les vues. Une fois la liaison de vues activée dans un module, elle génère une classe de liaison pour chaque fichier de mise en page XML présent dans ce module. Une instance d&#39;une classe de liaison contient des références directes à toutes les vues qui ont un ID dans la mise en page correspondante.</p>
+<p>La liaison de vues est une fonctionnalité très utile pour les développeurs Android, car elle permet de réduire la quantité de code boilerplate nécessaire pour interagir avec les vues. Elle permet également de rendre le code plus sûr et plus maintenable.</p>
+</aside>
+<p>Pour vérifier que la liaison de vue (<a href="https://developer.android.com/topic/libraries/view-binding#java" target="_blank">View Binding</a>) est activée dans un module, accédez au fichier <code>build.gradle</code> au niveau du module et vérifiez que <code>viewBinding</code> est défini sur true comme le montre l&#39;exemple suivant :</p>
+<pre><code>android {
+    ...
+    buildFeatures {
+        viewBinding true
+    }
+}</code></pre>
 <ol type="1" start="3">
-<li>In the <code>onCreate()</code> method of <code>MainActivity</code>, add the following code that creates the <code>RecyclerView</code> and connects it with an adapter and the data. The comments explain each line. You must insert this code <em>after</em> the <code>mWordList</code> initialization.</li>
+<li>Notre <code>RecyclerView</code> est défini dans <code>content_main.xml</code> et nous utilisons <code>include</code> dans <code>activity_main.xml</code> pour l&#39;inclure. Comme il s&#39;agit d&#39;une mise en page imbriquée (une mise en page à l&#39;intérieur d&#39;une autre mise en page), la fonctionnalité <code>View Binding</code> ne peut pas voir les vues à l&#39;intérieur de <code>content_main.xml</code>. Pour les exposer, il suffit d&#39;ajouter un <code>ID</code> à la balise <code>include</code> dans <code>activity_main.xml</code><br><br>Allez dans <code>activity_main.xml</code> et localisez la balise <code>include</code>, puis ajoutez-lui <code>content_main</code> comme un <code>ID</code>:</li>
 </ol>
-<pre><code>// Get a handle to the RecyclerView.
-mRecyclerView = findViewById(R.id.recyclerview);
-// Create an adapter and supply the data to be displayed.
-mAdapter = new WordListAdapter(this, mWordList);
-// Connect the adapter with the RecyclerView.
-mRecyclerView.setAdapter(mAdapter);
-// Give the RecyclerView a default layout manager.
-mRecyclerView.setLayoutManager(new LinearLayoutManager(this));</code></pre>
+<pre><code>&lt;include layout=&#34;@layout/content_main&#34; android:id=&#34;@+id/content_main&#34; /&gt;</code></pre>
 <ol type="1" start="4">
-<li>Run your app.</li>
+<li>Revenez à la méthode <code>onCreate()</code> de <code>MainActivity</code>, ajoutez le code suivant qui connecte le <code>RecyclerView</code> avec l&#39;adaptateur et les données. Les commentaires expliquent chaque ligne. Vous devez insérer ce code après l&#39;initialisation de <code>mWordList</code>.</li>
 </ol>
-<p>You should see your list of words displayed, and you can scroll the list.</p>
-<p class="image-container"><img style="width: 277.82px" src="img/8f0a2bef15cdf09.png"></p>
+<pre><code>// Charger la liste des mots
+LinkedList&lt;Word&gt; mWordList = mDataSource.loadWords();
+// Créer une instance de l&#39;adaptateur en passant la liste des mots comme paramètre
+mAdapter = new WordListAdapter(mWordList);
+// Lier RecyclerView à son adaptateur
+// binding.contentMain.recyclerview remplace findViewById(R.id.recyclerview)
+binding.contentMain.recyclerview.setAdapter(mAdapter);</code></pre>
+<ol type="1" start="5">
+<li>Étant donné que la taille de mise en page de votre <code>RecyclerView</code> est fixe dans la mise en page de l&#39;activité, vous pouvez définir le paramètre <code>setHasFixedSize</code> de <code>RecyclerView</code> sur true. Ce paramètre ne sert qu&#39;à améliorer les performances. Utilisez ce paramètre si vous savez que les modifications apportées au contenu n&#39;ont pas d&#39;incidence sur la taille de mise en page de <code>RecyclerView</code>.</li>
+</ol>
+<p>recyclerView.setHasFixedSize(true)</p>
+<ol type="1" start="6">
+<li>Exécutez votre application.</li>
+</ol>
+<p>Vous devriez voir votre liste de mots affichée, et vous pouvez faire défiler la liste.</p>
+<p class="image-container"><img style="width: 221.59px" src="img/f87fda08ba09db1f.png"></p>
+<p>Félicitations ! Vous venez de créer une application qui affiche une liste de données avec <code>RecyclerView</code> et un adaptateur personnalisé. Prenez le temps d&#39;examiner le code que vous avez créé et de comprendre l&#39;interaction entre les différents éléments.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Tâche 3: Make the list interactive" duration="0">
-        <p>Looking at lists of items is interesting, but it&#39;s a lot more fun and useful if your user can interact with them. To see how the <code>RecyclerView</code> can respond to user input, you will attach a click handler to each item. When the item is tapped, the click handler is executed, and that item&#39;s text will change.</p>
-<p>The list of items that a <code>RecyclerView</code> displays can also be modified dynamically—it doesn&#39;t have to be a static list. There are several ways to add additional behaviors. One is to use the floating action button (FAB). For example, in Gmail, the FAB is used to compose a new email. For this practical, you will generate a new word to insert into the list. For a more useful app, you would get data from your users.</p>
-<h2 is-upgraded>3.1. Make items respond to clicks</h2>
+      <google-codelab-step label="Tâche 3: Rendre la liste interactive" duration="0">
+        <p>Regarder des listes d&#39;éléments est intéressant, mais c&#39;est beaucoup plus amusant et utile si votre utilisateur peut interagir avec elles. Pour voir comment le <code>RecyclerView</code> peut répondre à la saisie de l&#39;utilisateur, vous allez attacher un gestionnaire de clic à chaque élément. Lorsque l&#39;élément est tapé, le gestionnaire de clic est exécuté et le texte de cet élément change.</p>
+<p>La liste d&#39;éléments qu&#39;un <code>RecyclerView</code> affiche peut également être modifiée dynamiquement, elle n&#39;a pas besoin d&#39;être une liste statique. Il existe plusieurs façons d&#39;ajouter des comportements supplémentaires. L&#39;une d&#39;entre elles consiste à utiliser le bouton d&#39;action flottant (FAB). Par exemple, dans Gmail, le FAB est utilisé pour composer un nouvel e-mail. Pour ce pratique, vous allez générer un nouveau mot à insérer dans la liste. Pour une application plus utile, vous obtiendriez des données de vos utilisateurs.</p>
+<h2 is-upgraded>3.1. Faire réagir les éléments aux clics</h2>
 <ol type="1" start="1">
-<li>Open <strong>WordListAdapter</strong>.</li>
-<li>Change the <code>WordViewHolder</code> class signature to implement <a href="https://developer.android.com/reference/android/view/View.OnClickListener.html" target="_blank"><code>View.onClickListener</code></a>:</li>
+<li>Ouvrez <strong><code>WordListAdapter</code></strong>.</li>
+<li>Modifiez la signature de la classe <strong><code>WordViewHolder</code></strong> pour implémenter <a href="https://developer.android.com/reference/android/view/View.OnClickListener.html" target="_blank">View.onClickListener</a>:</li>
 </ol>
 <pre><code>class WordViewHolder extends RecyclerView.ViewHolder 
                              implements View.OnClickListener {</code></pre>
 <ol type="1" start="3">
-<li>Click the class header and on the red light bulb to implement stubs for the required methods, which in this case is just the <code>onClick()</code> method.</li>
-<li>Add the following code to the body of the <code>onClick()</code> method.</li>
+<li>Cliquez sur l&#39;en-tête de la classe et sur l&#39;ampoule rouge pour implémenter des stubs pour les méthodes requises, qui dans ce cas est juste la méthode <code>onClick()</code>.</li>
+<li>Ajoutez le code suivant au corps de la méthode <code>onClick()</code>:</li>
 </ol>
-<pre><code>// Get the position of the item that was clicked.
+<pre><code>// Obtenez la position de l&#39;élément cliqué
 int mPosition = getLayoutPosition();
-// Use that to access the affected item in mWordList.
-String element = mWordList.get(mPosition);
-// Change the word in the mWordList.
-mWordList.set(mPosition, &#34;Clicked! &#34; + element);
-// Notify the adapter, that the data has changed so it can 
-// update the RecyclerView to display the data.
+
+// Utilisez cela pour accéder à l&#39;élément affecté dans mWordList.
+Word element = mWordList.get(mPosition);
+
+// Modifiez le mot dans la liste mWordList.
+element.setWord(&#34;Clicked! &#34; + element.getWord());
+mWordList.set(mPosition, element);
+
+// Notifier l&#39;adaptateur que les données ont changé afin qu&#39;il
+// puisse mettre à jour le RecyclerView pour afficher les données
 mAdapter.notifyDataSetChanged();</code></pre>
 <ol type="1" start="5">
-<li>Connect the <code>onClickListener</code> with the <code>View</code>. Add this code to the <code>WordViewHolder</code> constructor (below the <code>this.mAdapter = adapter</code> line):</li>
+<li>Connectez l&#39;<code>onClickListener</code> à la vue. Ajoutez ce code au constructeur <code>WordViewHolder</code> (sous la ligne <code>this.mAdapter = adapter</code>):</li>
 </ol>
 <pre><code>itemView.setOnClickListener(this);</code></pre>
 <ol type="1" start="6">
-<li>Run your app. Click items to see the text change.</li>
+<li>Lancez votre application. Cliquez sur les éléments pour voir le texte changer</li>
 </ol>
-<h2 is-upgraded>3.2. Add behavior to the FAB</h2>
-<p>In this task you will implement an action for the FAB to:</p>
+<h2 is-upgraded>3.2. Ajouter plus de données (un nouveau mot)</h2>
+<p>Dans cette tâche, vous allez implémenter une action pour le FAB afin de :</p>
 <ul>
-<li>Add a word to the end of the list of words.</li>
-<li>Notify the adapter that the data has changed.</li>
-<li>Scroll to the inserted item.</li>
+<li>Ajouter un mot à la fin de la liste de mots.</li>
+<li>Notifier l&#39;adaptateur que les données ont changé.</li>
+<li>Faire défiler jusqu&#39;à l&#39;élément inséré..</li>
 </ul>
-<p>Follow these steps:</p>
+<p>Suivez ces étapes:</p>
 <ol type="1" start="1">
-<li>Open <strong>MainActivity</strong>. The <code>onCreate()</code> method sets an <code>OnClickListener()</code> to the <code>FloatingActionButton</code> with an <code>onClick()</code> method for taking an action. Change the <code>onClick()</code> method to the following:</li>
+<li>Ouvrir <strong><code>MainActivity</code></strong>. La méthode <code>onCreate()</code> définit un <code>OnClickListener()</code> sur le <code>FloatingActionButton</code> avec une méthode <code>onClick()</code> pour effectuer une action. Modifiez la méthode <code>onClick()</code> comme suit :</li>
 </ol>
 <pre><code>@Override
 public void onClick(View view) {
     int wordListSize = mWordList.size();
-    // Add a new word to the wordList.
-    mWordList.addLast(&#34;+ Word &#34; + wordListSize);
-    // Notify the adapter, that the data has changed.
-    mRecyclerView.getAdapter().notifyItemInserted(wordListSize);
-    // Scroll to the bottom.
-    mRecyclerView.smoothScrollToPosition(wordListSize);
+
+    // Ajoutez un nouveau mot à la liste de mots.
+    mWordList.addLast(new Word(&#34;+ Word &#34; + wordListSize));
+
+    // Notifiez l&#39;adaptateur qu&#39;une nouvelle donnée a été insérée.
+    binding.contentMain.recyclerview.getAdapter().notifyItemInserted(wordListSize);
+
+    // Faites défiler jusqu&#39;en bas
+    binding.contentMain.recyclerview.smoothScrollToPosition(wordListSize);
 }</code></pre>
 <ol type="1" start="2">
-<li>Run the app.</li>
-<li>Scroll the list of words and click items.</li>
-<li>Add items by clicking the FAB.</li>
+<li>Exécuter l&#39;application.</li>
+<li>Faites défiler la liste de mots et cliquez sur les éléments.</li>
+<li>Ajouter des éléments en cliquant sur le FAB.</li>
 </ol>
-<p class="image-container"><img style="width: 250.12px" src="img/86fabc5476249934.png"></p>
-<p>What happens if you rotate the screen? You will learn in a later lesson how to preserve the state of an app when the screen is rotated.</p>
-<h2 is-upgraded>Solution code</h2>
-<p>Android Studio project: <a href="https://github.com/khammami/android-fundamentals-exycodelabs/tree/master/RecyclerView" target="_blank">RecyclerView</a></p>
+<p class="image-container"><img style="width: 221.59px" src="img/6ead92bf24dfd495.png"></p>
+<aside class="special"><p>Vous pouvez utiliser <a href="https://m3.material.io/theme-builder#/custom" target="_blank">le thème builder pour Material Design version 3</a> pour personnaliser les couleurs du thème.</p>
+</aside>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Résumé" duration="0">
         <ul>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.html" target="_blank"><code>RecyclerView</code></a> is a resource-efficient way to display a scrollable list of items.</li>
-<li>To create a <code>View</code> for each list item, the adapter inflates an XML layout resource for a list item using <a href="http://developer.android.com/reference/android/view/LayoutInflater.html" target="_blank"><code>LayoutInflator</code></a>.</li>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/LinearLayoutManager.html" target="_blank"><code>LinearLayoutManager</code></a> is a <code>RecyclerView</code> layout manager that shows items in a vertical or horizontal scrolling list.</li>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/GridLayoutManager.html" target="_blank"><code>GridLayoutManager</code></a> is a <code>RecyclerView</code> layout manager that shows items in a grid</li>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/StaggeredGridLayoutManager.html" target="_blank"><code>StaggeredGridLayoutManager</code></a> is a <code>RecyclerView</code> layout manager that shows items in a staggered grid.</li>
-<li>Use <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.Adapter.html" target="_blank"><code>RecyclerView.Adapter</code></a><code> </code>to connect your data to the <code>RecyclerView</code>. It prepares the data in a <a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.ViewHolder.html" target="_blank"><code>RecyclerView.ViewHolder</code></a> that describes a <code>View</code> item and its position within the <code>RecyclerView</code>.</li>
-<li>Implement <a href="https://developer.android.com/reference/android/view/View.OnClickListener.html" target="_blank"><code>View.onClickListener</code></a> to detect mouse clicks in a <code>RecyclerView</code>.</li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView" target="_blank">RecyclerView</a> est un moyen efficace d&#39;afficher une liste d&#39;éléments défilante.</li>
+<li>Pour créer une vue pour chaque élément de liste, l&#39;adaptateur gonfle une ressource de mise en page XML pour un élément de liste à l&#39;aide de <a href="http://developer.android.com/reference/android/view/LayoutInflater.html" target="_blank"><code>LayoutInflator</code></a>.</li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/LinearLayoutManager" target="_blank"><code>LinearLayoutManager</code></a> est un gestionnaire de mise en page <code>RecyclerView</code> qui affiche les éléments dans une liste à défilement vertical ou horizontal.</li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/GridLayoutManager" target="_blank"><code>GridLayoutManager</code></a>  est un gestionnaire de disposition <code>RecyclerView</code> qui affiche les éléments dans une grille.</li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/StaggeredGridLayoutManager" target="_blank"><code>StaggeredGridLayoutManager</code></a> est un gestionnaire de disposition <code>RecyclerView</code> qui affiche les éléments dans une grille décalée.</li>
+<li>Utilisez <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter" target="_blank"><code>RecyclerView.Adapter</code></a> pour connecter vos données au <code>RecyclerView</code>. Il prépare les données dans un <a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder" target="_blank"><code>RecyclerView.ViewHolder</code></a> qui décrit un élément <code>View</code> et sa position dans le <code>RecyclerView</code>.</li>
+<li>Implémenter <a href="https://developer.android.com/reference/android/view/View.OnClickListener.html" target="_blank"><code>View.onClickListener</code></a> pour détecter les clics de souris dans un RecyclerView.</li>
 </ul>
 
 
@@ -437,16 +630,16 @@ public void onClick(View view) {
 </ul>
 <p>Android developer documentation:</p>
 <ul>
-<li><a href="http://developer.android.com/reference/android/support/v7/widget/RecyclerView.html" target="_blank"><code>RecyclerView</code></a></li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView" target="_blank"><code>RecyclerView</code></a></li>
 <li><a href="http://developer.android.com/reference/android/view/LayoutInflater.html" target="_blank"><code>LayoutInflator</code></a></li>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.LayoutManager.html" target="_blank"><code>RecyclerView.LayoutManager</code></a></li>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/LinearLayoutManager.html" target="_blank"><code>LinearLayoutManager</code></a></li>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/GridLayoutManager.html" target="_blank"><code>GridLayoutManager</code></a></li>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/StaggeredGridLayoutManager.html" target="_blank"><code>StaggeredGridLayoutManager</code></a></li>
-<li><a href="http://developer.android.com/reference/android/support/design/widget/CoordinatorLayout.html" target="_blank"><code>CoordinatorLayout</code></a></li>
-<li><a href="https://developer.android.com/reference/android/support/constraint/ConstraintLayout.html" target="_blank"><code>ConstraintLayout</code></a></li>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.Adapter.html" target="_blank"><code>RecyclerView.Adapter</code></a></li>
-<li><a href="https://developer.android.com/reference/android/support/v7/widget/RecyclerView.ViewHolder.html" target="_blank"><code>RecyclerView.ViewHolder</code></a></li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.LayoutManager" target="_blank"><code>RecyclerView.LayoutManager</code></a></li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/LinearLayoutManager" target="_blank"><code>LinearLayoutManager</code></a></li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/GridLayoutManager" target="_blank"><code>GridLayoutManager</code></a></li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/StaggeredGridLayoutManager" target="_blank"><code>StaggeredGridLayoutManager</code></a></li>
+<li><a href="https://developer.android.com/reference/androidx/coordinatorlayout/widget/CoordinatorLayout" target="_blank"><code>CoordinatorLayout</code></a></li>
+<li><a href="https://developer.android.com/reference/androidx/constraintlayout/widget/ConstraintLayout" target="_blank"><code>ConstraintLayout</code></a></li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.Adapter" target="_blank"><code>RecyclerView.Adapter</code></a></li>
+<li><a href="https://developer.android.com/reference/androidx/recyclerview/widget/RecyclerView.ViewHolder" target="_blank"><code>RecyclerView.ViewHolder</code></a></li>
 <li><a href="https://developer.android.com/reference/android/view/View.OnClickListener.html" target="_blank"><code>View.onClickListener</code></a></li>
 <li><a href="https://developer.android.com/guide/topics/ui/layout/recyclerview" target="_blank">Create a list with <code>RecyclerView</code></a></li>
 </ul>
@@ -458,28 +651,31 @@ public void onClick(View view) {
 
       </google-codelab-step>
     
-      <google-codelab-step label="Travail à faire" duration="0">
-        <h2 is-upgraded>Créer et exécuter une application</h2>
-<p>Create an app that uses a <code>RecyclerView</code> to display a list of recipes. Each list item must show the name of the recipe with a short description. When the user taps a recipe (an item in the list), start an <code>Activity</code> that shows the full recipe text.</p>
+      <google-codelab-step label="Travail à faire (Compte Rendu)" duration="0">
+        <aside class="warning"><p>Pour soumettre votre compte rendu, veuillez suivre ce codelab : </p>
+<p><a href="https://codelabs-enetcom.khammami.tn/codelabs/soumettre-compte-rendu/" target="_blank">Comment soumettre votre compte rendu</a></p>
+</aside>
+<h2 is-upgraded>Créer et exécuter une application</h2>
+<p>Créer une application qui utilise un <code>RecyclerView</code> pour afficher une liste de recettes. Chaque élément de la liste doit indiquer le nom de la recette avec une courte description. Lorsque l&#39;utilisateur appuie sur une recette (un élément de la liste), démarrer une activité (<code>Activity</code>) qui affiche le texte complet de la recette.</p>
 <ul>
-<li>Use separate <code>TextView</code> elements and styling for the recipe name and description.</li>
-<li>You may use placeholder text for the full recipes.</li>
-<li>As an option, add an image for the finished dish to each recipe.</li>
-<li>Clicking the Up button takes the user back to the list of recipes.</li>
+<li>Utiliser des éléments et un style <code>TextView</code> distincts pour le nom et la description de la recette.</li>
+<li>Il est possible d&#39;utiliser un texte d&#39;espace réservé (placeholder) pour les recettes complètes.</li>
+<li>En option, ajouter une image du plat fini à chaque recette.</li>
+<li>Cliquer sur le bouton Haut ramène l&#39;utilisateur à la liste des recettes.</li>
 </ul>
-<p>The screenshot below shows an example for a simple implementation. Your app can look very different, as long as it has the required functionality.</p>
+<p>La capture d&#39;écran ci-dessous montre un exemple d&#39;implémentation simple. L&#39;application peut avoir un aspect très différent, tant qu&#39;elle dispose des fonctionnalités requises.</p>
 <p class="image-container"><img style="width: 511.50px" src="img/95ab0af3b6e24d7b.png"></p>
 <h2 is-upgraded>Répondre à ces questions</h2>
 <h3 is-upgraded>Question 1</h3>
-<p>Which of the following statements about a RecyclerView is <em>false</em>? Choose one.</p>
+<p>Laquelle des affirmations suivantes concernant une <code>RecyclerView</code> est fausse ? Choisissez-en un.</p>
 <ul>
-<li>A <code>RecyclerView</code> is a more resource-efficient way to display scrollable lists.</li>
-<li>You need to provide a layout for just one item of the list.</li>
-<li>All list items look the same.</li>
-<li>You don&#39;t need a layout manager with a <code>RecyclerView</code> to handle the hierarchy and layout of <code>View</code> elements.</li>
+<li>Un <code>RecyclerView</code> est un moyen plus économe en ressources pour afficher des listes déroulantes.</li>
+<li> Il faut fournir une mise en page (layout) pour un seul élément de la liste.</li>
+<li> Tous les éléments de la liste se ressemblent.</li>
+<li> on a pas besoin d&#39;un gestionnaire de disposition (layout manager) avec un <code>RecyclerView</code> pour gérer la hiérarchie et la disposition des éléments <code>View</code>.</li>
 </ul>
 <h3 is-upgraded>Question 2</h3>
-<p>Which of the following is the primary component you need to provide to an adapter a <code>View</code> item and its position within a <code>RecyclerView</code>? Choose one.</p>
+<p>Lequel des éléments suivants est le composant principal dont vous avez besoin pour fournir à un adaptateur un élément de vue et sa position dans un <code>RecyclerView</code>?Choisissez-en un.</p>
 <ul>
 <li><code>RecyclerView</code></li>
 <li><code>RecyclerView.Adapter</code></li>
@@ -487,7 +683,7 @@ public void onClick(View view) {
 <li><code>AppCompatActivity</code></li>
 </ul>
 <h3 is-upgraded>Question 3</h3>
-<p>Which interface do you need to implement in order to listen and respond to user clicks in a <code>RecyclerView</code>? Choose one.</p>
+<p>Quelle interface doit-on implémenter pour écouter et répondre aux clics des utilisateurs dans une <code>RecyclerView</code>? Choisissez-en un.</p>
 <ul>
 <li><code>View.onClickListener</code></li>
 <li><code>RecyclerView.Adapter</code></li>
@@ -495,13 +691,13 @@ public void onClick(View view) {
 <li><code>View.OnKeyListener</code></li>
 </ul>
 <h2 is-upgraded>Soumettez votre application pour la notation</h2>
-<p>Check that the app has the following features:</p>
+<p>Vérifier que l&#39;application dispose des fonctionnalités suivantes :</p>
 <ul>
-<li>Implements a <code>RecyclerView</code> that shows a scrollable list of recipe titles and short descriptions.</li>
-<li>The code extends or implements <code>RecyclerView</code>, <code>RecyclerView.Adapter</code>, <code>RecyclerView.ViewHolder</code>, and <code>View.OnClickListener</code>.</li>
-<li>Clicking a list item starts an <code>Activity</code> that shows the full recipe.</li>
-<li>The <code>AndroidManifest.xml</code> file defines a parent relationship so that clicking the Up button in a recipe view goes back to the list of recipes.</li>
-<li><code>ViewHolder</code> contains a layout with two <code>TextView</code> elements; for example, a <code>LinearLayout</code> with two <code>TextView</code> elements.</li>
+<li>Implémente un <code>RecyclerView</code> qui affiche une liste déroulante de titres de recettes et de courtes descriptions.</li>
+<li>Le code étend ou implémente <code>RecyclerView</code>, <code>RecyclerView.Adapter</code>, <code>RecyclerView.ViewHolder</code> et <code>View.OnClickListener</code>.</li>
+<li>Cliquer sur un élément de la liste démarre une activité (<code>Activity</code>) qui affiche la recette complète.</li>
+<li>Le fichier <code>AndroidManifest.xml</code> définit une relation parent de sorte que cliquer sur le bouton Haut dans une vue de recette revient à la liste des recettes.</li>
+<li>ViewHolder contient une mise en page avec deux éléments <code>TextView</code>; par exemple, un <code>LinearLayout</code> avec deux éléments <code>TextView</code>.</li>
 </ul>
 
 

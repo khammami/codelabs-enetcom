@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-3295395-7",
-  "updated": "2019-11-10T09:27:10Z",
+  "updated": "2023-10-14T11:19:22Z",
   "id": "menus-et-pickers",
   "duration": 0,
   "title": "TP 03.1: Les Menus et \"pickers\"",
@@ -23,5 +23,7 @@
     "kiosk",
     "web"
   ],
+  "feedback": "https://github.com/khammami/codelabs-enetcom/issues",
+  "ga": "UA-3295395-7",
   "url": "menus-et-pickers"
 }
