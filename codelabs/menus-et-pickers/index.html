@@ -81,9 +81,9 @@
 <p class="image-container"><img style="width: 595.00px" src="img/ae4b04d5feb4944b.png"></p>
 <p>Pour cet exercice, vous utilisez la barre d&#39;outils <a href="https://developer.android.com/reference/android/widget/Toolbar" target="_blank"><code>Toolbar</code></a> de la bibliothèque <em>Androidx appcompat</em> en tant que barre d&#39;applications, qui fonctionne sur la plus large gamme de périphériques et vous donne également la possibilité de personnaliser votre barre d&#39;applications ultérieurement, au fur et à mesure du développement de votre application. Pour en savoir plus sur les considérations de conception relatives à l&#39;utilisation de la barre d&#39;application, voir <a href="https://material.io/design/layout/responsive-layout-grid.html#" target="_blank">Responsive layout grid</a> dans la spécification de conception &#34;Material Design&#34;.</p>
 <p>Vous créez une nouvelle application qui affiche une boîte de dialogue d&#39;alerte. La boîte de dialogue interrompt le flux de travail de l&#39;utilisateur et oblige celui-ci à faire un choix.</p>
-<p class="image-container"><img style="width: 624.00px" src="img/6fcbad5be57491f3.png"></p>
+<p class="image-container"><img style="width: 164.08px" src="img/e4d7e3947a8a92b8.png"><img style="width: 164.08px" src="img/b38c175921e832b1.png"><img style="width: 164.08px" src="img/c13385716abc32cc.png"></p>
 <p>Vous créez également une application qui fournit un bouton pour afficher le sélecteur de date et convertit la date choisie en une chaîne à afficher dans un message <code>Toast</code>.</p>
-<p class="image-container"><img style="width: 457.50px" src="img/acfbdf73053e33ee.png"></p>
+<p class="image-container"><img style="width: 235.64px" src="img/ccb61c2d0b9e4eb1.png"><img style="width: 235.07px" src="img/c1de48463bdf867a.png"></p>
 
 
       </google-codelab-step>
@@ -414,13 +414,30 @@ public boolean onOptionsItemSelected(MenuItem item) {
       </google-codelab-step>
     
       <google-codelab-step label="Tâche 4: Utiliser une boîte de dialogue pour demander le choix d&#39;un utilisateur" duration="0">
-        <p>Vous pouvez créer une boîte de dialogue pour demander le choix d&#39;un utilisateur, telle qu&#39;une alerte demandant aux utilisateurs d&#39;appuyer sur <strong>OK</strong> ou <strong>Cancel</strong>. Un &#34;<em>dialog&#34;</em> est une fenêtre qui apparaît au-dessus de l&#39;écran ou qui remplit celui-ci, interrompant le flux d&#39;activité.</p>
+        <aside class="warning"><p>Pour suivre ce codelab, vous devez activer la nouvelle interface utilisateur dans Android Studio Giraffe:</p>
+<ul>
+<li>à partir de la fenêtre &#34;Welcome to Android Studio&#34;:<br><strong>Customize &gt; All settings</strong></li>
+<li>à partir de la fenêtre du projet ouvert:<br><strong>File &gt; Settings</strong></li>
+</ul>
+<p class="image-container"><img style="width: 610.00px" src="img/3918482f0c611fa1.png"></p>
+<p>Pour activer la nouvelle interface utilisateur et afficher le menu principal dans une barre d&#39;outils séparée, cochez les deux paramètres suivants :</p>
+<ul>
+<li><strong>Enable new UI</strong></li>
+<li><strong>Show main menu in separate toolbar</strong></li>
+</ul>
+<p>Une fois ces paramètres cochés, vous devez redémarrer Android Studio pour que les changements soient appliqués.</p>
+</aside>
+<p>Vous pouvez créer une boîte de dialogue pour demander le choix d&#39;un utilisateur, telle qu&#39;une alerte demandant aux utilisateurs d&#39;appuyer sur <strong>OK</strong> ou <strong>Cancel</strong>. Un &#34;<em>dialog&#34;</em> est une fenêtre qui apparaît au-dessus de l&#39;écran ou qui remplit celui-ci, interrompant le flux d&#39;activité.</p>
 <p>Par exemple, une boîte de dialogue d&#39;alerte peut obliger l&#39;utilisateur à cliquer sur <strong>Continue</strong> après l&#39;avoir lue ou à lui donner le choix d&#39;accepter une action en cliquant sur un bouton positif (tel que <strong>OK</strong> ou <strong>Accept</strong>) ou de ne pas être d&#39;accord en cliquant sur un bouton négatif ( comme <strong>Cancel</strong>). Utilisez la sous-classe <a href="https://developer.android.com/reference/android/app/AlertDialog.html" target="_blank"><code>AlertDialog</code></a> de la classe <code>Dialog</code> pour afficher une boîte de dialogue standard pour une alerte.</p>
 <p>Dans cette pratique, vous utilisez un bouton pour déclencher une boîte de dialogue d&#39;alerte standard. Dans une application réelle, vous pouvez déclencher une boîte de dialogue d&#39;alerte basée sur une condition ou sur le fait que l&#39;utilisateur tape quelque chose.</p>
 <h2 is-upgraded>4.1 Créer une nouvelle application pour afficher une boîte de dialogue d&#39;alerte</h2>
 <p>Dans cet exercice, vous créez une alerte avec les boutons <strong>OK</strong> et <strong>Cancel</strong>. L&#39;alerte est déclenchée lorsque l&#39;utilisateur appuie sur un bouton.</p>
 <ol type="1" start="1">
-<li>Créez un nouveau projet appelé <strong>Dialog For Alert</strong> basé sur le modèle d&#39;activité vide (Empty Activity).</li>
+<li>Créez un nouveau projet appelé <strong>Dialog For Alert</strong> basé sur le modèle d&#39;activité vide (<code>Empty Views Activity</code>).</li>
+<li>Ouvrez <strong>themes.xml</strong> et changez le parent de du thème de l&#39;application par <code>Theme.Material3.Light</code> et supprimez le fichier <code>themes.xml (night)</code>. C&#39;est juste pour avoir la même interface utilisateur, parce que le mode sombre peut être activé sur vos émulateurs ou téléphones.</li>
+</ol>
+<pre><code>&lt;style name=&#34;Base.Theme.DialogForAlert&#34; parent=&#34;Theme.Material3.Light&#34;&gt;</code></pre>
+<ol type="1" start="3">
 <li>Ouvrez le fichier de mise en page (layout) <strong>activity_main.xml</strong> pour afficher l&#39;éditeur de mise en page (layout).</li>
 <li>Éditez l&#39;élément <code>TextView</code> pour dire <strong>Hello World! Tap to test the alert:</strong> au lieu de &#34;Hello World!&#34;</li>
 <li>Ajoutez un bouton sous le <code>TextView</code>. (Facultatif: limitez le bouton au bas de <code>TextView</code> et aux côtés de la présentation, avec des marges définies à 8dp.)</li>
@@ -430,7 +447,7 @@ public boolean onOptionsItemSelected(MenuItem item) {
 </ol>
 <pre><code>android:onClick=&#34;onClickShowAlert&#34;</code></pre>
 <p>Vous avez maintenant une disposition (layout) semblable à la suivante:</p>
-<p class="image-container"><img style="width: 346.00px" src="img/3f3d8b64c3504227.png"></p>
+<p class="image-container"><img style="width: 268.51px" src="img/b2caee8357111581.png"></p>
 <h2 is-upgraded>4.2 Ajouter une boîte de dialogue d&#39;alerte à l&#39;activité principale</h2>
 <p>Le modèle de conception du générateur (<em>builder)</em> facilite la création d&#39;un objet à partir d&#39;une classe comportant de nombreux attributs obligatoires et facultatifs et nécessitant par conséquent de nombreux paramètres. Sans ce modèle, vous devrez créer des constructeurs pour les combinaisons d&#39;attributs obligatoires et facultatifs. Avec ce modèle, le code est plus facile à lire et à maintenir. Pour plus d&#39;informations sur le modèle de conception de générateur, voir <a href="https://en.wikipedia.org/wiki/Builder_pattern" target="_blank">Builder pattern</a>.</p>
 <p>La classe de générateur est généralement une classe de membre statique de la classe qu&#39;elle génère. Utilisez <a href="https://developer.android.com/reference/android/app/AlertDialog.Builder.html" target="_blank"><code>AlertDialog.Builder</code></a> pour créer une boîte de dialogue d&#39;alerte standard, avec <a href="https://developer.android.com/reference/android/app/AlertDialog.Builder.html#setTitle(int)" target="_blank"><code>setTitle()</code></a> pour définir son titre, <a href="https://developer.android.com/reference/android/app/AlertDialog.Builder.html#setMessage(int)" target="_blank"><code>setMessage()</code></a> pour définir son message, ainsi que <a href="https://developer.android.com/reference/android/app/AlertDialog.Builder.html#setPositiveButton(int,%20android.content.DialogInterface.OnClickListener)" target="_blank"><code>setPositiveButton()</code></a> et <a href="https://developer.android.com/reference/android/app/AlertDialog.Builder.html#setNegativeButton(int,%20android.content.DialogInterface.OnClickListener)" target="_blank"><code>setNegativeButton()</code></a> pour définir ses boutons..</p>
@@ -484,7 +501,7 @@ myAlertBuilder.show();</code></pre>
 <li>Exécutez l&#39;application.</li>
 </ol>
 <p>Vous devriez pouvoir appuyer sur le bouton <strong>Alert</strong>, illustré à gauche de la figure ci-dessous, pour afficher la boîte de dialogue d&#39;alerte, présentée au centre de la figure ci-dessous. La boîte de dialogue affiche les boutons <strong>OK</strong> et <strong>Cancel</strong>, et un message <code>Toast</code> apparaît, indiquant celui sur lequel vous avez appuyé, comme indiqué à droite de la figure ci-dessous.</p>
-<p class="image-container"><img style="width: 624.00px" src="img/6fcbad5be57491f3.png"></p>
+<p class="image-container"><img style="width: 164.08px" src="img/e4d7e3947a8a92b8.png"><img style="width: 164.08px" src="img/b38c175921e832b1.png"><img style="width: 164.08px" src="img/c13385716abc32cc.png"></p>
 
 
       </google-codelab-step>
@@ -496,9 +513,26 @@ myAlertBuilder.show();</code></pre>
 <aside class="special"><p><strong>Remarque :</strong> pour une meilleure expérience utilisateur, consultez la documentation du sélecteur de <a href="https://m3.material.io/components/date-pickers/overview" target="_blank">date</a> et d&#39;<a href="https://m3.material.io/components/time-pickers/overview" target="_blank">heure</a> Material Design.</p>
 </aside>
 <h2 is-upgraded>5.1 Créer une nouvelle application pour afficher un sélecteur de date</h2>
-<p>Pour démarrer cette tâche, créez une application dotée d&#39;un bouton permettant d&#39;afficher le sélecteur de date.</p>
+<aside class="warning"><p>Pour suivre ce codelab, vous devez activer la nouvelle interface utilisateur dans Android Studio Giraffe:</p>
+<ul>
+<li>à partir de la fenêtre &#34;Welcome to Android Studio&#34;:<br><strong>Customize &gt; All settings</strong></li>
+<li>à partir de la fenêtre du projet ouvert:<br><strong>File &gt; Settings</strong></li>
+</ul>
+<p class="image-container"><img style="width: 610.00px" src="img/3918482f0c611fa1.png"></p>
+<p>Pour activer la nouvelle interface utilisateur et afficher le menu principal dans une barre d&#39;outils séparée, cochez les deux paramètres suivants :</p>
+<ul>
+<li><strong>Enable new UI</strong></li>
+<li><strong>Show main menu in separate toolbar</strong></li>
+</ul>
+<p>Une fois ces paramètres cochés, vous devez redémarrer Android Studio pour que les changements soient appliqués.</p>
+</aside>
+<p><br>Pour démarrer cette tâche, créez une application dotée d&#39;un bouton permettant d&#39;afficher le sélecteur de date.</p>
 <ol type="1" start="1">
-<li>Créez un nouveau projet appelé <strong>Picker For Date</strong> basé sur le modèle <strong>Empty views Activity</strong>.</li>
+<li>Créez un nouveau projet appelé <strong>Picker For Date</strong> basé sur le modèle <strong>Empty Views Activity</strong>.</li>
+<li>Ouvrez <strong>themes.xml</strong> et changez le parent de du thème de l&#39;application par <code>Theme.Material3.Light</code> et supprimez le fichier <code>themes.xml (night)</code>. C&#39;est juste pour avoir la même interface utilisateur, parce que le mode sombre peut être activé sur vos émulateurs ou téléphones.</li>
+</ol>
+<pre><code>&lt;style name=&#34;Base.Theme.PickerForDate&#34; parent=&#34;Theme.Material3.Light&#34;&gt;</code></pre>
+<ol type="1" start="3">
 <li>Ouvrez le fichier de mise en page  <strong>activity_main.xml</strong> pour afficher l&#39;éditeur de layout.</li>
 <li>Modifiez l&#39;élément &#34;Hello World!&#34;  de l&#39;élément <code>TextView</code>  à <strong>Hello World! Choose a date:</strong>.</li>
 <li>Ajoutez un bouton sous le <code>TextView</code>. (Facultatif: limitez le bouton au bas de TextView et aux côtés de la présentation (layout), avec des marges définies à 8dp.)</li>
@@ -508,13 +542,12 @@ myAlertBuilder.show();</code></pre>
 </ol>
 <pre><code>android:onClick=&#34;showDatePicker&#34;</code></pre>
 <p>Vous devriez maintenant avoir une mise en page (layout) semblable à la suivante:</p>
-<p class="image-container"><img style="width: 281.00px" src="img/48b9c0d99cdc5f9f.png"></p>
+<p class="image-container"><img style="width: 260.39px" src="img/d41dc2ece918082e.png"></p>
 <h2 is-upgraded>5.2 Créer un nouveau fragment pour le sélecteur de date</h2>
 <p>Dans cette étape, vous ajoutez un <code>Fragment</code> pour le sélecteur de date.</p>
 <ol type="1" start="1">
 <li>Développez <strong>app &gt; java &gt; com.example.android.pickerfordate</strong> et sélectionnez <strong>MainActivity</strong>.</li>
-<li>Choisissez <strong>File &gt; New &gt; Fragment &gt; Fragment (Blank)</strong>, puis nommez le fragment <strong>DatePickerFragment</strong>. Cliquez sur <strong>Finish</strong>.</li>
-<li>Ouvrez la classe <strong>DatePickerFragment</strong> et supprimez tout le code de cette classe, y compris les imports et les commentaires inutiles.</li>
+<li>Choisissez <strong>File &gt; New &gt; Java Class</strong>, puis nommez la classe <strong>DatePickerFragment</strong>. Cliquez sur <strong>Entrée</strong>.</li>
 <li>Modifiez la définition de classe <strong>DatePickerFragment</strong> pour étendre <code>DialogFragment</code> et implémentez <a href="https://developer.android.com/reference/android/app/DatePickerDialog.OnDateSetListener.html" target="_blank"><code>DatePickerDialog.OnDateSetListener</code></a> pour créer un sélecteur de date standard avec un écouteur. Voir <a href="http://developer.android.com/guide/topics/ui/controls/pickers.html" target="_blank">Pickers</a> pour plus d&#39;informations sur l&#39;extension du <code>DialogFragment</code> pour un sélecteur de date:</li>
 </ol>
 <pre><code>public class DatePickerFragment extends DialogFragment
@@ -532,12 +565,12 @@ import android.app.DatePickerDialog;</code></pre>
 <pre><code>public void onDateSet(DatePicker datePicker, 
                                  int year, int month, int day)</code></pre>
 <ol type="1" start="5">
-<li>Supprimez le constructeur vide <code>public DatePickerFragment()</code>.</li>
-<li>Remplacez l&#39;intégralité de la méthode <code>onCreateView()</code> par <a href="https://developer.android.com/reference/androidx/fragment/app/DialogFragment#onCreateDialog(android.os.Bundle)" target="_blank"><code>onCreateDialog()</code></a> qui renvoie <code>Dialog</code> et annotez <code>onCreateDialog()</code> par <code>@NonNull</code> pour indiquer que la valeur renvoyée (<code>return</code>) <code>Dialog</code> ne peut pas être nulle. Android Studio affiche une ampoule rouge à côté de la méthode car elle ne renvoie (<code>return</code>) rien pour le moment.</li>
+<li>Modifiez la méthode <a href="https://developer.android.com/reference/androidx/fragment/app/DialogFragment#onCreateDialog(android.os.Bundle)" target="_blank"><code>onCreateDialog()</code></a>  (<strong>Code &gt; Override Methods</strong>) qui renvoie <code>Dialog</code> et supprimez par la suite la ligne de retour <code>return</code>, Android Studio affiche une ampoule rouge à côté de la méthode car elle ne renvoie (<code>return</code>) rien pour le moment.</li>
 </ol>
 <pre><code>@NonNull
-@Override
-public Dialog onCreateDialog(Bundle savedInstanceState) {
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        
 }</code></pre>
 <ol type="1" start="7">
 <li>Ajoutez le code suivant à <code>onCreateDialog()</code> pour initialiser l&#39;année (<code>year</code>), le mois (<code>month</code>) et le jour (<code>day</code>) à partir de <a href="https://developer.android.com/reference/java/util/Calendar.html" target="_blank"><code>Calendar</code></a>, puis renvoyez la boîte de dialogue et ces valeurs à l&#39;activité. Lorsque vous entrez <strong>Calendar.getInstance()</strong>, indiquez que l&#39;importation doit être <strong>java.util.Calendar</strong>.</li>
@@ -554,7 +587,7 @@ return new DatePickerDialog(getActivity(), this, year, month, day);</code></pre>
 <p>Bien qu&#39;une grande partie du code de <code>MainActivity.java</code> reste identique, vous devez ajouter une méthode qui crée une instance de <a href="https://developer.android.com/reference/android/app/FragmentManager.html" target="_blank"><code>FragmentManager</code></a> pour gérer le <code>Fragment</code> et afficher le sélecteur de date.</p>
 <ol type="1" start="1">
 <li>Ouvrez <strong>MainActivity</strong>.</li>
-<li>Ajoutez le gestionnaire <code>showDatePickerDialog()</code> pour le bouton <strong>Date</strong>. Il crée une instance de <code>FragmentManager</code> à l&#39;aide de <a href="https://developer.android.com/reference/android/support/v4/app/FragmentActivity.html#getSupportFragmentManager()" target="_blank">getSupportFragmentManager()</a> pour gérer le <code>Fragment</code> automatiquement et afficher le sélecteur. Pour plus d&#39;informations sur la classe <code>Fragment</code>, voir <a href="http://developer.android.com/guide/components/fragments.html" target="_blank">Fragments</a>.</li>
+<li>Modifiez le gestionnaire <code>showDatePicker()</code> pour le bouton <strong>Date</strong>. Il crée une instance de <code>FragmentManager</code> à l&#39;aide de <a href="https://developer.android.com/reference/android/support/v4/app/FragmentActivity.html#getSupportFragmentManager()" target="_blank">getSupportFragmentManager()</a> pour gérer le <code>Fragment</code> automatiquement et afficher le sélecteur. Pour plus d&#39;informations sur la classe <code>Fragment</code>, voir <a href="http://developer.android.com/guide/components/fragments.html" target="_blank">Fragments</a>.</li>
 </ol>
 <pre><code>public void showDatePicker(View view) {
         DialogFragment newFragment = new DatePickerFragment();
@@ -564,7 +597,7 @@ return new DatePickerDialog(getActivity(), this, year, month, day);</code></pre>
 <li>Extrayez la chaîne <code>"datePicker"</code> dans la ressource de chaîne (<code>strings.xml</code>) en tant que <code>datepicker</code>.</li>
 <li>Lancer l&#39;application. Vous devriez voir le sélecteur de date après avoir appuyé sur le bouton <strong>Date</strong>.</li>
 </ol>
-<p class="image-container"><img style="width: 590.00px" src="img/acfbdf73053e33ee.png"></p>
+<p class="image-container"><img style="width: 235.64px" src="img/ccb61c2d0b9e4eb1.png"><img style="width: 235.07px" src="img/c1de48463bdf867a.png"></p>
 <h2 is-upgraded>5.5 Utilisez la date choisie</h2>
 <p>Dans cette étape, vous renvoyez la date à <code>MainActivity.java</code> et convertissez la date en une chaîne que vous pouvez afficher dans un message <code>Toast</code>.</p>
 <ol type="1" start="1">
@@ -600,7 +633,7 @@ public void onDateSet(DatePicker datePicker,
 <ol type="1" start="6">
 <li>Exécutez l&#39;application. Après avoir sélectionné la date, la date apparaît dans un message <code>Toast</code>, comme indiqué à droite de la figure suivante.</li>
 </ol>
-<p class="image-container"><img style="width: 590.00px" src="img/a55da482a81ee897.png"></p>
+<p class="image-container"><img style="width: 235.07px" src="img/c1de48463bdf867a.png"><img style="width: 235.64px" src="img/a15a42fedcf29043.png"></p>
 
 
       </google-codelab-step>
