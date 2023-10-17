@@ -198,6 +198,9 @@ import com.example.recyclerview.model.Word;
 import java.util.LinkedList;
 
 public class Datasource {
+
+    public Datasource(){}
+
     public LinkedList&lt;Word&gt; loadWords(){
         // Mettre les données initiales dans la liste de mots.
         LinkedList&lt;Word&gt; wordList = new LinkedList&lt;&gt;();
@@ -211,7 +214,7 @@ public class Datasource {
 <p>Pour cette pratique, vous utiliserez un FAB pour générer un nouveau mot à insérer dans la liste. Le modèle d&#39;activité de base fournit un FAB, mais vous pouvez modifier son icône. Comme vous l&#39;avez appris dans une autre leçon, vous pouvez choisir une icône parmi l&#39;ensemble d&#39;icônes d&#39;Android Studio pour le FAB. Suivez ces étapes :</p>
 <ol type="1" start="1">
 <li>Développez <strong>res</strong> dans le volet <strong>Project &gt; Android</strong>, puis cliquez avec le bouton droit (ou Ctrl-clic) sur le dossier <strong>drawable</strong>.</li>
-<li>Choose <strong>New &gt; Image Asset</strong>. The Configure Image Asset dialog appears.<br>Choisissez <strong>New &gt; Image Asset</strong>. La boîte de dialogue Image Asset s&#39;affiche.</li>
+<li>Choisissez <strong>New &gt; Image Asset</strong>. La boîte de dialogue Image Asset s&#39;affiche.</li>
 <li>Choisissez <strong>Action Bar and Tab Items</strong> dans le menu déroulant en haut de la boîte de dialogue.</li>
 <li>Changez <strong>ic_action_name</strong>  dans le champ <strong>Name</strong> par <strong>ic_add_for_fab</strong>.</li>
 <li>Cliquez sur l&#39;image clipart (le logo Android à côté de <strong>Clipart</strong>) pour sélectionner une image clipart comme icône. Une page d&#39;icônes apparaît. Cliquez sur l&#39;icône que vous souhaitez utiliser pour le FAB, comme le signe plus (<strong>+</strong>).</li>
@@ -359,7 +362,7 @@ public class Datasource {
     android:padding=&#34;6dp&#34;&gt;
 
     &lt;TextView
-        android:id=&#34;@+id/word&#34;
+        android:id=&#34;@+id/word_title&#34;
         style=&#34;@style/word_title&#34; /&gt;
 
 &lt;/LinearLayout&gt;</code></pre>
