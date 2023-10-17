@@ -122,7 +122,7 @@
 <li>Des mots à afficher dans l&#39;application.</li>
 <li>Une source de données pour fournir une liste des mots à votre application.</li>
 </ul>
-<aside class="special"><p><strong>Remarque</strong> : Dans la plupart des projets de production Android, vous récupérez les données des affirmations à partir d&#39;une base de données ou d&#39;un serveur. La mise en réseau et les bases de données ne sont pas couvertes dans cet atelier de programmation. Vous utiliserez donc une liste de chaînes d&#39;affirmation définies dans l&#39;application.</p>
+<aside class="special"><p><strong>Remarque</strong> : Dans la plupart des projets de production Android, vous récupérez les données des mots à partir d&#39;une base de données ou d&#39;un serveur. La mise en réseau et les bases de données ne sont pas couvertes dans cet atelier de programmation. Vous utiliserez donc une liste de chaînes de mots définies dans l&#39;application.</p>
 </aside>
 <p>Dans l&#39;application RecyclerView, en plus d&#39;importer les classes Android et Java, vous allez organiser votre application dans plusieurs packages. Même si votre application ne contient pas beaucoup de classes, il est recommandé d&#39;utiliser des packages pour les regrouper par fonctionnalité.</p>
 <aside class="special"><p>En organisant votre code de manière logique, vous et d&#39;autres développeurs pouvez le comprendre, le gérer et l&#39;étendre. À l&#39;instar des documents, que vous pouvez organiser en fichiers et dossiers, vous pouvez organiser votre code en fichiers et packages.</p>
@@ -172,10 +172,14 @@ public class Word {
 <li>Saisissez <strong>data</strong> comme dernière partie du nom du package.</li>
 <li>Effectuez un clic droit sur le package <code>data</code>, puis sélectionnez <strong>New &gt; Java Class</strong>.</li>
 <li>Saisissez <strong>Datasource</strong> comme nom de classe.</li>
+<li>Initializer un constructeur vide pour Datasource.</li>
+</ol>
+<pre><code>public Datasource(){}</code></pre>
+<ol type="1" start="6">
 <li>Dans la classe <strong><code>Datasource</code></strong>, créez une fonction appelée <code>loadWords()</code>.</li>
 </ol>
 <p>La fonction <code>loadWords()</code> doit renvoyer une liste de mots. Pour ce faire, créez une liste et insérez-y une instance Word pour chaque mot.</p>
-<ol type="1" start="6">
+<ol type="1" start="7">
 <li>Déclarez <code>LinkedList<Word></code> comme type renvoyé de la méthode <code>loadWords()</code>.</li>
 <li>Dans le corps de <code>loadWords()</code>, ajoutez ce code pour générer 20 mots.<br></li>
 </ol>
@@ -225,9 +229,9 @@ public class Datasource {
       <google-codelab-step label="Tâche 2: Ajouter une RecyclerView à votre application" duration="0">
         <p>La création et l&#39;utilisation d&#39;une RecyclerView reposent sur un certain nombre d&#39;éléments. On peut les considérer comme une division du travail. Le schéma ci-dessous vous donne une vue d&#39;ensemble. Vous en apprendrez davantage sur chaque élément au fur et à mesure de l&#39;implémentation.</p>
 <ul>
-<li>item (élément) : élément de données de la liste à afficher. Représente un objet Affirmation de votre application.</li>
+<li>item (élément) : élément de données de la liste à afficher. Représente un objet Word de votre application.</li>
 <li>Adapter (Adaptateur) : accepte les données et les prépare pour que <code>RecyclerView</code> les affiche.</li>
-<li>ViewHolders : pool de vues que RecyclerView peut utiliser et réutiliser pour afficher des affirmations.</li>
+<li>ViewHolders : pool de vues que RecyclerView peut utiliser et réutiliser pour afficher des mots.</li>
 <li>RecyclerView : vues affichées à l&#39;écran.</li>
 </ul>
 <p class="image-container"><img alt="4e9c18b463f00bf7.png" style="width: 624.00px" src="img/4e9c18b463f00bf7.png"></p>
@@ -254,7 +258,7 @@ public class Datasource {
 <h2 is-upgraded>2.1. Modifiez la mise en page dans content_main.xml</h2>
 <p>To add a <code>RecyclerView</code> element to the XML layout, follow these steps:</p>
 <ol type="1" start="1">
-<li>Open <strong>content_main.xml</strong> in your RecyclerView app. It shows a &#34;Hello World&#34; <code>TextView</code> that we added earlier as replacement for the fragment.</li>
+<li>Ouvrez <strong><code>content_main.xml</code></strong> dans votre application <code>RecyclerView</code>. Il affiche un <code>TextView</code> &#34;<code>Hello World</code>&#34; que nous avons ajouté précédemment en remplacement du fragment. Supprimez le <code>TextView</code> car nous allons le remplacer par un <code>RecyclerView</code>.</li>
 <li>Dans la <strong>Palette</strong>, sélectionnez Conteneurs, puis recherchez <code>RecyclerView</code>.</li>
 <li>Faites glisser une vue <code>RecyclerView</code> dans la mise en page.</li>
 <li>Si le pop-up &#34;Ajouter une dépendance de projet&#34; s&#39;affiche, lisez-le, puis cliquez sur <strong>OK</strong>. (Si le pop-up ne s&#39;affiche pas, aucune action n&#39;est requise.)</li>
