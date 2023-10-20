@@ -530,11 +530,11 @@ public int getItemCount() {
         viewBinding true
     }
 }</code></pre>
-<ol type="1" start="3">
+<ol type="1" start="5">
 <li>Notre <code>RecyclerView</code> est défini dans <code>content_main.xml</code> et nous utilisons <code>include</code> dans <code>activity_main.xml</code> pour l&#39;inclure. Comme il s&#39;agit d&#39;une mise en page imbriquée (une mise en page à l&#39;intérieur d&#39;une autre mise en page), la fonctionnalité <code>View Binding</code> ne peut pas voir les vues à l&#39;intérieur de <code>content_main.xml</code>. Pour les exposer, il suffit d&#39;ajouter un <code>ID</code> à la balise <code>include</code> dans <code>activity_main.xml</code><br><br>Allez dans <code>activity_main.xml</code> et localisez la balise <code>include</code>, puis ajoutez-lui <code>content_main</code> comme un <code>ID</code>:</li>
 </ol>
 <pre><code>&lt;include layout=&#34;@layout/content_main&#34; android:id=&#34;@+id/content_main&#34; /&gt;</code></pre>
-<ol type="1" start="4">
+<ol type="1" start="6">
 <li>Revenez à la méthode <code>onCreate()</code> de <code>MainActivity</code>, ajoutez le code suivant qui connecte le <code>RecyclerView</code> avec l&#39;adaptateur et les données. Les commentaires expliquent chaque ligne. Vous devez insérer ce code après l&#39;initialisation de <code>mWordList</code>.</li>
 </ol>
 <pre><code>// Charger la liste des mots
@@ -544,11 +544,11 @@ mAdapter = new WordListAdapter(mWordList);
 // Lier RecyclerView à son adaptateur
 // binding.contentMain.recyclerview remplace findViewById(R.id.recyclerview)
 binding.contentMain.recyclerview.setAdapter(mAdapter);</code></pre>
-<ol type="1" start="5">
+<ol type="1" start="7">
 <li>Étant donné que la taille de mise en page de votre <code>RecyclerView</code> est fixe dans la mise en page de l&#39;activité, vous pouvez définir le paramètre <code>setHasFixedSize</code> de <code>RecyclerView</code> sur true. Ce paramètre ne sert qu&#39;à améliorer les performances. Utilisez ce paramètre si vous savez que les modifications apportées au contenu n&#39;ont pas d&#39;incidence sur la taille de mise en page de <code>RecyclerView</code>.</li>
 </ol>
-<p>recyclerView.setHasFixedSize(true)</p>
-<ol type="1" start="6">
+<pre><code>binding.contentMain.recyclerView.setHasFixedSize(true)</code></pre>
+<ol type="1" start="8">
 <li>Exécutez votre application.</li>
 </ol>
 <p>Vous devriez voir votre liste de mots affichée, et vous pouvez faire défiler la liste.</p>
