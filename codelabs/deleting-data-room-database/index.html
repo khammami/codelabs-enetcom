@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta name="theme-color" content="#4F7DC9">
   <meta charset="UTF-8">
-  <title>TP 04.2B: Deleting data from a Room database</title>
+  <title>TP 04.2B: Suppression de données d&#39;une base de données Room</title>
   <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Source+Code+Pro:400|Roboto:400,300,400italic,500,700|Roboto+Mono">
   <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
   <link rel="stylesheet" href="https://storage.googleapis.com/claat-public/codelab-elements.css">
@@ -18,155 +18,123 @@
       color: red;
     }
   </style>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T70T90JTWB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-T70T90JTWB');
-  </script>
 </head>
 <body>
-  <google-codelab-analytics gaid="UA-3295395-7"></google-codelab-analytics>
+  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-E0H6JSF2N3"></google-codelab-analytics>
   <google-codelab codelab-gaid=""
+                  codelab-ga4id="G-E0H6JSF2N3"
                   id="deleting-data-room-database"
-                  title="TP 04.2B: Deleting data from a Room database"
+                  title="TP 04.2B: Suppression de données d&#39;une base de données Room"
                   environment="web"
-                  feedback-link="">
+                  feedback-link="https://github.com/khammami/codelabs-enetcom/issues">
     
       <google-codelab-step label="Bienvenue" duration="0">
         <p>Ces travaux pratiques se base sur le cours de base pour les développeurs Android fourni par Google afin de  les préparer pour le test de certification <a href="https://developers.google.com/training/certification/associate-android-developer/" target="_blank">Associate Android Developer</a>. Vous obtiendrez le plus de valeur de ce TP si vous travaillez successivement dans les codelabs.</p>
 <h2 is-upgraded>Introduction</h2>
-<p>This codelab (practical) follows on from 4.2A: Room, LiveData, and ViewModel. This codelab gives you more practice at using the API provided by the Room library to implement database functionality. You will add the ability to delete specific items from the database. This codelab also includes a coding challenge, in which you update the app so the user can edit existing data.</p>
+<p>Ce codelab pratique fait suite au <strong><code>4.2A : Room, LiveData et ViewModel</code></strong>. Ce codelab vous permet de vous entraîner davantage à utiliser l&#39;API fournie par la bibliothèque Room pour implémenter des fonctionnalités de base de données. Vous ajouterez la possibilité de supprimer des éléments spécifiques de la base de données. Ce codelab comprend également un défi de codage, dans lequel vous mettez à jour l&#39;application pour que l&#39;utilisateur puisse modifier les données existantes.</p>
 <h2 is-upgraded>What you should already know</h2>
-<p>You should be able to create and run apps in <a href="https://developer.android.com/studio/index.html" target="_blank">Android Studio 3.0 or higher</a>. In particular, be familiar with the following:</p>
+<p>Vous devriez être capable de créer et d&#39;exécuter des applications dans <a href="https://developer.android.com/studio/index.html" target="_blank">Android Studio Giraffe (2022.3.1) ou une version supérieure</a>. En particulier, vous devez être familiarisé avec les éléments suivants :</p>
 <ul>
-<li>Using <code>RecyclerView</code> and adapters.</li>
-<li>Using entity classes, data access objects (DAOs), and the <code>RoomDatabase</code> to store and retrieve data in Android&#39;s built-in SQLite database. You learned these topics in 4.1A: Room, LiveData, and ViewModel.</li>
+<li>Utilisation de <code>RecyclerView</code> et des adaptateurs</li>
+<li>Utilisation de classes d&#39;entités, d&#39;objets d&#39;accès aux données (DAO) et de <code>RoomDatabase</code> pour stocker et récupérer des données dans la base de données SQLite intégrée d&#39;Android. Vous avez appris ces sujets dans <code>4.2A : Room, LiveData et ViewModel</code>.</li>
 </ul>
 <h2 class="checklist" is-upgraded>What you&#39;ll learn</h2>
 <ul class="checklist">
-<li>How to populate the database with data only if the database is empty (so users don&#39;t lose changes they made to the data).</li>
-<li>How to delete data from a Room database.</li>
-<li>How to update existing data (if you build the challenge app).</li>
+<li>Comment peupler la base de données avec des données uniquement si la base de données est vide (afin que les utilisateurs ne perdent pas les modifications qu&#39;ils ont apportées aux données).</li>
+<li>Comment supprimer des données d&#39;une base de données Room.</li>
+<li>Comment mettre à jour des données existantes (si vous construisez l&#39;application de défi).</li>
 </ul>
 <h2 is-upgraded>What you&#39;ll do</h2>
 <ul>
-<li>Update the RoomWordsSample app to keep data when the app closes.</li>
-<li>Allow users to delete all words by selecting an <strong>Options</strong> menu item.</li>
-<li>Allow users to delete a specific word by swiping an item in the list.</li>
-<li>Optionally, in a coding challenge, extend the app to allow the user to update existing words.</li>
+<li>Mise à jour de l&#39;application <code>RoomWordsSample</code> pour conserver les données lorsque l&#39;application se ferme.</li>
+<li>Permettre aux utilisateurs de supprimer tous les mots en sélectionnant un élément du menu d&#39;options.</li>
+<li>Permettre aux utilisateurs de supprimer un mot spécifique en balayant un élément de la liste.</li>
+<li>En option, dans un défi de codage, étendre l&#39;application pour permettre à l&#39;utilisateur de mettre à jour les mots existants.</li>
 </ul>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Aperçu de l&#39;application" duration="0">
-        <p>You will extend the RoomWordsSample app that you created in the previous codelab. So far, that app displays a list of words, and users can add words. When the app closes and re-opens, the app re-initializes the database. Words that the user has added are lost.</p>
-<p>In this practical, you extend the app so that it only initializes the data in the database if there is no existing data.</p>
-<p>Then you add a menu item that allows the user to delete all the data.</p>
-<p class="image-container"><img style="width: 624.00px" src="img/ba683f98ec094a10.png"></p>
-<p>You also enable the user to swipe a word to delete it from the database.</p>
-<p class="image-container"><img style="width: 288.00px" src="img/1fc13b1dec09c03.png"></p>
+        <p>Vous allez étendre l&#39;application RoomWordsSample que vous avez créée dans le codelab précédent. Jusqu&#39;à présent, cette application affiche une liste de mots et les utilisateurs peuvent ajouter des mots. Lorsque l&#39;application est fermée et rouverte, elle réinitialise la base de données. Les mots que l&#39;utilisateur a ajoutés sont perdus.</p>
+<p>Dans ce TP, vous étendez l&#39;application afin qu&#39;elle initialise les données de la base de données uniquement s&#39;il n&#39;y a pas de données existantes.</p>
+<p>Ensuite, vous ajoutez un élément de menu qui permet à l&#39;utilisateur de supprimer toutes les données.</p>
+<p class="image-container"><img style="width: 537.00px" src="img/3f73f6ff1475fc35.png"></p>
+<p>Vous permettez également à l&#39;utilisateur de balayer un mot pour le supprimer de la base de données.</p>
+<p class="image-container"><img style="width: 221.59px" src="img/6639edd4da022795.png"></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Tâche 1: Initialize data only if the database is empty" duration="0">
-        <p>The RoomWordsSample app that you created in the previous practical deletes and re-creates the data whenever the user opens the app. This behavior isn&#39;t ideal, because users will want their added words to remain in the database when the app is closed. (Solution code for the previous practical is in <a href="https://github.com/khammami/android-fundamentals-exycodelabs/tree/master/RoomWordsSample" target="_blank">GitHub</a>.)</p>
-<p>In this task you update the app so that when it opens, the initial data set is only added if the database has no data.</p>
-<p>To detect whether the database contains data already, you can run a query to get one data item. If the query returns nothing, then the database is empty.</p>
-<aside class="special"><p><strong>Note</strong>: In a production app, you might want to allow users to delete all data without re-initializing the data when the app restarts. But for testing purposes, it&#39;s useful to be able to delete all data, then re-initialize the data when the app starts.</p>
+        <p>L&#39;application <code>RoomWordsSample</code> que vous avez créée dans le précédent exercice pratique supprime et recrée les données chaque fois que l&#39;utilisateur ouvre l&#39;application. Ce comportement n&#39;est pas idéal, car les utilisateurs souhaitent que leurs mots ajoutés restent dans la base de données lorsque l&#39;application est fermée. (Le code de la solution de l&#39;exercice précédent se trouve sur GitHub.)</p>
+<p>Dans cette tâche, vous devez mettre à jour l&#39;application afin que, lorsqu&#39;elle s&#39;ouvre, le jeu de données initial ne soit ajouté que si la base de données ne contient pas de données.</p>
+<p>Pour détecter si la base de données contient déjà des données, vous pouvez exécuter une requête pour obtenir un élément de données. Si la requête ne renvoie rien, alors la base de données est vide.</p>
+<p><a href="https://github.com/khammami/android-fundamentals-exycodelabs/archive/refs/heads/room-words-sample-2023.zip" target="_blank"><paper-button class="colored" raised>Télécharger .zip</paper-button></a> <a href="https://github.com/khammami/android-fundamentals-exycodelabs/tree/room-words-sample-2023" target="_blank"><paper-button class="colored" raised>Dépot GitHub du Projet</paper-button></a></p>
+<aside class="special"><p><strong>Remarque</strong> : Dans une application de production, vous souhaiterez peut-être permettre aux utilisateurs de supprimer toutes les données sans réinitialiser les données au redémarrage de l&#39;application. Mais à des fins de test, il est utile de pouvoir supprimer toutes les données, puis de les réinitialiser au démarrage de l&#39;application.</p>
 </aside>
-<h2 is-upgraded>1.1 Add a method to the DAO to get a single word</h2>
-<p>Currently, the <code>WordDao</code> interface has a method for getting all the words, but not for getting any single word. The method to get a single word does not need to return <code>LiveData</code>, because your app will call the method explicitly when needed.</p>
-<ol type="1" start="1">
-<li>In the <code>WordDao</code> interface, add a method to get any word:</li>
-</ol>
+<h2 is-upgraded>1.1 Ajouter une méthode au DAO pour obtenir un seul mot</h2>
+<p>Actuellement, l&#39;interface <strong><code>WordDao</code></strong> possède une méthode pour obtenir tous les mots, mais pas pour obtenir un mot spécifique. La méthode pour obtenir un mot spécifique n&#39;a pas besoin de renvoyer <code>LiveData</code>, car votre application appellera la méthode explicitement lorsque cela est nécessaire.</p>
+<p>Dans l&#39;interface <strong><code>WordDao</code></strong>, ajoutez une méthode pour obtenir n&#39;importe quel mot.</p>
 <pre><code>@Query(&#34;SELECT * from word_table LIMIT 1&#34;)
-    Word[] getAnyWord();</code></pre>
-<p><code>Room</code> issues the database query when the <code>getAnyWord()</code> method is called and returns an array containing one word. You don&#39;t need to write any additional code to implement it.</p>
-<h2 is-upgraded>1.2 Update the initialization method to check whether data exists</h2>
-<p>Use the <code>getAnyWord()</code> method in the method that initializes the database. If there is any data, leave the data as it is. If there is no data, add the initial data set.</p>
+Word[] getAnyWord();</code></pre>
+<p><code>Room</code> déclenche la requête de base de données lorsque la méthode <code>getAnyWord()</code> est appelée et renvoie un tableau contenant un mot. Vous n&#39;avez pas besoin d&#39;écrire de code supplémentaire pour l&#39;implémenter.</p>
+<h2 is-upgraded>1.2 Mettre à jour la méthode d&#39;initialisation pour vérifier si des données existent</h2>
+<p>Utilisez la méthode <strong><code>getAnyWord()</code></strong> dans la méthode qui initialise la base de données. S&#39;il y a des données, laissez-les telles quelles. S&#39;il n&#39;y a pas de données, ajoutez l&#39;ensemble de données initial.</p>
 <ol type="1" start="1">
-<li><code>PopulateDBAsync</code> is an inner class in <code>WordRoomDatbase</code>. In <code>PopulateDBAsync</code>, update the <code>doInBackground()</code> method to check whether the database has any words before initializing the data:</li>
+<li>Dans <strong><code>WordRoomDatbase</code></strong>, mettez à jour le <strong><code>sRoomDatabaseCallback</code></strong> pour vérifier si la base de données contient des mots avant d&#39;initialiser les données.</li>
 </ol>
-<pre><code>@Override
-protected Void doInBackground(final Void... params) {
-
-       // If we have no words, then create the initial list of words
-       if (mDao.getAnyWord().length &lt; 1) {
-           for (int i = 0; i &lt;= words.length - 1; i++) {
-               Word word = new Word(words[i]);
-               mDao.insert(word);
-           }
-       }
-   return null;
-}</code></pre>
+<pre><code>databaseWriteExecutor.execute(() -&gt; {
+     // Remplir la base de données en arrière-plan
+     // Si vous voulez commencer avec plus de mots, il suffit de les ajouter.
+     WordDao dao = INSTANCE.wordDao();
+     // Si nous n&#39;avons pas de mots, alors créons la liste initiale de mots.
+     if (dao.getAnyWord().length &lt; 1) {
+          Word word = new Word(&#34;Hello&#34;);
+          dao.insert(word);
+          word = new Word(&#34;World&#34;);
+          dao.insert(word);
+     }
+});</code></pre>
 <ol type="1" start="2">
-<li>Run your app and add several new words. Close the app and restart it. You should see the new words that you added, as the words should now persist when the app is closed and opened again.</li>
+<li>Exécutez votre application et ajoutez plusieurs nouveaux mots. Fermez l&#39;application et redémarrez-la. Vous devriez voir les nouveaux mots que vous avez ajoutés, car les mots doivent maintenant persister lorsque l&#39;application est fermée et rouverte.</li>
 </ol>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Tâche 2: Delete all words" duration="0">
-        <p>In the previous practical, you used the <code>deleteAll()</code> method to clear out all the data when the database opened. The <code>deleteAll()</code> method was only invoked from the <code>PopulateDbAsync</code> class when the app started. You will now make the <code>deleteAll()</code> method available through the <code>ViewModel</code> so that your app can call the method whenever it&#39;s needed.</p>
-<p>Here are the general steps for implementing a method to use the <code>Room</code> library to interact with the database:</p>
+      <google-codelab-step label="Tâche 2: Effacer tous les mots" duration="0">
+        <p>Dans le précédent exercice pratique, vous avez utilisé la méthode <code>deleteAll()</code> pour effacer toutes les données à l&#39;ouverture de la base de données. La méthode <code>deleteAll()</code> n&#39;était appelée que depuis la fonction d&#39;appel <code>sRoomDatabaseCallback</code> au démarrage de l&#39;application. Vous allez maintenant rendre la méthode <code>deleteAll()</code> disponible via le <code>ViewModel</code> afin que votre application puisse appeler la méthode à tout moment.</p>
+<p>Voici les étapes générales pour implémenter une méthode d&#39;utilisation de la bibliothèque Room pour interagir avec la base de données :</p>
 <ul>
-<li>Add the method to the DAO, and annotate it with the relevant database operation. For the <code>deleteAll()</code> method, you already did this step in the previous practical.</li>
-<li>Add the method to the <code>WordRepository</code> class. Write the code to run the method in the background.</li>
-<li>To call the method in the <code>WordRepository</code> class, add the method to the <code>WordViewModel</code>. The rest of the app can then access the method through the <code>WordViewModel</code>.</li>
+<li>Ajoutez la méthode au DAO et annotez-la avec l&#39;opération de base de données correspondante. Pour la méthode <code>deleteAll()</code>, vous avez déjà effectué cette étape dans le précédent TP.</li>
+<li>Ajoutez la méthode à la classe <code>WordRepository</code>. Écrivez le code pour exécuter la méthode en arrière-plan.</li>
+<li>Pour appeler la méthode dans la classe <code>WordRepository</code>, ajoutez la méthode au <code>WordViewModel</code>. Le reste de l&#39;application pourra alors accéder à la méthode par l&#39;intermédiaire du <code>WordViewModel</code>.</li>
 </ul>
-<h2 is-upgraded>2.1 Add deleteAll() to the WordDao interface and annotate it</h2>
-<ol type="1" start="1">
-<li>In <code>WordDao</code>, check that the <code>deleteAll()</code> method is defined and annotated with the SQL that runs when the method executes:</li>
-</ol>
+<h2 is-upgraded>2.1 Ajoutez <code>deleteAll()</code> à l&#39;interface <code>WordDao</code> et annotez-la.</h2>
+<p>Dans <strong><code>WordDao</code></strong>, vérifiez que la méthode <strong><code>deleteAll()</code></strong> est définie et annotée avec le SQL qui s&#39;exécute lorsque la méthode s&#39;exécute.</p>
 <pre><code>@Query(&#34;DELETE FROM word_table&#34;)
 void deleteAll();</code></pre>
-<h2 is-upgraded>2.2 Add deleteAll() to the WordRepository class</h2>
-<p>Add the <code>deleteAll()</code> method to the <code>WordRepository</code> and implement an <code>AsyncTask</code> to delete all words in the background.</p>
-<ol type="1" start="1">
-<li>In <code>WordRepository</code>, define <code>deleteAllWordsAsyncTask</code> as an inner class. Implement <code>doInBackground()</code> to delete all the words by calling <code>deleteAll()</code> on the DAO:</li>
-</ol>
-<pre><code>private static class deleteAllWordsAsyncTask extends AsyncTask&lt;Void, Void, Void&gt; {
-   private WordDao mAsyncTaskDao;
-
-   deleteAllWordsAsyncTask(WordDao dao) {
-       mAsyncTaskDao = dao;
-   }
-
-   @Override
-   protected Void doInBackground(Void... voids) {
-       mAsyncTaskDao.deleteAll();
-       return null;
-   }
+<h2 is-upgraded>2.2 Ajouter la méthode <code>deleteAll()</code> à la classe <code>WordRepository</code></h2>
+<p>Add the <code>deleteAll()</code> method to the <code>WordRepository</code> and use ExecutorService to delete all words in the background.</p>
+<pre><code>public void deleteAll(){
+        WordRoomDatabase.databaseWriteExecutor.execute(() -&gt; mWordDao.deleteAll());
 }</code></pre>
-<ol type="1" start="2">
-<li>In the <code>WordRepository</code> class, add the <code>deleteAll()</code> method to invoke the <code>AsyncTask</code> that you defined.</li>
-</ol>
-<pre><code>public void deleteAll()  {
-   new deleteAllWordsAsyncTask(mWordDao).execute();
-}</code></pre>
-<h2 is-upgraded>2.3 Add deleteAll() to the WordViewModel class</h2>
-<p>Make the <code>deleteAll()</code> method available to the <code>MainActivity</code> by adding it to the <code>WordViewModel</code>.</p>
-<ol type="1" start="1">
-<li>In the <code>WordViewModel</code> class, add the <code>deleteAll()</code> method:</li>
-</ol>
+<h2 is-upgraded>2.3 Ajouter la méthode <code>deleteAll()</code> à la classe <code>WordViewModel</code></h2>
+<p>Rendez la méthode <strong><code>deleteAll()</code></strong> disponible pour l&#39;activité principale en l&#39;ajoutant au <strong><code>WordViewModel</code></strong>.</p>
+<p>Dans la classe WordViewModel, ajoutez la méthode deleteAll():</p>
 <pre><code>public void deleteAll() {mRepository.deleteAll();}</code></pre>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Tâche 3: Add an Options menu item to delete all data" duration="0">
-        <p>Next, you add a menu item to enable users to invoke <code>deleteAll()</code>.</p>
-<aside class="special"><p><strong>Note</strong>: The production version of your app must provide safeguards so that users do not accidentally wipe out their entire database. However, while you develop your app, it&#39;s helpful to be able to clear out test data quickly. This is especially true now that your app does not clear out the data when the app opens.</p>
+      <google-codelab-step label="Tâche 3: Ajouter un élément de menu Options pour supprimer toutes les données." duration="0">
+        <p>Ensuite, vous ajoutez une option au menu pour permettre aux utilisateurs de supprimer tous les données.</p>
+<aside class="special"><p><strong>Remarque</strong> : La version de production de votre application doit fournir des garanties pour éviter que les utilisateurs n&#39;effacent accidentellement l&#39;intégralité de leur base de données. Cependant, pendant le développement de votre application, il est utile de pouvoir effacer rapidement les données de test. Cela est particulièrement vrai maintenant que votre application n&#39;efface pas les données à son ouverture.</p>
 </aside>
-<h2 is-upgraded>3.1 Add the Clear all data menu option</h2>
+<h2 is-upgraded>3.1 Ajouter l&#39;option de menu &#34;Clear all data&#34;</h2>
 <ol type="1" start="1">
-<li>In <code>menu_main.xml</code>, change the menu option <code>title</code> and <code>id</code>, as follows:</li>
+<li>Dans <strong><code>menu_main.xml</code></strong>, modifiez le titre et l&#39;identifiant de l&#39;option de menu, comme suit :</li>
 </ol>
 <pre><code>&lt;item
    android:id=&#34;@+id/clear_data&#34;
@@ -174,205 +142,182 @@ void deleteAll();</code></pre>
    android:title=&#34;@string/clear_all_data&#34;
    app:showAsAction=&#34;never&#34; /&gt;</code></pre>
 <ol type="1" start="2">
-<li>In <code>MainActivity</code>, implement the <code>onOptionsItemSelected()</code> method to invoke the <code>deleteAll()</code> method on the <code>WordViewModel</code> object.</li>
+<li>Dans <strong><code>MainActivity</code></strong>, implémentez la méthode <strong><code>onOptionsItemSelected()</code></strong> pour appeler la méthode <strong><code>deleteAll()</code></strong> sur l&#39;objet <code>WordViewModel</code>.</li>
 </ol>
-<pre><code>@Override
-public boolean onOptionsItemSelected(MenuItem item) {
-   int id = item.getItemId();
+<pre><code>public boolean onOptionsItemSelected(MenuItem item) {
+    // Handle action bar item clicks here. The action bar will
+    // automatically handle clicks on the Home/Up button, so long
+    // as you specify a parent activity in AndroidManifest.xml.
+    int id = item.getItemId();
 
-   if (id == R.id.clear_data) {
-       // Add a toast just for confirmation
-       Toast.makeText(this, &#34;Clearing the data...&#34;,
-               Toast.LENGTH_SHORT).show();
+    //noinspection SimplifiableIfStatement
+    if (id == R.id.clear_data) {
+        // Add a toast just for confirmation
+        Toast.makeText(this, &#34;Clearing the data...&#34;,
+                Toast.LENGTH_SHORT).show();
 
-       // Delete the existing data
-       mWordViewModel.deleteAll();
-       return true;
-   }
+        // Effacer les données existantes
+        mWordViewModel.deleteAll();
+        return true;
+    }
 
-   return super.onOptionsItemSelected(item);
+    return super.onOptionsItemSelected(item);
 }</code></pre>
 <ol type="1" start="3">
-<li>Run your app. In the <strong>Options</strong> menu, select <strong>Clear all data</strong>. All words should disappear.</li>
-<li>Restart the app. (Restart it from your device or the emulator; don&#39;t run it again from Android Studio) You should see the initial set of words.</li>
+<li>Exécutez votre application. Dans le menu Options, sélectionnez <strong><code>Clear all data</code></strong>. Tous les mots devraient disparaître.</li>
+<li>Redémarrez l&#39;application. (Redémarrez-la depuis votre appareil ou l&#39;émulateur ; ne la relancez pas depuis Android Studio). Vous devriez voir l&#39;ensemble initial de mots.</li>
 </ol>
-<aside class="special"><p><strong>Note</strong>: After you clear the data, re-deploying the app from Android Studio shows the initial data set again. Opening the app shows the empty data set.</p>
-</aside>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Tâche 4: Delete a single word" duration="0">
-        <p>Your app lets users add words and delete all words. In Tasks 4 and 5, you extend the app so that users can delete a word by swiping the item in the <code>RecyclerView</code>.</p>
-<p>Again, here are the general steps to implement a method to use the <code>Room</code> library to interact with the database:</p>
+      <google-codelab-step label="Tâche 4: Supprimer un seul mot" duration="0">
+        <p>Votre application permet aux utilisateurs d&#39;ajouter des mots et de supprimer tous les mots. Dans les tâches 4 et 5, vous étendrez l&#39;application afin que les utilisateurs puissent supprimer un mot en faisant glisser l&#39;élément dans le <code>RecyclerView</code>.</p>
+<p>Encore une fois, voici les étapes générales pour implémenter une méthode d&#39;utilisation de la bibliothèque Room pour interagir avec la base de données :</p>
 <ul>
-<li>Add the method to the DAO, and annotate it with the relevant database operation.</li>
-<li>Add the method to the <code>WordRepository</code> class. Write the code to run the method in the background.</li>
-<li>To call the method in the <code>WordRepository</code> class, add the method to the <code>WordViewModel</code>. The rest of the app can then access the method through the <code>WordViewModel</code>.</li>
+<li>Ajoutez la méthode au DAO et annotez-la avec l&#39;opération de base de données correspondante.</li>
+<li>Ajoutez la méthode à la classe <code>WordRepository</code>. Écrivez le code pour exécuter la méthode en arrière-plan.</li>
+<li>Pour appeler la méthode dans la classe <code>WordRepository</code>, ajoutez la méthode à <code>WordViewModel</code>. Le reste de l&#39;application peut alors accéder à la méthode via <code>WordViewModel</code>.</li>
 </ul>
-<h2 is-upgraded>4.1 Add deleteWord() to the DAO and annotate it</h2>
-<ol type="1" start="1">
-<li>In <code>WordDao</code>, add the <code>deleteWord()</code> method:</li>
-</ol>
+<h2 is-upgraded>4.1 Ajouter <code>deleteWord()</code> à la DAO et l&#39;annoter.</h2>
+<p>Dans <strong><code>WordDao</code></strong>, ajoutez la méthode <strong><code>deleteWord()</code></strong>.</p>
 <pre><code>@Delete
 void deleteWord(Word word);</code></pre>
-<p>Because this operation deletes a single row, the <code>@Delete</code> annotation is all that is needed to delete the word from the database.</p>
-<h2 is-upgraded>4.2 Add deleteWord() to the WordRepository class</h2>
+<p>Comme cette opération supprime une seule ligne, l&#39;annotation <code>@Delete</code> est tout ce qui est nécessaire pour supprimer le mot de la base de données.</p>
+<h2 is-upgraded>4.2 Ajouter <code>deleteWord()</code> à la classe <code>WordRepository</code></h2>
 <ol type="1" start="1">
-<li>In <code>WordRepository</code>, define another <code>AsyncTask</code> called <code>deleteWordAsyncTask</code> as an inner class. Implement <code>doInBackground()</code> to delete a word by calling <code>deleteWord()</code> on the DAO:</li>
-</ol>
-<pre><code>private static class deleteWordAsyncTask extends AsyncTask&lt;Word, Void, Void&gt; {
-   private WordDao mAsyncTaskDao;
-
-   deleteWordAsyncTask(WordDao dao) {
-       mAsyncTaskDao = dao;
-   }
-
-   @Override
-   protected Void doInBackground(final Word... params) {
-       mAsyncTaskDao.deleteWord(params[0]);
-       return null;
-   }
-}</code></pre>
-<ol type="1" start="2">
-<li>In <code>WordRepository</code>, add the <code>deleteWord()</code> method to invoke the <code>AsyncTask</code> you defined.</li>
+<li>Dans <strong><code>WordRepository</code></strong>, ajoutez la méthode <strong><code>deleteWord()</code></strong> pour supprimer un mot en appelant <strong><code>deleteWord()</code></strong> à partir du DAO en utilisant <code>ExecutorService</code>.</li>
 </ol>
 <pre><code>public void deleteWord(Word word)  {
-   new deleteWordAsyncTask(mWordDao).execute(word);
+        WordRoomDatabase.databaseWriteExecutor.execute(() -&gt; mWordDao.deleteWord(word));
 }</code></pre>
-<h2 is-upgraded>4.3 Add deleteWord() to the WordViewModel class</h2>
-<p>To make the <code>deleteWord()</code> method available to other classes in the app, in particular, <code>MainActivity</code>, add it to <code>WordViewModel</code>.</p>
-<ol type="1" start="1">
-<li>In <code>WordViewModel</code>, add the <code>deleteWord()</code> method:</li>
-</ol>
+<h2 is-upgraded>4.3 Ajouter <code>deleteWord()</code> à la classe <code>WordViewModel</code></h2>
+<p>Pour rendre la méthode <strong><code>deleteWord()</code></strong> disponible aux autres classes de l&#39;application, en particulier <code>MainActivity</code>, ajoutez-la à <strong><code>WordViewModel</code></strong>.</p>
 <pre><code>public void deleteWord(Word word) {mRepository.deleteWord(word);}</code></pre>
-<p>You have now implemented the logic to delete a word. As yet, there is no way to invoke the delete-word operation from the app&#39;s UI. You fix that next.</p>
+<p>Vous avez maintenant implémenté la logique pour supprimer un mot. Cependant, il n&#39;existe pas encore de moyen d&#39;appeler l&#39;opération de suppression de mots depuis l&#39;interface utilisateur de l&#39;application. Vous allez résoudre ce problème ensuite.</p>
 
 
       </google-codelab-step>
     
-      <google-codelab-step label="Tâche 5: Enable users to swipe words away" duration="0">
-        <p>In this task, you add functionality to allow users to swipe an item in the <code>RecyclerView</code> to delete it.</p>
-<p>Use the <a href="https://developer.android.com/reference/android/support/v7/widget/helper/ItemTouchHelper.html" target="_blank"><code>ItemTouchHelper</code></a> class provided by the Android Support Library (version 7 and higher or androidx) to implement swipe functionality in your <code>RecyclerView</code>. The <code>ItemTouchHelper</code> class has the following methods:</p>
+      <google-codelab-step label="Tâche 5: Permettre aux utilisateurs de balayer les mots pour les supprimer" duration="0">
+        <p>Dans cette tâche, vous ajoutez une fonctionnalité pour permettre aux utilisateurs de balayer un élément de la <code>RecyclerView</code> pour le supprimer.</p>
+<p>Utilisez la classe <a href="https://developer.android.com/reference/androidx/recyclerview/widget/ItemTouchHelper" target="_blank"><code>ItemTouchHelper</code></a> fournie par la bibliothèque de support Android (Androidx) pour implémenter la fonctionnalité de glissement dans votre <code>RecyclerView</code>. La classe <code>ItemTouchHelper</code> possède les méthodes suivantes :</p>
 <ul>
-<li><code>onMove()</code> is called when the user moves the item. You will not implement any move functionality in this app.</li>
-<li><code>onSwipe()</code> is called when the user swipes the item. You implement this method to delete the word that was swiped.</li>
+<li><code>onMove()</code> est appelée lorsque l&#39;utilisateur déplace l&#39;élément. Vous n&#39;implémenterez aucune fonctionnalité de déplacement dans cette application.</li>
+<li><code>onSwipe()</code> est appelée lorsque l&#39;utilisateur glisse l&#39;élément. Vous implémentez cette méthode pour supprimer le mot qui a été glissé.</li>
 </ul>
-<p class="image-container"><img style="width: 288.00px" src="img/1fc13b1dec09c03.png"></p>
-<h2 is-upgraded>5.1 Enable the adapter to detect the swiped word</h2>
+<p class="image-container"><img style="width: 221.59px" src="img/6639edd4da022795.png"></p>
+<h2 is-upgraded>5.1 Activer l&#39;adaptateur pour détecter le mot glissé</h2>
 <ol type="1" start="1">
-<li>In <code>WordListAdapter</code>, add a method to get the word at a given position.</li>
+<li>Dans <strong><code>WordListAdapter</code></strong>, ajouter une méthode pour obtenir le mot à une position donnée.</li>
 </ol>
 <pre><code>public Word getWordAtPosition (int position) {
    return mWords.get(position);
 }</code></pre>
 <ol type="1" start="2">
-<li>In <code>MainActivity</code>, in <code>onCreate()</code>, create the <code>ItemTouchHelper</code>. Attach the <code>ItemTouchHelper</code> to the <code>RecyclerView</code>.</li>
+<li>Dans <strong><code>MainActivity</code></strong>, dans <strong><code>onCreate()</code></strong>, créez le <strong><code>ItemTouchHelper</code></strong>. Attachez le <code>ItemTouchHelper</code> au <code>RecyclerView</code>.</li>
 </ol>
-<pre><code>// Add the functionality to swipe items in the 
-// recycler view to delete that item
+<pre><code>// Ajouter la fonctionnalité de glisser pour supprimer les éléments de la recyclerview.
 ItemTouchHelper helper = new ItemTouchHelper(
-    new ItemTouchHelper.SimpleCallback(0,
-        ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
-           @Override
-           public boolean onMove(RecyclerView recyclerView,
-                                 RecyclerView.ViewHolder viewHolder,
-                                 RecyclerView.ViewHolder target) {
-               return false;
-           }
-
-           @Override
-           public void onSwiped(RecyclerView.ViewHolder viewHolder, 
-                                int direction) {
-               int position = viewHolder.getAdapterPosition();
-               Word myWord = adapter.getWordAtPosition(position);
-               Toast.makeText(MainActivity.this, &#34;Deleting &#34; + 
-                       myWord.getWord(), Toast.LENGTH_LONG).show();
-
-               // Delete the word
-               mWordViewModel.deleteWord(myWord);
+        new ItemTouchHelper.SimpleCallback(0,
+                ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView,
+                                  @NonNull RecyclerView.ViewHolder viewHolder,
+                                  @NonNull RecyclerView.ViewHolder target) {
+                return false;
             }
-       });
 
-helper.attachToRecyclerView(recyclerView);</code></pre>
-<p><strong>Things to notice in the code:</strong></p>
-<p><code>onSwiped()</code> gets the position of the <code>ViewHolder</code> that was swiped:</p>
-<pre><code>int position = viewHolder.getAdapterPosition();</code></pre>
-<p>Given the position, you can get the word displayed by the <code>ViewHolder</code> by calling the <code>getWordAtPosition()</code> method that you defined in the adapter:</p>
-<pre><code>Word myWord = adapter.getWordAtPosition(position);</code></pre>
-<p>Delete the word by calling <code>deleteWord()</code> on the <code>WordViewModel</code>:</p>
-<pre><code>mWordViewModel.deleteWord(myWord);</code></pre>
-<p><strong>Now run your app and delete some words</strong></p>
-<ol type="1" start="1">
-<li>Run your app. You should be able to delete words by swiping them left or right.</li>
+            @Override
+            public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder,
+                                 int direction) {
+                int position = viewHolder.getAdapterPosition();
+                Word swipedWord = mAdapter.getWordAtPosition(position);
+                Toast.makeText(MainActivity.this, &#34;Deleting &#34; +
+                        swipedWord.getWord(), Toast.LENGTH_LONG).show();
+
+                // Supprimer le mot
+                mWordViewModel.deleteWord(swipedWord);
+            }
+        });
+
+helper.attachToRecyclerView(binding.contentMain.recyclerview);</code></pre>
+<p>Points à noter dans le code:</p>
+<ul>
+<li><strong><code>viewHolder.getAdapterPosition()</code></strong>: <code>onSwiped()</code> récupère la position du <code>ViewHolder</code> qui a été glissé.</li>
+<li><strong><code>mAdapter.getWordAtPosition(position)</code></strong>: En fonction de la position, vous pouvez obtenir le mot affiché par le <code>ViewHolder</code> en appelant la méthode <code>getWordAtPosition()</code> que vous avez définie dans l&#39;adaptateur.</li>
+<li><strong><code>mWordViewModel.deleteWord(swipedWord)</code></strong>: Supprime le mot en appelant <code>deleteWord()</code> sur le <code>WordViewModel</code>.</li>
+</ul>
+<ol type="1" start="3">
+<li>Lancez votre application. Vous devriez pouvoir supprimer des mots en les faisant glisser vers la gauche ou vers la droite.</li>
 </ol>
-<h2 is-upgraded>Solution code</h2>
-<p>Android Studio project: <a href="https://github.com/khammami/android-fundamentals-exycodelabs/tree/master/RoomWordsWithDelete" target="_blank">RoomWordsWithDelete</a></p>
+<h2 is-upgraded>Code de solution</h2>
+<p><a href="https://github.com/khammami/android-fundamentals-exycodelabs/archive/refs/heads/room-words-with-delete-2023.zip" target="_blank"><paper-button class="colored" raised>Télécharger .zip</paper-button></a> <a href="https://github.com/khammami/android-fundamentals-exycodelabs/tree/room-words-with-delete-2023" target="_blank"><paper-button class="colored" raised>Dépot GitHub du Projet</paper-button></a> <a href="https://github.com/khammami/android-fundamentals-exycodelabs/compare/room-words-sample-2023...khammami:android-fundamentals-exycodelabs:room-words-with-delete-2023" target="_blank"><paper-button class="colored" raised>Voir la différence</paper-button></a></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Défi de codage" duration="0">
-        <aside class="special"><p><strong>Note</strong>: All coding challenges are optional and are not prerequisites for later lessons.</p>
+        <aside class="special"><p><strong>Remarque</strong> : Tous les défis de codage sont facultatifs et ne sont pas des prérequis pour les leçons ultérieures.</p>
 </aside>
-<p>Challenge: Update your app to allow users to edit a word by tapping the word and then saving their changes.</p>
-<h2 is-upgraded>Hints</h2>
-<p><strong>Make changes in NewWordActivity</strong></p>
-<p>You can add functionality to <code>NewWordActivity</code>, so that it can be used either to add a new word or edit an existing word.</p>
-<p><strong>Use an auto-generated key in Word</strong></p>
-<p>The <code>Word</code> entity class uses the <code>word</code> field as the database key. However, when you update a row in the database, the item being updated cannot be the primary key, because the primary key is unique to each row and never changes. So you need to add an auto-generated <code>id</code> to use as the primary key</p>
+<p>Défi : Mettez à jour votre application pour permettre aux utilisateurs de modifier un mot en appuyant sur le mot, puis en sauvegardant leurs modifications.</p>
+<h2 is-upgraded>Indices</h2>
+<h3 is-upgraded>Faire des changements dans <code>NewWordActivity</code></h3>
+<p>Vous pouvez ajouter des fonctionnalités à <code>NewWordActivity</code>, afin qu&#39;elle puisse être utilisée soit pour ajouter un nouveau mot, soit pour modifier un mot existant.</p>
+<h3 is-upgraded>Utiliser une clé auto-générée dans <code>Word</code></h3>
+<p>La classe d&#39;entité <code>Word</code> utilise le champ word comme clé de base de données. Cependant, lorsque vous mettez à jour une ligne dans la base de données, l&#39;élément mis à jour ne peut pas être la clé primaire, car la clé primaire est unique à chaque ligne et ne change jamais. Vous devez donc ajouter un identifiant <code>id</code> généré automatiquement à utiliser comme clé primaire.</p>
 <pre><code>@PrimaryKey(autoGenerate = true)
 private int id;
 
 @NonNull
 @ColumnInfo(name = &#34;word&#34;)
 private String mWord;</code></pre>
-<p><strong>Add a constructor for </strong><strong><code>Word</code></strong><strong> that takes an </strong><strong><code>id</code></strong></p>
-<p>Add a constructor to the <code>Word</code> entity class that takes <code>id</code> and <code>word</code> as parameters. Make sure this additional constructor is annotated using <code>@Ignore</code>, because <code>Room</code> expects only one constructor by default in an entity class.</p>
+<h3 is-upgraded>Ajouter un constructeur pour <code>Word</code> qui prend un <code>id</code></h3>
+<p>Ajoutez un constructeur à la classe d&#39;entité <code>Word</code> qui prend id et word comme paramètres. Assurez-vous que ce constructeur supplémentaire est annoté à l&#39;aide de <code>@Ignore</code>, car Room attend par défaut un seul constructeur dans une classe d&#39;entité.</p>
 <pre><code>@Ignore
 public Word(int id, @NonNull String word) {
    this.id = id;
    this.mWord = word;
 }</code></pre>
-<p>To update an existing <code>Word</code>, create the <code>Word</code> using this constructor. <code>Room</code> will use the primary key (in this case the <code>id</code>) to find the existing entry in the database so it can be updated.</p>
-<p>In <code>WordDao</code>, add the <code>update()</code> method like this:</p>
+<p>Pour mettre à jour un mot existant, créez le mot en utilisant ce constructeur. Room utilisera la clé primaire (dans ce cas, l&#39;<code>id</code>) pour trouver l&#39;entrée existante dans la base de données afin qu&#39;elle puisse être mise à jour.</p>
+<p>Dans <code>WordDao</code>, ajoutez la méthode <code>update()</code> comme ceci :</p>
 <pre><code>@Update
 void update(Word... word);</code></pre>
-<p>In <code>WordRoomDatabase</code>, increase the database version number, since database table schema is changed.</p>
+<p>Dans <code>WordRoomDatabase</code>, augmentez le numéro de version de la base de données, car la structure de la table de la base de données a été modifiée.</p>
 <pre><code>@Database(entities = {Word.class}, version = 2, exportSchema = false)</code></pre>
-<h2 is-upgraded>Challenge solution code</h2>
-<p>Android Studio project: <a href="https://github.com/khammami/android-fundamentals-exycodelabs/tree/master/RoomWordsWithUpdate" target="_blank">RoomWordsWithUpdate</a></p>
+<h2 is-upgraded>Code de solution de défi 👀</h2>
+<p><a href="https://github.com/khammami/android-fundamentals-exycodelabs/archive/refs/heads/room-words-with-update-2023.zip" target="_blank"><paper-button class="colored" raised>Télécharger .zip</paper-button></a> <a href="https://github.com/khammami/android-fundamentals-exycodelabs/tree/room-words-with-update-2023" target="_blank"><paper-button class="colored" raised>Dépot GitHub du Projet</paper-button></a> <a href="https://github.com/khammami/android-fundamentals-exycodelabs/compare/room-words-with-delete-2023...khammami:android-fundamentals-exycodelabs:room-words-with-update-2023" target="_blank"><paper-button class="colored" raised>Voir la différence</paper-button></a></p>
 
 
       </google-codelab-step>
     
       <google-codelab-step label="Résumé" duration="0">
-        <h2 is-upgraded>Writing database code</h2>
+        <h2 is-upgraded>Écrire du code de base de données</h2>
 <ul>
-<li>Room takes care of opening and closing the database connections each time a database operations executes.</li>
-<li>Annotate methods in the data access object (DAO) as <code>@insert</code>, <code>@delete</code>, <code>@update</code>, <code>@query</code>.</li>
-<li>For simple insertions, updates and deletions, it is enough to add the relevant annotation to the method in the DAO.</li>
+<li><code>Room</code> se charge d&#39;ouvrir et de fermer les connexions à la base de données chaque fois qu&#39;une opération de base de données est exécutée.</li>
+<li>Annotez les méthodes de l&#39;objet d&#39;accès aux données (DAO) avec <code>@insert</code>, <code>@delete</code>, <code>@update</code>, <code>@query</code>.</li>
+<li>Pour les insertions, mises à jour et suppressions simples, il suffit d&#39;ajouter l&#39;annotation correspondante à la méthode dans le DAO.</li>
 </ul>
-<p>For example:</p>
+<p>Par exemple:</p>
 <pre><code>@Delete
 void deleteWord(Word word);
 
 @Update
 void update(Word... word);</code></pre>
 <ul>
-<li>For queries or more complex database interactions, such as deleting all words, use the <code>@query</code> annotation and provide the SQL for the operation.</li>
+<li>Pour les requêtes ou les interactions plus complexes avec la base de données, telles que la suppression de tous les mots, utilisez l&#39;annotation <code>@query</code> et fournissez le SQL de l&#39;opération.</li>
 </ul>
-<p>For example:</p>
+<p>Par exemple:</p>
 <pre><code>@Query(&#34;SELECT * from word_table ORDER BY word ASC&#34;)
 LiveData&lt;List&lt;Word&gt;&gt; getAllWords();
 
 @Query(&#34;DELETE FROM word_table&#34;)
 void deleteAll();</code></pre>
-<h2 is-upgraded>ItemTouchHelper</h2>
+<h2 is-upgraded><code>ItemTouchHelper</code></h2>
 <ul>
-<li>To enable users to swipe or move items in a <code>RecyclerView</code>, you can use the <code>ItemTouchHelper</code> class.</li>
-<li>Implement <code>onMove()</code> and <code>onSwipe()</code>.</li>
-<li>To identify which item the user moved or swiped, you can add a method to the adapter for the <code>RecylerView</code>. The method takes a position and returns the relevant item. Call the method inside <code>onMove()</code> or <code>onSwipe()</code>.</li>
+<li>Pour permettre aux utilisateurs de glisser ou de déplacer des éléments dans un <code>RecyclerView</code>, vous pouvez utiliser la classe <code>ItemTouchHelper</code>.</li>
+<li>Implémentez les méthodes <code>onMove()</code> et <code>onSwipe()</code>.</li>
+<li>Pour identifier l&#39;élément que l&#39;utilisateur a déplacé ou balayé, vous pouvez ajouter une méthode à l&#39;adaptateur du <code>RecyclerView</code>. La méthode prend une position en entrée et renvoie l&#39;élément correspondant. Appelez la méthode dans <code>onMove()</code> ou <code>onSwipe()</code>.</li>
 </ul>
 
 

@@ -3,13 +3,13 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-3295395-7",
-  "updated": "2019-11-14T08:41:29Z",
+  "updated": "2023-10-26T11:04:20Z",
   "id": "deleting-data-room-database",
   "duration": 0,
-  "title": "TP 04.2B: Deleting data from a Room database",
+  "title": "TP 04.2B: Suppression de données d'une base de données Room",
   "authors": "Khalil Hammami",
   "summary": "",
-  "source": "1Qb4fXou7YUNi-jnLQj5U8HjViVFdaEwQucJIkcrBOTM",
+  "source": "1ntY118_8jq9_exZz96rKfc6kFiwQ-xlReq0jtwcjEJY",
   "theme": "android",
   "status": [
     "hidden"
@@ -23,5 +23,6 @@
     "kiosk",
     "web"
   ],
+  "feedback": "https://github.com/khammami/codelabs-enetcom/issues",
   "url": "deleting-data-room-database"
 }
