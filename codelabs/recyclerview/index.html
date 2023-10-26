@@ -107,7 +107,7 @@
 <ol type="1" start="3">
 <li>Supprimez le répertoire &#34;<strong>navigation</strong>&#34; sous les ressources (<code>res</code>).</li>
 <li>Supprimez toutes les mises en page et classes Java des <strong>fragments</strong>.<br><code>FirstFragment.java</code>, <code>SecondFragment.java</code>, <code>fragment_first.xml</code> et <code>fragment_second.xml</code>.</li>
-<li>Supprimez la balise <code>fragment</code> de &#34;<code>content_main.xml</code>&#34; et la remplacez par un TextView qui contient &#34;Hello World&#34;.</li>
+<li>Supprimez la balise <code>fragment</code> de &#34;<code>content_main.xml</code>&#34; et la remplacez par un <code>TextView</code> qui contient &#34;Hello World&#34;.</li>
 <li>Supprimez les dépendances de la bibliothèque de <strong>navigation</strong> et synchronisez le projet.</li>
 </ol>
 <pre><code>    implementation &#39;androidx.navigation:navigation-fragment:*&#39;
@@ -184,7 +184,7 @@ public class Word {
 <li>Dans le corps de <code>loadWords()</code>, ajoutez ce code pour générer 20 mots.<br></li>
 </ol>
 <pre><code>// Mettre les données initiales dans la liste de mots.
-LinkedList&lt;String&gt; wordList = new LinkedList&lt;&gt;();
+LinkedList&lt;Word&gt; wordList = new LinkedList&lt;&gt;();
 for (int i = 0; i &lt; 20; i++) {
             wordList.addLast(new Word(&#34;Word &#34; + i));
 }
@@ -250,13 +250,13 @@ public class Datasource {
 <p>Le diagramme ci-dessous montre la relation entre les données, l&#39;adaptateur, le <code>ViewHolder</code> et le gestionnaire de mise en page dans notre application.</p>
 <p class="image-container"><img style="width: 624.00px" src="img/6cc2768882a8bc4a.png"></p>
 <p>Pour mettre en œuvre ces pièces, vous devrez :</p>
-<ol type="1" start="1">
+<ul>
 <li>Ajoutez un élément <code>RecyclerView</code> à la mise en page du contenu XML de <code>MainActivity</code> (<code>content_main.xml</code>) pour l&#39;application RecyclerView.</li>
 <li>Créez un fichier de mise en page XML (<code>wordlist_item.xml</code>) pour un élément de liste, qui est <code>WordListItem</code>.</li>
 <li>Créez un adaptateur (<code>WordListAdapter</code>) avec un <code>ViewHolder</code> (<code>WordViewHolder</code>). </li>
 <li>Implémentez la méthode qui prend les données, les place dans le <code>ViewHolder</code> et indique au gestionnaire de mise en page qu&#39;il doit les afficher.</li>
 <li>Dans la méthode <code>onCreate()</code> de MainActivity, créez un RecyclerView et initialisez-le avec l&#39;adaptateur.</li>
-</ol>
+</ul>
 <p>Faisons-les une par une ⬇️</p>
 <h2 is-upgraded>2.1. Modifiez la mise en page dans content_main.xml</h2>
 <p>To add a <code>RecyclerView</code> element to the XML layout, follow these steps:</p>
@@ -510,13 +510,21 @@ public int getItemCount() {
 <ol type="1" start="7">
 <li>Exécutez votre application pour vous assurer qu&#39;il n&#39;y a pas d&#39;erreurs.</li>
 </ol>
-<h2 is-upgraded>2.7. Create the RecyclerView in the Activity</h2>
+<h2 is-upgraded>2.7. Créer RecyclerView dans l&#39;activité principale.</h2>
 <p>Pour terminer, vous devez utiliser vos classes <code>Datasource</code> et <code>WordListAdapter</code> pour créer et afficher des éléments dans <code>RecyclerView</code>. Cette opération est effectuée dans <code>MainActivity</code>.</p>
 <p>Maintenant que vous avez un adaptateur avec un <code>ViewHolder</code>, vous pouvez enfin créer un <code>RecyclerView</code> et connecter toutes les pièces pour afficher vos données.</p>
 <ol type="1" start="1">
 <li>Ouvrez <strong><code>MainActivity</code></strong>.</li>
-<li>Dans <code>MainActivity</code>, accédez à la méthode <code>onCreate()</code>. Insérez le nouveau code décrit dans les étapes suivantes après l&#39;appel vers <code>setContentView(binding.getRoot())</code>.</li>
-<li>Créez une instance de <code>Datasource</code> sous le nom  <code>mDataSource</code> et appelez la méthode <code>loadWords()</code> sur cette instance. Stockez la liste des mots renvoyée dans un variable local nommé <code>mWordList</code>.</li>
+<li>Dans <code>MainActivity</code>, accédez à la méthode <code>onCreate()</code>. Insérez le nouveau code décrit dans les étapes suivantes après l&#39;appel vers <strong><code>setContentView(binding.getRoot())</code></strong>.</li>
+<li>Créez une instance de <code>Datasource</code> sous le nom  <strong><code>mDataSource</code></strong> </li>
+</ol>
+<pre><code>Datasource mDatasource = new Datasource(); </code></pre>
+<ol type="1" start="4">
+<li>Appelez la méthode <strong><code>loadWords()</code></strong> sur l&#39;instance <code>mDatasource</code>. Stockez la liste des mots renvoyée dans un variable local nommé <strong><code>mWordList</code></strong>.</li>
+</ol>
+<pre><code>// Charger la liste des mots
+LinkedList&lt;Word&gt; mWordList = mDatasource.loadWords();</code></pre>
+<ol type="1" start="5">
 <li>Ajouter une variable membre de la classe <code>MainActivity</code> pour l&#39;adaptateur. Par contre pour le <code>RecyclerView</code>, nous utiliserons la bibliothèque de liaison de vues (<a href="https://developer.android.com/topic/libraries/view-binding#java" target="_blank">View Binding</a>), utilisée par le nouveau modèle d&#39;activité de vue de base, au lieu de la méthode <code>findViewById()</code>:</li>
 </ol>
 <pre><code>private WordListAdapter mAdapter;</code></pre>
@@ -530,25 +538,23 @@ public int getItemCount() {
         viewBinding true
     }
 }</code></pre>
-<ol type="1" start="5">
+<ol type="1" start="6">
 <li>Notre <code>RecyclerView</code> est défini dans <code>content_main.xml</code> et nous utilisons <code>include</code> dans <code>activity_main.xml</code> pour l&#39;inclure. Comme il s&#39;agit d&#39;une mise en page imbriquée (une mise en page à l&#39;intérieur d&#39;une autre mise en page), la fonctionnalité <code>View Binding</code> ne peut pas voir les vues à l&#39;intérieur de <code>content_main.xml</code>. Pour les exposer, il suffit d&#39;ajouter un <code>ID</code> à la balise <code>include</code> dans <code>activity_main.xml</code><br><br>Allez dans <code>activity_main.xml</code> et localisez la balise <code>include</code>, puis ajoutez-lui <code>content_main</code> comme un <code>ID</code>:</li>
 </ol>
 <pre><code>&lt;include layout=&#34;@layout/content_main&#34; android:id=&#34;@+id/content_main&#34; /&gt;</code></pre>
-<ol type="1" start="6">
+<ol type="1" start="7">
 <li>Revenez à la méthode <code>onCreate()</code> de <code>MainActivity</code>, ajoutez le code suivant qui connecte le <code>RecyclerView</code> avec l&#39;adaptateur et les données. Les commentaires expliquent chaque ligne. Vous devez insérer ce code après l&#39;initialisation de <code>mWordList</code>.</li>
 </ol>
-<pre><code>// Charger la liste des mots
-LinkedList&lt;Word&gt; mWordList = mDataSource.loadWords();
-// Créer une instance de l&#39;adaptateur en passant la liste des mots comme paramètre
+<pre><code>// Créer une instance de l&#39;adaptateur en passant la liste des mots comme paramètre
 mAdapter = new WordListAdapter(mWordList);
 // Lier RecyclerView à son adaptateur
 // binding.contentMain.recyclerview remplace findViewById(R.id.recyclerview)
 binding.contentMain.recyclerview.setAdapter(mAdapter);</code></pre>
-<ol type="1" start="7">
+<ol type="1" start="8">
 <li>Étant donné que la taille de mise en page de votre <code>RecyclerView</code> est fixe dans la mise en page de l&#39;activité, vous pouvez définir le paramètre <code>setHasFixedSize</code> de <code>RecyclerView</code> sur true. Ce paramètre ne sert qu&#39;à améliorer les performances. Utilisez ce paramètre si vous savez que les modifications apportées au contenu n&#39;ont pas d&#39;incidence sur la taille de mise en page de <code>RecyclerView</code>.</li>
 </ol>
-<pre><code>binding.contentMain.recyclerView.setHasFixedSize(true)</code></pre>
-<ol type="1" start="8">
+<pre><code>binding.contentMain.recyclerview.setHasFixedSize(true)</code></pre>
+<ol type="1" start="9">
 <li>Exécutez votre application.</li>
 </ol>
 <p>Vous devriez voir votre liste de mots affichée, et vous pouvez faire défiler la liste.</p>
