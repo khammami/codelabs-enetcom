@@ -1,3 +1,4 @@
 [submodule "site/data"]
 	path = site/data
 	url = https://github.com/khammami/codelabs-enetcom-md.git
+	branch = main
