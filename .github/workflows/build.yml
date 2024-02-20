@@ -1,0 +1,12 @@
+name: Build and Deploy
+
+on:
+  repository_dispatch:
+    types: [dispatch_build]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest # Specify preferred runner environment
+
+    steps:
+      - run: echo ${{ github.event.client_payload.message }}
