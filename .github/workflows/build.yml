@@ -20,6 +20,7 @@ jobs:
             node-version: lts/fermium
 
       - name: Install & Build
+        working-directory: site
         run: |
             npm install
             gulp dist --codelabs-dir=./data/codelabs
