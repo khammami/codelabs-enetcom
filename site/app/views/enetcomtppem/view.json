@@ -1,0 +1,10 @@
+{
+  "title": "TP Programmation Embarqué & Mobile",
+  "description": "Une série de codelabs qui vous apprennent les bases de la création d'applications Android. Dans ce tp, vous allez apprendre les concepts de base de la programmation Android et créer différentes applications, en commençant par Hello World, puis en passant à des applications qui planifient des tâches, mettent à jour des paramètres et utilisent des composants d'architecture.",
+  "logoUrl": "/enetcomtppem/enetcom_logo.png",
+  "tags": ["enetcomtppem"],
+  "exclude": [
+    ".*-about$",
+    "^lang-.*"
+  ]
+}

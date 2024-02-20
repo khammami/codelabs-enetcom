@@ -1,0 +1,10 @@
+{
+  "title": "Mini projet informatique embarquée",
+  "description": "Une série d'ateliers de codes qui vous apprennent les bases de la création d'application Android. Dans ce matériel, vous apprendrez les concepts de base de la programmation Android et construirez différentes applications, des applications liées à votre spécialité, tout en travaillant sur votre propre projet d'application Android.",
+  "logoUrl": "/enetcommpie/enetcom_logo.png",
+  "tags": ["enetcommpie"],
+  "exclude": [
+    ".*-about$",
+    "^lang-.*"
+  ]
+}
