@@ -5,9 +5,22 @@ on:
   repository_dispatch:
     types: [dispatch_build]
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   build:
     runs-on: ubuntu-latest # Specify preferred runner environment
 
     steps:
-      - run: echo ${{ github.event.client_payload.message }}
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+            node-version: lts/fermium
+
+      - name: Install & Build
+        run: |
+            npm install
+            gulp dist --codelabs-dir=./data/codelabs
+    
