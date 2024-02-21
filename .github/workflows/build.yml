@@ -22,7 +22,7 @@ jobs:
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "github-actions"
-          git submodule update --remote
+          git submodule update --remote site/data
           git add site/data/*
           git commit -m "Update submodule site/data" || echo "No changes in submodule to commit"
 
