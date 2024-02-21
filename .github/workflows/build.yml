@@ -18,6 +18,14 @@ jobs:
         with:
             submodules: 'true'
 
+      - name: Commit changes in submodule site/data
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions"
+          git submodule update --remote
+          git add site/data/*
+          git commit -m "Update submodule site/data" || echo "No changes in submodule to commit"
+
       - uses: actions/setup-node@v4
         with:
             node-version: lts/fermium
