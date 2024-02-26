@@ -36,4 +36,45 @@ jobs:
         run: |
             npm install
             gulp dist --codelabs-dir=./data/codelabs
-    
+
+      - name: Check for worktree changes
+        id: git-build-changes
+        run: |
+          rm -rf ./codelabs
+          cp -rfL site/dist/* .
+          if [ $(git status --porcelain | wc -l) -eq "0" ]; then   
+            echo "is-changed=false" >> "$GITHUB_OUTPUT"
+          else   
+            echo "is-changed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Commit changes
+        if: steps.git-build-changes.outputs.is-changed == 'true'
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "github-actions"
+          git add .
+          git commit -m "build(site): Codelabs has been updated" || echo "No changes to commit"
+          git push -qf origin HEAD:github-actions-auto-build || echo "No changes to commit"
+
+      - name: Create PR from Updated Branch
+        if: steps.git-build-changes.outputs.is-changed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const {owner, repo} = context.repo
+            const branch = 'github-actions-auto-build'
+            const head = `${owner}:${branch}`
+            const title = 'build(site): Update site with new codelab(s) updates'
+            const branchesResult = await github.rest.repos.listBranches({ owner, repo })
+            if (branchesResult.status !== 200 || !branchesResult.data.find(({ name }) => name === branch)) {
+              return
+            }
+            const prsResult = await github.rest.pulls.list({ owner, repo, head, state: 'open' })
+            if (prsResult.status === 200 && prsResult.data.length === 0) {
+              try {
+                await github.rest.pulls.create({ owner, repo, head, title, base: 'main' })
+              } catch (error) {
+                console.error(error)
+              }
+            }
