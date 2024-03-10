@@ -3,7 +3,7 @@
   "format": "html",
   "prefix": "https://storage.googleapis.com",
   "mainga": "UA-3295395-7",
-  "updated": "2023-10-02T04:26:22Z",
+  "updated": "2024-02-19T15:57:08Z",
   "id": "soumettre-compte-rendu",
   "duration": 0,
   "title": "Soumission de compte rendu",
@@ -15,7 +15,7 @@
     "published"
   ],
   "category": [
-    "Android"
+    "android"
   ],
   "tags": [
     "enetcomtppem",

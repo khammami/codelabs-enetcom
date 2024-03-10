@@ -20,12 +20,13 @@
   </style>
 </head>
 <body>
-  <google-codelab-analytics gaid="UA-3295395-7"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
+  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-E0H6JSF2N3"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-3295395-7"
+                  codelab-ga4id="G-E0H6JSF2N3"
                   id="sensor-based-orientation"
                   title="P 04.2: Sensor-based orientation"
                   environment="web"
-                  feedback-link="">
+                  feedback-link="https://github.com/khammami/codelabs-enetcom/issues">
     
       <google-codelab-step label="Welcome" duration="0">
         <h2 is-upgraded>Introduction</h2>
@@ -147,7 +148,7 @@ boolean rotationOK = SensorManager.getRotationMatrix(rotationMatrix,
 <li>The <em>x</em>-axis is 90 degrees from <em>y</em>, pointing approximately east.</li>
 <li>The <em>z</em>-axis extends up into space. Negative <em>z</em> extends down into the ground.</li>
 </ul>
-<p class="image-container"><img alt="749a31c1658d9883.png" style="width: 246.00px" src="img/366bbfc0851d0559.png"></p>
+<p class="image-container"><img alt="749a31c1658d9883.png" style="width: 246.00px" src="img/749a31c1658d9883.png"></p>
 <p>A reference to the array for the rotation matrix is passed into the <code>getRotationMatrix()</code> method and modified in place. The second argument to <code>getRotationMatrix()</code> is an inclination matrix, which you don&#39;t need for this app. You can use null for this argument.</p>
 <p>The <code>getRotationMatrix()</code> method returns a boolean (the <code>rotationOK</code> variable), which is <code>true</code> if the rotation was successful. The boolean might be <code>false</code> if the device is free-falling (meaning that the force of gravity is close to 0), or if the device is pointed very close to magnetic north. The incoming sensor data is unreliable in these cases, and the matrix can&#39;t be calculated. Although the boolean value is almost always <code>true</code>, it&#39;s good practice to check that value anyhow.</p>
 <ol type="1" start="6">
@@ -179,7 +180,7 @@ mTextSensorPitch.setText(getResources().getString(
    R.string.value_format, pitch));
 mTextSensorRoll.setText(getResources().getString(
    R.string.value_format, roll));</code></pre>
-<p>The string (<code>value_format</code> in <code>strings.xml</code>) contains placeholder code (<code>&#34;%1$.2f&#34;</code>) that formats the incoming floating-point value to two decimal places.</p>
+<p>The string (<code>value_format</code> in <code>strings.xml</code>) contains placeholder code (<code>"%1$.2f"</code>) that formats the incoming floating-point value to two decimal places.</p>
 <pre><code>&lt;string name=&#34;value_format&#34;&gt;%1$.2f&lt;/string&gt;</code></pre>
 <h2 is-upgraded>1.3 Build and run the app</h2>
 <ol type="1" start="1">
@@ -212,7 +213,7 @@ mTextSensorRoll.setText(getResources().getString(
 <h2 is-upgraded>2.1 Add the spots and modify the layout</h2>
 <ol type="1" start="1">
 <li>Add a new file called <code>spot.xml</code> to the project, in the <code>res/drawable</code> directory. (Create the directory if needed.)</li>
-<li>Replace the selector tag in <code>spot.xml</code> with an oval shape drawable whose color is solid black (<code>&#34;@android:color/black&#34;</code>):</li>
+<li>Replace the selector tag in <code>spot.xml</code> with an oval shape drawable whose color is solid black (<code>"@android:color/black"</code>):</li>
 </ol>
 <pre><code>&lt;shape
    xmlns:android=&#34;http://schemas.android.com/apk/res/android&#34;
@@ -300,7 +301,7 @@ mTextSensorRoll.setText(getResources().getString(
 <p>The layout preview should now look like this:</p>
 <p class="image-container"><img alt="499674c89c937df.png" style="width: 288.00px" src="img/499674c89c937df.png"></p>
 <ol type="1" start="6">
-<li>Add the <a href="https://developer.android.com/reference/android/support/v7/appcompat/R.attr.html#alpha" target="_blank"><code>android:alpha</code></a> attribute to all four <code>ImageView</code> elements, and set the value to <code>&#34;0.05&#34;</code>. The alpha is the opacity of the shape. Smaller values are less opaque (less visible). Setting the value to 0.05 makes the shape very nearly invisible, but you can still see them in the layout view.</li>
+<li>Add the <a href="https://developer.android.com/reference/android/support/v7/appcompat/R.attr.html#alpha" target="_blank"><code>android:alpha</code></a> attribute to all four <code>ImageView</code> elements, and set the value to <code>"0.05"</code>. The alpha is the opacity of the shape. Smaller values are less opaque (less visible). Setting the value to 0.05 makes the shape very nearly invisible, but you can still see them in the layout view.</li>
 </ol>
 <h2 is-upgraded>2.2 Update the spot color with new sensor data</h2>
 <p>Next you modify the <code>onSensorChanged()</code> method to set the alpha value of the spots in response to the pitch and roll values from the sensor data. A higher sensor value indicates a larger degree of tilt. The higher the sensor value, the more opaque (the darker) you make the spot.</p>
