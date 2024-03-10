@@ -18,23 +18,15 @@
       color: red;
     }
   </style>
-
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-T70T90JTWB"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-T70T90JTWB');
-  </script>
 </head>
 <body>
-  <google-codelab-analytics gaid="UA-3295395-7"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
+  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-E0H6JSF2N3"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-3295395-7"
+                  codelab-ga4id="G-E0H6JSF2N3"
                   id="sqlite-database"
                   title="TP 04.1A: SQLite Database"
                   environment="web"
-                  feedback-link="">
+                  feedback-link="https://github.com/khammami/codelabs-enetcom/issues">
     
       <google-codelab-step label="Bienvenue" duration="0">
         <p>Ces travaux pratiques se base sur le cours de base pour les développeurs Android fourni par Google afin de  les préparer pour le test de certification <a href="https://developers.google.com/training/certification/associate-android-developer/" target="_blank">Associate Android Developer</a>. Vous obtiendrez le plus de valeur de ce TP si vous travaillez successivement dans les codelabs.</p>
@@ -678,7 +670,7 @@ values.put(KEY_WORD, word);</code></pre>
 }</code></pre>
 <h2 is-upgraded>7.2. Add a click listener to the EDIT button</h2>
 <p>And here is the code for the Edit click listener when we bind the <code>View</code> in the <code>onBindViewHolder</code> method of <code>WordListAdapter</code>. This listener has nothing database specific. It starts the <code>EditWordActivity</code> Activity using an <code>Intent</code> and passes it the current   id, position, and word in the Extras.</p>
-<p>If you get an error on the <code>EXTRA_POSITION</code> constant, add it with a value of <code>&#34;POSITION&#34;</code>,</p>
+<p>If you get an error on the <code>EXTRA_POSITION</code> constant, add it with a value of <code>"POSITION"</code>,</p>
 <p><strong>Solution:</strong></p>
 <pre><code>// Attach a click listener to the EDIT button.
 holder.edit_button.setOnClickListener(new MyButtonOnClickListener(

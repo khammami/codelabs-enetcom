@@ -20,12 +20,13 @@
   </style>
 </head>
 <body>
-  <google-codelab-analytics gaid="UA-3295395-7"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
+  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-E0H6JSF2N3"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-3295395-7"
+                  codelab-ga4id="G-E0H6JSF2N3"
                   id="making-phone-calls"
                   title="P 03.1: Making Phone Calls"
                   environment="web"
-                  feedback-link="">
+                  feedback-link="https://github.com/khammami/codelabs-enetcom/issues">
     
       <google-codelab-step label="Welcome" duration="0">
         <h2 is-upgraded>Introduction</h2>
@@ -254,7 +255,7 @@ if (dialIntent.resolveActivity(getPackageManager()) != null) {
 <h2 is-upgraded>2.1 Create the app and add permission</h2>
 <ol type="1" start="1">
 <li>Copy the <strong>PhoneCallDial</strong> project folder, rename the folder to <strong>PhoneCallingSample</strong>, and refactor the app to populate the new name throughout the app project. </li>
-<li>Add the following permission to the <code>AndroidManifest.xml</code> file after the first line (with the <code>package</code> definition) and before the <code>&lt;application&gt;</code> section:<br> </li>
+<li>Add the following permission to the <code>AndroidManifest.xml</code> file after the first line (with the <code>package</code> definition) and before the <code><application></code> section:<br> </li>
 </ol>
 <pre><code>&lt;uses-permission android:name=&#34;android.permission.CALL_PHONE&#34; /&gt;</code></pre>
 <p><br>Your app can&#39;t make a phone call without the <code>CALL_PHONE</code> permission line in <code>AndroidManifest.xml</code>. This permission line enables a setting for the app in the Settings app that gives the user the choice of allowing or disallowing use of the phone. (In the next task you will add a way for the user to grant that permission from within the app.)</p>
@@ -275,7 +276,7 @@ if (dialIntent.resolveActivity(getPackageManager()) != null) {
 </ol>
 <ul>
 <li>You will use the <code>android:id</code> for the <code>EditText</code> view in your code to retrieve the phone number.</li>
-<li>The <code>EditText</code> view uses the <code>android:inputType</code> attribute set to <code>&#34;phone&#34;</code> for a phone-style numeric keypad.</li>
+<li>The <code>EditText</code> view uses the <code>android:inputType</code> attribute set to <code>"phone"</code> for a phone-style numeric keypad.</li>
 </ul>
 <ol type="1" start="4">
 <li>Change the <code>ImageButton</code> as follows:</li>
@@ -297,7 +298,7 @@ if (dialIntent.resolveActivity(getPackageManager()) != null) {
   android:visibility=&#34;visible&#34;
   android:onClick=&#34;callNumber&#34;/&gt;</code></pre>
 <ol type="1" start="5">
-<li>Add the following Button at the end of the layout, before the ending <code>&lt;/RelativeLayout&gt;</code> tag:<br></li>
+<li>Add the following Button at the end of the layout, before the ending <code></RelativeLayout></code> tag:<br></li>
 </ol>
 <pre><code>&lt;Button
     android:id=&#34;@+id/button_retry&#34;
@@ -309,12 +310,12 @@ if (dialIntent.resolveActivity(getPackageManager()) != null) {
     android:visibility=&#34;invisible&#34;/&gt;
 &lt;/RelativeLayout&gt;</code></pre>
 <ol type="1" start="6">
-<li>After adding a hard-coded string <code>&#34;Retry&#34;</code> for the <code>android:contentDescription</code> attribute, extract it into the string resource retry, and then replace the hard-coded string in the <code>android:text</code> attribute to <code>&#34;@string/retry&#34;</code>.</li>
+<li>After adding a hard-coded string <code>"Retry"</code> for the <code>android:contentDescription</code> attribute, extract it into the string resource retry, and then replace the hard-coded string in the <code>android:text</code> attribute to <code>"@string/retry"</code>.</li>
 <li>Note the following:</li>
 </ol>
 <ul>
 <li>You will refer to the <code>android:id</code> <code>button_retry</code> in your code.</li>
-<li>Make sure you include the <code>android:visibility</code> attribute set to <code>&#34;invisible&#34;</code>. It should appear only if the app detects that telephony is not enabled, or if the user previously denied phone permission when the app requested it.</li>
+<li>Make sure you include the <code>android:visibility</code> attribute set to <code>"invisible"</code>. It should appear only if the app detects that telephony is not enabled, or if the user previously denied phone permission when the app requested it.</li>
 </ul>
 <p>Your app&#39;s layout should look like the following figure (the <code>button_retry</code> Button is invisible):</p>
 <p class="image-container"><img alt="App layout with an EditText and ImageButton" title="App layout with an EditText and ImageButton" style="width: 283.30px" src="img/3d946a18ec5a95bf.png"></p>
@@ -342,7 +343,7 @@ Toast.makeText(this,
               &#34;Phone Status: DIALING: &#34; + phoneNumber,
               Toast.LENGTH_LONG).show();</code></pre>
 <ol type="1" start="5">
-<li>Extract <code>&#34;Phone Status: DIALING: &#34;</code> to a string resource (<code>dial_number</code>). Replace the second use of the string in the <code>Toast.makeText()</code> statement to <code>getString(R.string.dial_number)</code>.</li>
+<li>Extract <code>"Phone Status: DIALING: "</code> to a string resource (<code>dial_number</code>). Replace the second use of the string in the <code>Toast.makeText()</code> statement to <code>getString(R.string.dial_number)</code>.</li>
 <li>Refactor and rename the <code>dialIntent</code> implicit intent to <code>callIntent</code>, and replace <code>ACTION_DIAL</code> with <code>ACTION_CALL</code>. As a result, the statements should now look like this:</li>
 </ol>
 <pre><code>...
@@ -389,16 +390,16 @@ if (callIntent.resolveActivity(getPackageManager()) != null) {
 <li>To launch an emulator directly from the AVD Manager, choose <strong>Tools &gt; Android &gt; AVD Manager</strong>.</li>
 <li>Double-click a predefined device. Note the number that appears in the emulator&#39;s window title on the far right, as shown in the figure below as #1 (5556). This is the port number of the emulator instance.</li>
 </ol>
-<p class="image-container"><img alt="The port number of the emulator instance" title="The port number of the emulator instance" style="width: 347.00px" src="img/4edd01e0f8cb7a68.png"></p>
+<p class="image-container"><img alt="The port number of the emulator instance" title="The port number of the emulator instance" style="width: 347.00px" src="img/92e6aafd4021b34.png"></p>
 <ol type="1" start="3">
 <li>Open the Android Studio project for the app, if it isn&#39;t already open.</li>
 <li>Run the app, but choose another emulator—not the one that is already running. Android Studio launches the other emulator.</li>
 <li>In the app, enter the port number of the other emulator rather than a real phone number.</li>
 <li>Click the call button in the app. The emulator shows the phone call starting up, as shown in the figure below.</li>
 </ol>
-<p class="image-container"><img alt="Making a call on the emulator" title="Making a call on the emulator" style="width: 281.62px" src="img/dd653061f64db6e7.png"></p>
+<p class="image-container"><img alt="Making a call on the emulator" title="Making a call on the emulator" style="width: 281.62px" src="img/64785809e5d509d0.png"></p>
 <p>The other emulator instance should now be receiving the call, as shown in the figure below:</p>
-<p class="image-container"><img alt="Receiving a call on the emulator" title="Receiving a call on the emulator" style="width: 310.87px" src="img/3a8f63a18b7e9b.png"></p>
+<p class="image-container"><img alt="Receiving a call on the emulator" title="Receiving a call on the emulator" style="width: 310.87px" src="img/4d708a7e458b2859.png"></p>
 <ol type="1" start="7">
 <li>Click <strong>Answer</strong> or <strong>Dismiss</strong> on the emulator receiving the call. If you click <strong>Answer</strong>, also click the red <strong>Hang-up</strong> button to end the call.</li>
 </ol>
@@ -465,8 +466,8 @@ protected void onCreate(Bundle savedInstanceState) {
 <li>Extract the hard-coded strings in the above code to string resources:</li>
 </ol>
 <ul>
-<li><code>&#34;Telephony is enabled&#34;</code>: <code>telephony_enabled</code></li>
-<li><code>&#34;TELEPHONY NOT ENABLED! &#34;</code>: <code>telephony_not_enabled</code></li>
+<li><code>"Telephony is enabled"</code>: <code>telephony_enabled</code></li>
+<li><code>"TELEPHONY NOT ENABLED! "</code>: <code>telephony_not_enabled</code></li>
 </ul>
 <ol type="1" start="7">
 <li>Create the <code>disableCallButton()</code> method in <code>MainActivity</code>, and code to:</li>
@@ -542,7 +543,7 @@ protected void onCreate(Bundle savedInstanceState) {
 <li>When your app calls <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.html#requestPermissions(android.app.Activity,%20java.lang.String[],%20int)" target="_blank"><code>requestPermissions()</code></a>, the system shows a standard dialog to the user, as shown in the figure below.</li>
 </ol>
 <ol type="1" start="5">
-<li>Extract the hard-coded string <code>&#34;PERMISSION NOT GRANTED!&#34;</code> in the above code to the string resource <code>permission_not_granted</code>.</li>
+<li>Extract the hard-coded string <code>"PERMISSION NOT GRANTED!"</code> in the above code to the string resource <code>permission_not_granted</code>.</li>
 <li>In the <code>onCreate()</code> method after checking to see if telephony is enabled, add a call to <code>checkForPhonePermission()</code>:</li>
 </ol>
 <pre><code>@Override
@@ -586,7 +587,7 @@ switch (requestCode) {
     }
 }</code></pre>
 <ol type="1" start="9">
-<li>Extract the hard-coded string <code>&#34;Failure to obtain permission!&#34;</code> in the above code to the string resource <code>failure_permission</code>, and note the following:</li>
+<li>Extract the hard-coded string <code>"Failure to obtain permission!"</code> in the above code to the string resource <code>failure_permission</code>, and note the following:</li>
 </ol>
 <ul>
 <li>The user&#39;s response to the request dialog is returned in the <code>permissions</code> array (index 0 if only one permission is requested in the dialog). The code snippet above compares this to the corresponding grant result, which is either <code>PERMISSION_GRANTED</code> or <code>PERMISSION_DENIED</code>.</li>
@@ -639,7 +640,7 @@ if (callIntent.resolveActivity(getPackageManager()) != null) {
 <h2 is-upgraded>4.1 Set the permission and logging tag</h2>
 <ol type="1" start="1">
 <li>Open the Android Studio project for the <strong>PhoneCallingSample</strong> app, if it isn&#39;t already open.</li>
-<li>Add the following <code>READ_PHONE_STATE</code> permission to the <code>AndroidManifest.xml</code> file after after the <code>CALL_PHONE</code> permission, and before the <code>&lt;application&gt;</code> section:</li>
+<li>Add the following <code>READ_PHONE_STATE</code> permission to the <code>AndroidManifest.xml</code> file after after the <code>CALL_PHONE</code> permission, and before the <code><application></code> section:</li>
 </ol>
 <pre><code>  &lt;uses-permission android:name=&#34;android.permission.CALL_PHONE&#34; /&gt;
   &lt;uses-permission android:name=&#34;android.permission.READ_PHONE_STATE&#34; /&gt;</code></pre>
@@ -681,7 +682,7 @@ public void onCallStateChanged(int state, String incomingNumber) {
 String message = &#34;Phone Status: &#34;;
 switch (state) { ...</code></pre>
 <ol type="1" start="4">
-<li>Extract the string <code>&#34;Phone Status: &#34;</code> to the string resource <code>phone_status</code>.</li>
+<li>Extract the string <code>"Phone Status: "</code> to the string resource <code>phone_status</code>.</li>
 <li>For the <code>CALL_STATE_RINGING</code> state, assemble a message for logging and displaying a toast with the incoming phone number:</li>
 </ol>
 <pre><code>...
@@ -695,7 +696,7 @@ switch (state) {
        break;
   ...</code></pre>
 <ol type="1" start="6">
-<li>Extract <code>&#34;RINGING, number: &#34;</code> to the string resource <code>ringing</code>.</li>
+<li>Extract <code>"RINGING, number: "</code> to the string resource <code>ringing</code>.</li>
 <li>Add a boolean <code>returningFromOffHook</code>, set to <code>false</code>, at the top of the <code>MyPhoneCallListener</code> declaration, in order to use it with the the <code>CALL_STATE_OFFHOOK</code> state:</li>
 </ol>
 <pre><code>private class MyPhoneCallListener extends PhoneStateListener {
@@ -718,7 +719,7 @@ switch (state) {
                break;
      ...</code></pre>
 <ol type="1" start="9">
-<li>Extract <code>&#34;OFFHOOK&#34;</code> to the string resource <code>offhook</code>.</li>
+<li>Extract <code>"OFFHOOK"</code> to the string resource <code>offhook</code>.</li>
 <li>For the <code>CALL_STATE_IDLE</code> state, log and display a toast, and check if <code>returningFromOffHook</code> is <code>true</code>; if so, restart the activity if the version of Android is earlier than KitKat.</li>
 </ol>
 <pre><code>...
@@ -748,7 +749,7 @@ switch (state) {
           ...</code></pre>
 <p>If the app is running on KitKat (version 19) or newer versions, there is no need to restart the activity after the phone call ends. But if the app is running on a version of Android older than KitKat (version 19), the code must restart the current activity so that the user can return to the app after the call ends.<br><strong>Tip</strong>: The code also sets <a href="https://developer.android.com/reference/android/content/Intent.html#FLAG_ACTIVITY_CLEAR_TOP" target="_blank"><code>FLAG_ACTIVITY_CLEAR_TOP</code></a> so that instead of launching a new instance of the current activity, any other activities on top of the current activity are closed and an intent is delivered to the (now on top) current activity. This flag helps you manage a stack of activities in an app.</p>
 <ol type="1" start="11">
-<li>Extract <code>&#34;IDLE&#34;</code> to the string resource <code>idle</code>, and extract &#34;Restarting app&#34; to the string resource <code>restarting_app</code>.</li>
+<li>Extract <code>"IDLE"</code> to the string resource <code>idle</code>, and extract &#34;Restarting app&#34; to the string resource <code>restarting_app</code>.</li>
 </ol>
 <p>The code below shows the entire <code>onCallStateChanged()</code> method:</p>
 <pre><code>...
@@ -834,13 +835,13 @@ protected void onDestroy() {
 <h2 is-upgraded>4.4 Run the app</h2>
 <ol type="1" start="1">
 <li>Run the app. If the user changes the Phone permission for the app while the app is running, the request dialog appears again for the user to <strong>Allow</strong> or <strong>Deny</strong> the permission. Click <strong>Allow</strong> to test the app&#39;s ability to make a phone call.</li>
-<li>After entering a phone number and clicking the call button, the emulator or device shows the phone call starting up, as shown in the figure below. A toast message appears showing the phone number (left side of figure), and the toast message changes to show a new status of <code>&#34;OFFHOOK&#34;</code> (right side of figure) after the call has started.</li>
+<li>After entering a phone number and clicking the call button, the emulator or device shows the phone call starting up, as shown in the figure below. A toast message appears showing the phone number (left side of figure), and the toast message changes to show a new status of <code>"OFFHOOK"</code> (right side of figure) after the call has started.</li>
 </ol>
-<p class="image-container"><img alt="Starting a call (left) and showing the phone status (right)" title="Starting a call (left) and showing the phone status (right)" style="width: 353.00px" src="img/5f4d390ada48b5ae.png"></p>
+<p class="image-container"><img alt="Starting a call (left) and showing the phone status (right)" title="Starting a call (left) and showing the phone status (right)" style="width: 353.00px" src="img/1aea534d21d2a28b.png"></p>
 <ol type="1" start="3">
 <li>The other emulator instance or device should now be receiving the call, as shown in the figure below. Click <strong>Answer</strong> or <strong>Dismiss</strong> on the device or emulator receiving the call.</li>
 </ol>
-<p class="image-container"><img alt="Receiving a call on the emulator" title="Receiving a call on the emulator" style="width: 292.32px" src="img/3a8f63a18b7e9b.png"></p>
+<p class="image-container"><img alt="Receiving a call on the emulator" title="Receiving a call on the emulator" style="width: 292.32px" src="img/4d708a7e458b2859.png"></p>
 <ol type="1" start="4">
 <li>If you click <strong>Answer</strong>, be sure to also click the red <strong>Hang-up</strong> button to finish the call, as shown in the figure below.</li>
 </ol>
