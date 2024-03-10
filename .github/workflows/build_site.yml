@@ -1,0 +1,37 @@
+name: Build Site
+
+on:
+  push:
+    paths:
+      - 'site/**'
+    branches:
+      - 'main'
+  pull_request:
+    paths:
+      - 'site/**'
+    branches:
+      - 'main'
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+            submodules: 'true'
+
+      - uses: actions/setup-node@v4
+        with:
+            node-version: lts/fermium
+
+      - name: Install & Build
+        working-directory: site
+        run: |
+            npm install
+            gulp dist --codelabs-dir=./data/codelabs

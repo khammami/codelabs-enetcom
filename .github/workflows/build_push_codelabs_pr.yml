@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Dispatch Build and Push for PR
 
 on:
   workflow_dispatch:
@@ -27,15 +27,8 @@ jobs:
           git add site/data/*
           git commit -m "Update submodule site/data" || echo "No changes in submodule to commit"
 
-      - uses: actions/setup-node@v4
-        with:
-            node-version: lts/fermium
-
-      - name: Install & Build
-        working-directory: site
-        run: |
-            npm install
-            gulp dist --codelabs-dir=./data/codelabs
+      - name: Build Site
+        uses: ./.github/workflows/build_site
 
       - name: Check for worktree changes
         id: git-build-changes
