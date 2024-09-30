@@ -27,6 +27,11 @@ jobs:
           git add site/data/*
           git commit -m "Update submodule site/data" || echo "No changes in submodule to commit"
 
+      - name: debug
+        run: |
+          pwd
+          ls -la
+          
       - name: Build Site
         uses: ./.github/workflows/build_site.yml@main
 
