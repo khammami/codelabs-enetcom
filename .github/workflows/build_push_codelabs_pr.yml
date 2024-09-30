@@ -32,8 +32,16 @@ jobs:
           pwd
           ls -la
           
-      - name: Build Site
-        uses: ./.github/workflows/build_site.yml
+      #- name: Build Site
+      #  uses: ./.github/workflows/build_site.yml
+      - uses: actions/setup-node@v4
+        with:
+            node-version: lts/fermium
+      - name: Install & Build
+        working-directory: site
+        run: |
+            npm install
+            gulp dist --codelabs-dir=./data/codelabs
 
       - name: Check for worktree changes
         id: git-build-changes
