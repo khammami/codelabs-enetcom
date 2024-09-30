@@ -28,7 +28,7 @@ jobs:
           git commit -m "Update submodule site/data" || echo "No changes in submodule to commit"
 
       - name: Build Site
-        uses: ./.github/workflows/build_site.yml
+        uses: khammami/codelabs-enetcom/.github/workflows/build_site.yml@main
 
       - name: Check for worktree changes
         id: git-build-changes
