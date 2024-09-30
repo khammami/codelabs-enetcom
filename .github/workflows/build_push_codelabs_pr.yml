@@ -33,7 +33,7 @@ jobs:
           ls -la
           
       - name: Build Site
-        uses: ./.github/workflows/build_site.yml@main
+        uses: ./.github/workflows/build_site
 
       - name: Check for worktree changes
         id: git-build-changes
