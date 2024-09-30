@@ -20,24 +20,31 @@
   </style>
 </head>
 <body>
-  <google-codelab-analytics gaid="UA-3295395-7"></google-codelab-analytics>
-  <google-codelab codelab-gaid=""
+  <google-codelab-analytics gaid="UA-3295395-7" ga4id="G-E0H6JSF2N3"></google-codelab-analytics>
+  <google-codelab codelab-gaid="UA-3295395-7"
+                  codelab-ga4id="G-E0H6JSF2N3"
                   id="sending-receiving-sms-messages"
                   title="P 03.2: Sending and Receiving SMS Messages"
                   environment="web"
-                  feedback-link="">
+                  feedback-link="https://github.com/khammami/codelabs-enetcom/issues">
     
       <google-codelab-step label="Welcome" duration="0">
         <h2 is-upgraded>Introduction</h2>
 <p>Android smartphones can send and receive messages to or from any other phone that supports Short Message Service (SMS). You have two choices for sending SMS messages:</p>
-<ul>
+<ol type="1" start="1">
 <li>Use an implicit <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank">Intent</a> to launch a messaging app with the <a href="https://developer.android.com/reference/android/content/Intent.html#ACTION_SENDTO" target="_blank">ACTION_SENDTO</a> intent action.</li>
+</ol>
+<ul>
 <li>This is the simplest choice for sending messages. The user can add a picture or other attachment in the messaging app, if the messaging app supports adding attachments.</li>
 <li>Your app doesn&#39;t need code to request permission from the user.</li>
 <li>If the user has multiple SMS messaging apps installed on the Android phone, the App chooser will appear with a list of these apps, and the user can choose which one to use. (Android smartphones will have at least one, such as Messenger.)</li>
 <li>The user can change the message in the messaging app before sending it.</li>
 <li>The user navigates back to your app using the <strong>Back</strong> button.</li>
+</ul>
+<ol type="1" start="2">
 <li>Send the SMS message using the <a href="https://developer.android.com/reference/android/telephony/SmsManager.html#sendTextMessage(java.lang.String,%20java.lang.String,%20java.lang.String,%20android.app.PendingIntent,%20android.app.PendingIntent)" target="_blank">sendTextMessage()</a> method or other methods of the <a href="https://developer.android.com/reference/android/telephony/SmsManager.html" target="_blank">SmsManager</a> class.</li>
+</ol>
+<ul>
 <li>This is a good choice for sending messages from your app without having to use another installed app.</li>
 <li>Your app must ask the user for permission before sending the SMS message, if the user hasn&#39;t already granted permission.</li>
 <li>The user stays in your app during and after sending the message.</li>
@@ -93,11 +100,11 @@
 <li>Copy the <a href="https://github.com/khammami/android-fundamentals-phone-sms/tree/master/PhoneCallDial" target="_blank">PhoneCallDial</a> project folder, rename it to <strong>PhoneMessaging</strong>, and refactor it to populate the new name throughout the app project.</li>
 <li>Add an icon for the messaging button by following these steps:</li>
 </ol>
-<ol type="1" start="1">
+<ul>
 <li>Select drawable in the Project: Android view and choose <strong>File &gt; New &gt; Vector Asset</strong>.</li>
 <li>Click the Android icon next to &#34;Icon:&#34; to choose an icon. To find a messaging icon, choose <strong>Communication</strong> in the left column.</li>
 <li>Select the icon, click <strong>OK</strong>, click <strong>Next</strong>, and then click <strong>Finish</strong>.</li>
-</ol>
+</ul>
 <ol type="1" start="3">
 <li>Add the following <code>EditText</code> to the existing layout after the <code>phone_icon</code> <code>ImageButton</code>:<br></li>
 </ol>
@@ -115,13 +122,13 @@
     android:layout_marginRight=&#34;@dimen/activity_horizontal_margin&#34;
     android:hint=&#34;Enter message here&#34;
     android:inputType=&#34;textMultiLine&#34;/&gt;</code></pre>
-<p>You will use the <code>android:id</code> <code>sms_message</code> to retrieve the message in your code. You can use <code>@dimen/activity_horizontal_margin</code> and <code>@dimen/activity_vertical_margin</code> for the <code>EditText</code> margins because they are already defined in the <strong>dimens.xml</strong> file. The <code>EditText</code> view uses the <code>android:inputType</code> attribute set to <code>&#34;textMultiLine&#34;</code> for entering multiple lines of text.</p>
+<p>You will use the <code>android:id</code> <code>sms_message</code> to retrieve the message in your code. You can use <code>@dimen/activity_horizontal_margin</code> and <code>@dimen/activity_vertical_margin</code> for the <code>EditText</code> margins because they are already defined in the <strong>dimens.xml</strong> file. The <code>EditText</code> view uses the <code>android:inputType</code> attribute set to <code>"textMultiLine"</code> for entering multiple lines of text.</p>
 <ol type="1" start="4">
 <li>After adding hard-coded strings and dimensions, extract them into resources:</li>
 </ol>
 <ul>
-<li><code>android:layout_width=&#34;@dimen/edittext_width&#34;</code>: The width of the <code>EditText</code> message (200dp).</li>
-<li><code>android:hint=&#34;@string/enter_message_here&#34;</code>: The hint for the <code>EditText</code> (&#34;Enter message here&#34;).</li>
+<li><code>android:layout_width="@dimen/edittext_width"</code>: The width of the <code>EditText</code> message (200dp).</li>
+<li><code>android:hint="@string/enter_message_here"</code>: The hint for the <code>EditText</code> (&#34;Enter message here&#34;).</li>
 </ul>
 <ol type="1" start="5">
 <li>Add the following <code>ImageButton</code> to the layout after the above <code>EditText</code>:</li>
@@ -176,7 +183,7 @@ smsIntent.setData(Uri.parse(smsNumber));
   // Add the message (sms) with the key (&#34;sms_body&#34;).
 smsIntent.putExtra(&#34;sms_body&#34;, sms);
 ...</code></pre>
-<p>The <a href="https://developer.android.com/reference/android/content/Intent.html#putExtra(java.lang.String,%20java.lang.String)" target="_blank">putExtra()</a> method needs two strings: the key identifying the type of data (<code>&#34;sms_body&#34;</code>) and the data itself, which is the text of the message (<code>sms</code>). For more information about common intents and the <code>putExtra()</code> method, see <a href="https://developer.android.com/guide/components/intents-common.html#Messaging" target="_blank">Common Intents: Text Messaging</a>.</p>
+<p>The <a href="https://developer.android.com/reference/android/content/Intent.html#putExtra(java.lang.String,%20java.lang.String)" target="_blank">putExtra()</a> method needs two strings: the key identifying the type of data (<code>"sms_body"</code>) and the data itself, which is the text of the message (<code>sms</code>). For more information about common intents and the <code>putExtra()</code> method, see <a href="https://developer.android.com/guide/components/intents-common.html#Messaging" target="_blank">Common Intents: Text Messaging</a>.</p>
 <ol type="1" start="4">
 <li>Add a check to see if the implicit intent resolves to a package (a messaging app). If it does, send the intent with <code>startActivity()</code>, and the system launches the app. If it does not, log an error.</li>
 </ol>
@@ -216,7 +223,7 @@ if (smsIntent.resolveActivity(getPackageManager()) != null) {
 <li>Run the app on either an emulator or a device.</li>
 <li>Enter a message, and tap the messaging icon (marked &#34;1&#34; in the left side of the figure below). The messaging app appears, as shown on the right side of the figure below.</li>
 </ol>
-<p class="image-container"><img alt="Enter a message and tap the icon (1) and the messaging appears (right side)" title="Enter a message and tap the icon (1) and the messaging appears (right side)" style="width: 492.00px" src="img/cdb76dd206c69ee5.png"></p>
+<p class="image-container"><img alt="Enter a message and tap the icon (1) and the messaging appears (right side)" title="Enter a message and tap the icon (1) and the messaging appears (right side)" style="width: 492.00px" src="img/461f4fa09e29c7ab.png"></p>
 <ol type="1" start="3">
 <li>Use the <strong>Back</strong> button to return to the PhoneMessaging app. You may need to tap or click it more than once to leave the SMS messaging app.</li>
 </ol>
@@ -233,7 +240,7 @@ if (smsIntent.resolveActivity(getPackageManager()) != null) {
 <h2 is-upgraded>2.1 Create the app and layout and add permission</h2>
 <ol type="1" start="1">
 <li>Copy the <a href="https://github.com/khammami/android-fundamentals-phone-sms/tree/master/PhoneCallingSample" target="_blank"><strong>PhoneCallingSample</strong></a> project folder, rename it to <strong>SmsMessaging</strong>, and refactor it to populate the new name throughout the app project.</li>
-<li>Open <strong>strings.xml</strong> and change the <code>app_name</code> string resource to <code>&#34;SMS Messaging&#34;</code>.</li>
+<li>Open <strong>strings.xml</strong> and change the <code>app_name</code> string resource to <code>"SMS Messaging"</code>.</li>
 <li>Add the <code>android.permission.SEND_SMS</code> permission to the <strong>AndroidManifest.xml</strong> file, and remove the <code>CALL_PHONE</code> and <code>READ_PHONE_STATE</code> permissions for phone use, so that you have only one permission:<br> </li>
 </ol>
 <pre><code>&lt;uses-permission android:name=&#34;android.permission.SEND_SMS&#34; /&gt;</code></pre>
@@ -259,9 +266,9 @@ android:layout_marginRight=&#34;@dimen/activity_horizontal_margin&#34;
     android:layout_margin=&#34;@dimen/activity_horizontal_margin&#34;
     android:hint=&#34;Enter message here&#34;
     android:inputType=&#34;textMultiLine&#34;/&gt;</code></pre>
-<p>You will use the <code>android:id</code> attribute to <code>sms_message</code> to identify it as the <code>EditText</code> for the message. The <code>EditText</code> view uses the <code>android:inputType</code> attribute set to <code>&#34;textMultiLine&#34;</code> for entering multiple lines of text.</p>
+<p>You will use the <code>android:id</code> attribute to <code>sms_message</code> to identify it as the <code>EditText</code> for the message. The <code>EditText</code> view uses the <code>android:inputType</code> attribute set to <code>"textMultiLine"</code> for entering multiple lines of text.</p>
 <ol type="1" start="7">
-<li>After adding the hard-coded string <code>&#34;Enter message here&#34;</code> for the <code>android:hint</code> attribute, extract it into the text resource <code>&#34;enter_message_here&#34;</code>.</li>
+<li>After adding the hard-coded string <code>"Enter message here"</code> for the <code>android:hint</code> attribute, extract it into the text resource <code>"enter_message_here"</code>.</li>
 <li>Change the <code>android:layout_below</code> attribute for the <code>button_retry</code> Button to refer to the <code>sms_message</code> <code>EditText</code> view. The Button should appear below the SMS message in the layout if it becomes visible:</li>
 </ol>
 <pre><code>android:layout_below=&#34;@id/sms_message&#34;</code></pre>
@@ -281,7 +288,7 @@ android:layout_marginRight=&#34;@dimen/activity_horizontal_margin&#34;
     android:src=&#34;@drawable/ic_message_black_24dp&#34;
     android:visibility=&#34;visible&#34;
     android:onClick=&#34;smsSendMessage&#34;/&gt;</code></pre>
-<p>You will use the <code>android:id</code> <code>message_icon</code> in your code to refer to the <code>ImageButton</code> for sending the message. Use the vector asset you added previously (such as <code>ic_message_black_24dp</code> for a messaging icon) for the <code>ImageButton</code>. Make sure you include the <code>android:visibility</code> attribute set to <code>&#34;visible&#34;</code>. You will control the visibility of this <code>ImageButton</code> from your code.</p>
+<p><br>You will use the <code>android:id</code> <code>message_icon</code> in your code to refer to the <code>ImageButton</code> for sending the message. Use the vector asset you added previously (such as <code>ic_message_black_24dp</code> for a messaging icon) for the <code>ImageButton</code>. Make sure you include the <code>android:visibility</code> attribute set to <code>"visible"</code>. You will control the visibility of this <code>ImageButton</code> from your code.</p>
 <ol type="1" start="10">
 <li>After adding a hard-coded string for the <code>android:contentDescription</code> attribute, extract it to the <code>send_a_message</code> string resource.<br>The <code>smsSendMessage()</code> method referred to in the <code>android:onClick</code> attribute for the <code>ImageButton</code> remains highlighted until you create this method in the <strong>MainActivity</strong>, which you will do in the next step.</li>
 <li>Click <code>smsSendMessage</code> in the <code>android:onClick</code> attribute, click the red light bulb that appears, and then select <strong>Create smsSendMessage(View) in &#39;MainActivity&#39;</strong>. Android Studio automatically creates the <code>smsSendMessage()</code> method in <strong>MainActivity</strong> as <code>public</code>, returning <code>void</code>, with a <code>View</code> parameter. This method is called when the user taps the <code>message_icon</code> <code>ImageButton</code>.</li>
@@ -361,7 +368,7 @@ smsManager.sendTextMessage
 <li>At the top of <strong>MainActivity</strong>, below the class definition, change the global constant for the <code>MY_PERMISSIONS_REQUEST_CALL_PHONE</code> request code to the following:<br></li>
 </ol>
 <pre><code>private static final int MY_PERMISSIONS_REQUEST_SEND_SMS = 1;</code></pre>
-<p>When a result returns in the activity, it will contain the <code>MY_PERMISSIONS_REQUEST_SEND_SMS</code> <code>requestCode</code> so that your code can identify it.</p>
+<p><br>When a result returns in the activity, it will contain the <code>MY_PERMISSIONS_REQUEST_SEND_SMS</code> <code>requestCode</code> so that your code can identify it.</p>
 <ol type="1" start="2">
 <li>Remove the constant declarations for <code>mTelephonyManager</code> and <code>MyPhoneCallListener</code>.</li>
 <li>Remove the <code>isTelephonyEnabled()</code> method, and remove all of the code in the <code>onCreate()</code> method that starts with the <code>mTelephonyManager</code> assignment, leaving only the first two lines:</li>
@@ -386,7 +393,7 @@ protected void onCreate(Bundle savedInstanceState) {
    Button retryButton = (Button) findViewById(R.id.button_retry);
    retryButton.setVisibility(View.VISIBLE);
 }</code></pre>
-<p>Extract a string resource (<code>sms_disabled</code>) for the hard-coded string <code>&#34;SMS usage disabled&#34;</code> in the toast statement.</p>
+<p>Extract a string resource (<code>sms_disabled</code>) for the hard-coded string <code>"SMS usage disabled"</code> in the toast statement.</p>
 <ol type="1" start="5">
 <li>Refactor/rename the existing <code>enableCallButton()</code> method to <code>enableSmsButton()</code> to set the SMS message icon button to be visible:</li>
 </ol>
@@ -476,12 +483,12 @@ checkForSmsPermission();
 <li>Click <strong>Retry</strong>, and then click <strong>Allow</strong> for SMS permission.</li>
 <li>Test the app&#39;s ability to send a message:</li>
 </ol>
-<ol type="1" start="1">
+<ul>
 <li>Enter a phone number.</li>
 <li>Enter a message.</li>
 <li>Tap the messaging icon.</li>
-</ol>
-<p class="image-container"><img alt="Entering a message and tapping the messaging icon marked as " title="Entering a message and tapping the messaging icon marked as " style="width: 488.00px" src="img/d88ea144f61ff0d2.png"></p>
+</ul>
+<p class="image-container"><img alt="Entering a message and tapping the messaging icon marked as " title="Entering a message and tapping the messaging icon marked as " style="width: 488.00px" src="img/49706989059265ed.png"></p>
 
 
       </google-codelab-step>
@@ -499,7 +506,7 @@ checkForSmsPermission();
 <ol type="1" start="2">
 <li>Select the package name in the Project:Android: view and choose <strong>File &gt; New &gt; Other &gt; Broadcast Receiver</strong>.</li>
 <li>Name the class &#34;<strong>MySmsReceiver</strong>&#34; and make sure &#34;<strong>Exported</strong>&#34; and &#34;<strong>Enabled</strong>&#34; are checked.<br>The &#34;<strong>Exported</strong>&#34; option allows your app to respond to outside broadcasts, while &#34;<strong>Enabled</strong>&#34; allows it to be instantiated by the system.</li>
-<li>Open the <strong>AndroidManifest.xml</strong> file again. Note that Android Studio automatically generates a <code>&lt;receiver&gt;</code> tag with your chosen options as attributes:</li>
+<li>Open the <strong>AndroidManifest.xml</strong> file again. Note that Android Studio automatically generates a <code><receiver></code> tag with your chosen options as attributes:</li>
 </ol>
 <pre><code>&lt;receiver
     android:name=
@@ -509,7 +516,7 @@ checkForSmsPermission();
 &lt;/receiver&gt;</code></pre>
 <h2 is-upgraded>3.2 Register the broadcast receiver</h2>
 <p>In order to receive any broadcasts, you must register for specific broadcast intents. In the <a href="https://developer.android.com/reference/android/content/Intent.html" target="_blank">Intent documentation</a>, under &#34;Standard Broadcast Actions&#34;, you can find some of the common broadcast intents sent by the system. In this app, you use the <code>android.provider.Telephony.SMS_RECEIVED</code> intent.</p>
-<p>Add the following inside the <code>&lt;receiver&gt;</code> tags to register your receiver:</p>
+<p>Add the following inside the <code><receiver></code> tags to register your receiver:</p>
 <pre><code>&lt;receiver
     android:name=&#34;com.example.android.smsmessaging.MySmsReceiver&#34;
     android:enabled=&#34;true&#34;
@@ -532,12 +539,12 @@ checkForSmsPermission();
 <li>Delete the default implementation inside the supplied <code>onReceive()</code> method.</li>
 <li>In the blank <code>onReceive()</code> method:</li>
 </ol>
-<ol type="1" start="1">
+<ul>
 <li>Add the <code>@TargetAPI</code> annotation for the method, because it performs a different action depending on the build version.</li>
 <li>Retrieve a map of extended data from the intent to a <code>bundle</code>.</li>
 <li>Define the <code>msgs</code> array and <code>strMessage</code> string.</li>
 <li>Get the <code>format</code> for the message from the <code>bundle</code>.</li>
-</ol>
+</ul>
 <pre><code>@TargetApi(Build.VERSION_CODES.M)
 @Override
 public void onReceive(Context context, Intent intent) {
@@ -585,11 +592,11 @@ if (pdus != null) {
 <ol type="1" start="7">
 <li>Build the <code>strMessage</code> to show in a toast message:</li>
 </ol>
-<ol type="1" start="1">
+<ul>
 <li>Get the originating address using the <code>getOriginatingAddress()</code> method.</li>
 <li>Get the message body using the <code>getMessageBody()</code> method.</li>
 <li>Add an ending character for an end-of-line.</li>
-</ol>
+</ul>
 <pre><code>...
 // Build the message to show.
 strMessage += &#34;SMS from &#34; + msgs[i].getOriginatingAddress();
@@ -645,11 +652,11 @@ public void onReceive(Context context, Intent intent) {
 <li>Run the app on an emulator.</li>
 <li>Click the ... (More) icon at the bottom of the emulator&#39;s toolbar on the right side, as shown in the figure below:</li>
 </ol>
-<p class="image-container"><img alt="Click the … (More) icon for more emulator controls" title="Click the … (More) icon for more emulator controls" style="width: 63.00px" src="img/9a778ca42d5b3969.png"></p>
+<p class="image-container"><img alt="Click the … (More) icon for more emulator controls" title="Click the … (More) icon for more emulator controls" style="width: 63.00px" src="img/96c6d4551805e259.png"></p>
 <ol type="1" start="3">
 <li>The extended controls for the emulator appear. Click <strong>Phone</strong> in the left column to see the extended phone controls:</li>
 </ol>
-<p class="image-container"><img alt="Click Phone for the extra phone controls including Send Message" title="Click Phone for the extra phone controls including Send Message" style="width: 624.00px" src="img/3e20a894ba664a0e.png"></p>
+<p class="image-container"><img alt="Click Phone for the extra phone controls including Send Message" title="Click Phone for the extra phone controls including Send Message" style="width: 624.00px" src="img/397fef5e63a08fa9.png"></p>
 <ol type="1" start="4">
 <li>You can now enter a message (or use the default &#34;marshmallows&#34; message) and click <strong>Send Message</strong> to have the emulator send an SMS message to itself.</li>
 <li>The emulator responds with a notification about receiving an SMS message. The app should also display a toast message showing the message and its originating address, as shown below:</li>
@@ -696,8 +703,8 @@ smsIntent.setType(&#34;image/*&#34;);</code></pre>
 <li>Android Studio emulators can&#39;t pass MMS messages to and from each other. You must test this app on real Android devices.</li>
 <li>For more information about sending multimedia messages, see <a href="http://jtribe.blogspot.com/2008/12/sending-mms-with-android.html" target="_blank">Sending MMS with Android</a>.</li>
 </ul>
-<p class="image-container"><img alt="After the user taps the button (1)" title="After the user taps the button (1)" style="width: 524.00px" src="img/cb920eebc69fd60d.png"></p>
-<p class="image-container"><img alt="In Messenger" title="In Messenger" style="width: 449.00px" src="img/dca7c1ada0831860.png"></p>
+<p class="image-container"><img alt="After the user taps the button (1)" title="After the user taps the button (1)" style="width: 524.00px" src="img/b999133017a097d5.png"></p>
+<p class="image-container"><img alt="In Messenger" title="In Messenger" style="width: 449.00px" src="img/3f42bd31b1ab72b1.png"></p>
 <p>Android Studio project: <a href="https://github.com/khammami/android-fundamentals-phone-sms/tree/master/MMSChallenge" target="_blank">MMSChallenge</a></p>
 
 
@@ -705,9 +712,9 @@ smsIntent.setType(&#34;image/*&#34;);</code></pre>
     
       <google-codelab-step label="Summary" duration="0">
         <ul>
-<li>To send an intent to an SMS messaging app with a phone number, your app needs to prepare a URI for the phone number as a string prefixed by <code>&#34;smsto:&#34;</code> (as in <code>smsto:14155551212</code>).</li>
+<li>To send an intent to an SMS messaging app with a phone number, your app needs to prepare a URI for the phone number as a string prefixed by <code>"smsto:"</code> (as in <code>smsto:14155551212</code>).</li>
 <li>Use an implicit intent with <code>ACTION_SENDTO</code> to launch an SMS app, and set the phone number and message for the intent with <code>setData()</code> and <code>putExtra</code>.</li>
-<li>To send SMS messages from within your app, add the <code>&#34;android.permission.SEND_SMS&#34;</code> permission to the <strong>AndroidManifest.xml</strong> file:</li>
+<li>To send SMS messages from within your app, add the <code>"android.permission.SEND_SMS"</code> permission to the <strong>AndroidManifest.xml</strong> file:</li>
 <li>Use the <a href="https://developer.android.com/reference/android/telephony/SmsManager.html#sendTextMessage(java.lang.String,%20java.lang.String,%20java.lang.String,%20android.app.PendingIntent,%20android.app.PendingIntent)" target="_blank">sendTextMessage()</a> method of the <a href="https://developer.android.com/reference/android/telephony/SmsManager.html" target="_blank">SmsManager</a> class to send the message, which takes the following parameters:</li>
 <li><code>destinationAddress</code>: The string for the phone number to receive the message.</li>
 <li><code>scAddress</code>: A string for the service center address, or <code>null</code> to use the current default Short Message Service Center (SMSC).</li>
@@ -716,7 +723,7 @@ smsIntent.setType(&#34;image/*&#34;);</code></pre>
 <li><code>deliveryIntent</code>: A <code>PendingIntent</code>. If not <code>null</code>, this is broadcast when the message is delivered to the recipient.</li>
 <li>Use <a href="https://developer.android.com/reference/android/support/v4/content/ContextCompat.html#checkSelfPermission(android.content.Context,%20java.lang.String)" target="_blank">checkSelfPermission()</a> to determine whether your app has been granted a particular permission by the user. If permission has not been granted, use the <a href="https://developer.android.com/reference/android/support/v4/app/ActivityCompat.html#requestPermissions(android.app.Activity,%20java.lang.String[],%20int)" target="_blank">requestPermissions()</a> method to display a standard dialog for the user to grant permission.</li>
 <li>Create a broadcast receiver to receive SMS messages using the <a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html#onReceive(android.content.Context,%20android.content.Intent)" target="_blank">onReceive()</a> method of the <a href="https://developer.android.com/reference/android/content/BroadcastReceiver.html" target="_blank">BroadcastReceiver</a> class.</li>
-<li>Add the <code>&#34;android.provider.Telephony.SMS_RECEIVED&#34;</code> intent filter between the <code>&lt;receiver&gt;</code> tags in <strong>AndroidManifest.xml</strong> to register your receiver for SMS messages.</li>
+<li>Add the <code>"android.provider.Telephony.SMS_RECEIVED"</code> intent filter between the <code><receiver></code> tags in <strong>AndroidManifest.xml</strong> to register your receiver for SMS messages.</li>
 <li>Use <code>getExtras()</code> to get the message from the intent:<br></li>
 </ul>
 <pre><code>Bundle bundle = intent.getExtras();</code></pre>
